@@ -47,6 +47,5 @@ the L1 TBE for this. TMT_B could go either to SS if not threatened
 (i.e., Unblock w/o any Threat). or TMT (i.e., Unblock w/ threat)
 3. TMT_B_MT always goes to MT in the end (i.e., it got a Fwd GETX). If
 there are any other TM lines they will abort.
-
-
+4. More comments in the .sm files. 
 
