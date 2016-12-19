@@ -1,0 +1,2645 @@
+Parsing command line arguments:
+  g_PROCS_PER_CHIP: 1
+  tracefile = little.trace
+  debug start cycle = 1
+Ruby Timing Mode
+Creating event queue...
+Creating event queue done
+Creating system...
+  Processors: 16
+Creating system done
+Ruby initialization complete
+
+================ Begin System Configuration Print ================
+
+Ruby Configuration
+------------------
+protocol: MESI_CMP_directory
+compiled_at: 23:34:41, Dec 19 2011
+RUBY_DEBUG: false
+hostname: cs-csts-11-burnaby
+g_RANDOM_SEED: 1
+g_DEADLOCK_THRESHOLD: 500000
+RANDOMIZATION: true
+g_SYNTHETIC_DRIVER: false
+g_DETERMINISTIC_DRIVER: false
+g_FILTERING_ENABLED: false
+g_DISTRIBUTED_PERSISTENT_ENABLED: true
+g_DYNAMIC_TIMEOUT_ENABLED: true
+g_RETRY_THRESHOLD: 1
+g_FIXED_TIMEOUT_LATENCY: 300
+g_trace_warmup_length: 1000000
+g_bash_bandwidth_adaptive_threshold: 0.75
+g_tester_length: 0
+g_synthetic_locks: 2048
+g_deterministic_addrs: 1
+g_SpecifiedGenerator: DetermGETXGenerator
+g_callback_counter: 0
+g_NUM_COMPLETIONS_BEFORE_PASS: 0
+g_NUM_SMT_THREADS: 1
+g_think_time: 5
+g_hold_time: 5
+g_wait_time: 5
+PROTOCOL_DEBUG_TRACE: true
+DEBUG_FILTER_STRING: none
+DEBUG_VERBOSITY_STRING: none
+DEBUG_START_TIME: 1
+DEBUG_OUTPUT_FILENAME: none
+SIMICS_RUBY_MULTIPLIER: 4
+OPAL_RUBY_MULTIPLIER: 1
+TRANSACTION_TRACE_ENABLED: false
+USER_MODE_DATA_ONLY: false
+PROFILE_HOT_LINES: false
+PROFILE_ALL_INSTRUCTIONS: false
+PRINT_INSTRUCTION_TRACE: false
+g_DEBUG_CYCLE: 0
+BLOCK_STC: false
+PERFECT_MEMORY_SYSTEM: false
+PERFECT_MEMORY_SYSTEM_LATENCY: 0
+DATA_BLOCK: true
+REMOVE_SINGLE_CYCLE_DCACHE_FAST_PATH: false
+g_SIMICS: false
+L1_CACHE_ASSOC: 2
+L1_CACHE_NUM_SETS_BITS: 2
+L2_CACHE_ASSOC: 2
+L2_CACHE_NUM_SETS_BITS: 5
+g_MEMORY_SIZE_BYTES: 1048576
+g_DATA_BLOCK_BYTES: 64
+g_PAGE_SIZE_BYTES: 4096
+g_REPLACEMENT_POLICY: PSEDUO_LRU
+g_NUM_PROCESSORS: 16
+g_NUM_L2_BANKS: 16
+g_NUM_MEMORIES: 16
+g_PROCS_PER_CHIP: 1
+g_NUM_CHIPS: 16
+g_NUM_CHIP_BITS: 4
+g_MEMORY_SIZE_BITS: 20
+g_DATA_BLOCK_BITS: 6
+g_PAGE_SIZE_BITS: 12
+g_NUM_PROCESSORS_BITS: 4
+g_PROCS_PER_CHIP_BITS: 0
+g_NUM_L2_BANKS_BITS: 4
+g_NUM_L2_BANKS_PER_CHIP_BITS: 0
+g_NUM_L2_BANKS_PER_CHIP: 1
+g_NUM_MEMORIES_BITS: 4
+g_NUM_MEMORIES_PER_CHIP: 1
+g_MEMORY_MODULE_BITS: 10
+g_MEMORY_MODULE_BLOCKS: 1024
+MAP_L2BANKS_TO_LOWEST_BITS: false
+DIRECTORY_CACHE_LATENCY: 6
+NULL_LATENCY: 1
+ISSUE_LATENCY: 2
+CACHE_RESPONSE_LATENCY: 12
+L2_RESPONSE_LATENCY: 6
+L2_TAG_LATENCY: 6
+L1_RESPONSE_LATENCY: 3
+MEMORY_RESPONSE_LATENCY_MINUS_2: 158
+DIRECTORY_LATENCY: 80
+NETWORK_LINK_LATENCY: 1
+COPY_HEAD_LATENCY: 4
+ON_CHIP_LINK_LATENCY: 1
+RECYCLE_LATENCY: 1
+L2_RECYCLE_LATENCY: 5
+TIMER_LATENCY: 10000
+TBE_RESPONSE_LATENCY: 1
+PERIODIC_TIMER_WAKEUPS: true
+PROFILE_EXCEPTIONS: false
+PROFILE_XACT: true
+PROFILE_NONXACT: false
+XACT_DEBUG: true
+XACT_DEBUG_LEVEL: 1
+XACT_MEMORY: false
+XACT_ENABLE_TOURMALINE: false
+XACT_NUM_CURRENT: 0
+XACT_LAST_UPDATE: 0
+XACT_ISOLATION_CHECK: true
+PERFECT_FILTER: true
+READ_WRITE_FILTER: Perfect_
+PERFECT_VIRTUAL_FILTER: true
+VIRTUAL_READ_WRITE_FILTER: Perfect_
+PERFECT_SUMMARY_FILTER: true
+SUMMARY_READ_WRITE_FILTER: Perfect_
+XACT_EAGER_CD: true
+XACT_LAZY_VM: false
+XACT_CONFLICT_RES: BASE
+XACT_VISUALIZER: false
+XACT_COMMIT_TOKEN_LATENCY: 0
+XACT_NO_BACKOFF: false
+XACT_LOG_BUFFER_SIZE: 0
+XACT_STORE_PREDICTOR_HISTORY: 256
+XACT_STORE_PREDICTOR_ENTRIES: 256
+XACT_STORE_PREDICTOR_THRESHOLD: 4
+XACT_FIRST_ACCESS_COST: 0
+XACT_FIRST_PAGE_ACCESS_COST: 0
+ENABLE_MAGIC_WAITING: false
+ENABLE_WATCHPOINT: false
+XACT_ENABLE_VIRTUALIZATION_LOGTM_SE: false
+ATMTP_ENABLED: false
+ATMTP_ABORT_ON_NON_XACT_INST: false
+ATMTP_ALLOW_SAVE_RESTORE_IN_XACT: false
+ATMTP_XACT_MAX_STORES: 32
+ATMTP_DEBUG_LEVEL: 0
+L1_REQUEST_LATENCY: 2
+L2_REQUEST_LATENCY: 4
+SINGLE_ACCESS_L2_BANKS: true
+SEQUENCER_TO_CONTROLLER_LATENCY: 4
+L1CACHE_TRANSITIONS_PER_RUBY_CYCLE: 32
+L2CACHE_TRANSITIONS_PER_RUBY_CYCLE: 1000
+DIRECTORY_TRANSITIONS_PER_RUBY_CYCLE: 1000
+g_SEQUENCER_OUTSTANDING_REQUESTS: 16
+NUMBER_OF_TBES: 128
+NUMBER_OF_L1_TBES: 32
+NUMBER_OF_L2_TBES: 32
+FINITE_BUFFERING: false
+FINITE_BUFFER_SIZE: 3
+PROCESSOR_BUFFER_SIZE: 10
+PROTOCOL_BUFFER_SIZE: 32
+TSO: false
+g_NETWORK_TOPOLOGY: HIERARCHICAL_SWITCH
+g_CACHE_DESIGN: NUCA
+g_endpoint_bandwidth: 10000
+g_adaptive_routing: true
+NUMBER_OF_VIRTUAL_NETWORKS: 6
+FAN_OUT_DEGREE: 4
+g_PRINT_TOPOLOGY: true
+XACT_LENGTH: 2000
+XACT_SIZE: 1000
+ABORT_RETRY_TIME: 400
+g_GARNET_NETWORK: false
+g_DETAIL_NETWORK: false
+g_NETWORK_TESTING: false
+g_FLIT_SIZE: 16
+g_NUM_PIPE_STAGES: 4
+g_VCS_PER_CLASS: 4
+g_BUFFER_SIZE: 4
+MEM_BUS_CYCLE_MULTIPLIER: 10
+BANKS_PER_RANK: 8
+RANKS_PER_DIMM: 2
+DIMMS_PER_CHANNEL: 2
+BANK_BIT_0: 8
+RANK_BIT_0: 11
+DIMM_BIT_0: 12
+BANK_QUEUE_SIZE: 12
+BANK_BUSY_TIME: 11
+RANK_RANK_DELAY: 1
+READ_WRITE_DELAY: 2
+BASIC_BUS_BUSY_TIME: 2
+MEM_CTL_LATENCY: 12
+REFRESH_PERIOD: 1560
+TFAW: 0
+MEM_RANDOM_ARBITRATE: 0
+MEM_FIXED_DELAY: 0
+
+Chip Config
+-----------
+Total_Chips: 16
+
+L2Cache_L2_TBEs numberPerChip: 1
+TBEs_per_TBETable: 128
+
+L2Cache_L2cacheMemory numberPerChip: 1
+Cache config: L2Cache_0
+  cache_associativity: 2
+  num_cache_sets_bits: 5
+  num_cache_sets: 32
+  cache_set_size_bytes: 2048
+  cache_set_size_Kbytes: 2
+  cache_set_size_Mbytes: 0.00195312
+  cache_size_bytes: 4096
+  cache_size_Kbytes: 4
+  cache_size_Mbytes: 0.00390625
+
+L1Cache_L1_TBEs numberPerChip: 1
+TBEs_per_TBETable: 128
+
+L1Cache_L1IcacheMemory numberPerChip: 1
+Cache config: L1Cache_0_L1I
+  cache_associativity: 2
+  num_cache_sets_bits: 2
+  num_cache_sets: 4
+  cache_set_size_bytes: 256
+  cache_set_size_Kbytes: 0.25
+  cache_set_size_Mbytes: 0.000244141
+  cache_size_bytes: 512
+  cache_size_Kbytes: 0.5
+  cache_size_Mbytes: 0.000488281
+
+L1Cache_L1DcacheMemory numberPerChip: 1
+Cache config: L1Cache_0_L1D
+  cache_associativity: 2
+  num_cache_sets_bits: 2
+  num_cache_sets: 4
+  cache_set_size_bytes: 256
+  cache_set_size_Kbytes: 0.25
+  cache_set_size_Mbytes: 0.000244141
+  cache_size_bytes: 512
+  cache_size_Kbytes: 0.5
+  cache_size_Mbytes: 0.000488281
+
+L1Cache_mandatoryQueue numberPerChip: 1
+
+L1Cache_sequencer numberPerChip: 1
+sequencer: Sequencer - SC
+  max_outstanding_requests: 16
+
+Directory_directory numberPerChip: 1
+Memory config:
+  memory_bits: 20
+  memory_size_bytes: 1048576
+  memory_size_Kbytes: 1024
+  memory_size_Mbytes: 1
+  memory_size_Gbytes: 0.000976562
+  module_bits: 10
+  module_size_lines: 1024
+  module_size_bytes: 65536
+  module_size_Kbytes: 64
+  module_size_Mbytes: 0.0625
+
+
+Network Configuration
+---------------------
+network: SIMPLE_NETWORK
+topology: HIERARCHICAL_SWITCH
+
+virtual_net_0: active, unordered
+virtual_net_1: active, unordered
+virtual_net_2: active, unordered
+virtual_net_3: active, unordered
+virtual_net_4: active, unordered
+virtual_net_5: inactive
+
+--- Begin Topology Print ---
+
+Topology print ONLY indicates the _NETWORK_ latency between two machines
+It does NOT include the latency within the machines
+
+L2Cache-0 Network Latencies
+  L2Cache-0 -> L2Cache-1 net_lat: 13
+  L2Cache-0 -> L2Cache-2 net_lat: 13
+  L2Cache-0 -> L2Cache-3 net_lat: 13
+  L2Cache-0 -> L2Cache-4 net_lat: 13
+  L2Cache-0 -> L2Cache-5 net_lat: 13
+  L2Cache-0 -> L2Cache-6 net_lat: 13
+  L2Cache-0 -> L2Cache-7 net_lat: 13
+  L2Cache-0 -> L2Cache-8 net_lat: 13
+  L2Cache-0 -> L2Cache-9 net_lat: 13
+  L2Cache-0 -> L2Cache-10 net_lat: 13
+  L2Cache-0 -> L2Cache-11 net_lat: 13
+  L2Cache-0 -> L2Cache-12 net_lat: 13
+  L2Cache-0 -> L2Cache-13 net_lat: 13
+  L2Cache-0 -> L2Cache-14 net_lat: 13
+  L2Cache-0 -> L2Cache-15 net_lat: 13
+  L2Cache-0 -> L1Cache-0 net_lat: 13
+  L2Cache-0 -> L1Cache-1 net_lat: 13
+  L2Cache-0 -> L1Cache-2 net_lat: 13
+  L2Cache-0 -> L1Cache-3 net_lat: 13
+  L2Cache-0 -> L1Cache-4 net_lat: 13
+  L2Cache-0 -> L1Cache-5 net_lat: 13
+  L2Cache-0 -> L1Cache-6 net_lat: 13
+  L2Cache-0 -> L1Cache-7 net_lat: 13
+  L2Cache-0 -> L1Cache-8 net_lat: 13
+  L2Cache-0 -> L1Cache-9 net_lat: 13
+  L2Cache-0 -> L1Cache-10 net_lat: 13
+  L2Cache-0 -> L1Cache-11 net_lat: 13
+  L2Cache-0 -> L1Cache-12 net_lat: 13
+  L2Cache-0 -> L1Cache-13 net_lat: 13
+  L2Cache-0 -> L1Cache-14 net_lat: 13
+  L2Cache-0 -> L1Cache-15 net_lat: 13
+  L2Cache-0 -> Directory-0 net_lat: 13
+  L2Cache-0 -> Directory-1 net_lat: 13
+  L2Cache-0 -> Directory-2 net_lat: 13
+  L2Cache-0 -> Directory-3 net_lat: 13
+  L2Cache-0 -> Directory-4 net_lat: 13
+  L2Cache-0 -> Directory-5 net_lat: 13
+  L2Cache-0 -> Directory-6 net_lat: 13
+  L2Cache-0 -> Directory-7 net_lat: 13
+  L2Cache-0 -> Directory-8 net_lat: 13
+  L2Cache-0 -> Directory-9 net_lat: 13
+  L2Cache-0 -> Directory-10 net_lat: 13
+  L2Cache-0 -> Directory-11 net_lat: 13
+  L2Cache-0 -> Directory-12 net_lat: 13
+  L2Cache-0 -> Directory-13 net_lat: 13
+  L2Cache-0 -> Directory-14 net_lat: 13
+  L2Cache-0 -> Directory-15 net_lat: 13
+
+L2Cache-1 Network Latencies
+  L2Cache-1 -> L2Cache-0 net_lat: 13
+  L2Cache-1 -> L2Cache-2 net_lat: 13
+  L2Cache-1 -> L2Cache-3 net_lat: 13
+  L2Cache-1 -> L2Cache-4 net_lat: 13
+  L2Cache-1 -> L2Cache-5 net_lat: 13
+  L2Cache-1 -> L2Cache-6 net_lat: 13
+  L2Cache-1 -> L2Cache-7 net_lat: 13
+  L2Cache-1 -> L2Cache-8 net_lat: 13
+  L2Cache-1 -> L2Cache-9 net_lat: 13
+  L2Cache-1 -> L2Cache-10 net_lat: 13
+  L2Cache-1 -> L2Cache-11 net_lat: 13
+  L2Cache-1 -> L2Cache-12 net_lat: 13
+  L2Cache-1 -> L2Cache-13 net_lat: 13
+  L2Cache-1 -> L2Cache-14 net_lat: 13
+  L2Cache-1 -> L2Cache-15 net_lat: 13
+  L2Cache-1 -> L1Cache-0 net_lat: 13
+  L2Cache-1 -> L1Cache-1 net_lat: 13
+  L2Cache-1 -> L1Cache-2 net_lat: 13
+  L2Cache-1 -> L1Cache-3 net_lat: 13
+  L2Cache-1 -> L1Cache-4 net_lat: 13
+  L2Cache-1 -> L1Cache-5 net_lat: 13
+  L2Cache-1 -> L1Cache-6 net_lat: 13
+  L2Cache-1 -> L1Cache-7 net_lat: 13
+  L2Cache-1 -> L1Cache-8 net_lat: 13
+  L2Cache-1 -> L1Cache-9 net_lat: 13
+  L2Cache-1 -> L1Cache-10 net_lat: 13
+  L2Cache-1 -> L1Cache-11 net_lat: 13
+  L2Cache-1 -> L1Cache-12 net_lat: 13
+  L2Cache-1 -> L1Cache-13 net_lat: 13
+  L2Cache-1 -> L1Cache-14 net_lat: 13
+  L2Cache-1 -> L1Cache-15 net_lat: 13
+  L2Cache-1 -> Directory-0 net_lat: 13
+  L2Cache-1 -> Directory-1 net_lat: 13
+  L2Cache-1 -> Directory-2 net_lat: 13
+  L2Cache-1 -> Directory-3 net_lat: 13
+  L2Cache-1 -> Directory-4 net_lat: 13
+  L2Cache-1 -> Directory-5 net_lat: 13
+  L2Cache-1 -> Directory-6 net_lat: 13
+  L2Cache-1 -> Directory-7 net_lat: 13
+  L2Cache-1 -> Directory-8 net_lat: 13
+  L2Cache-1 -> Directory-9 net_lat: 13
+  L2Cache-1 -> Directory-10 net_lat: 13
+  L2Cache-1 -> Directory-11 net_lat: 13
+  L2Cache-1 -> Directory-12 net_lat: 13
+  L2Cache-1 -> Directory-13 net_lat: 13
+  L2Cache-1 -> Directory-14 net_lat: 13
+  L2Cache-1 -> Directory-15 net_lat: 13
+
+L2Cache-2 Network Latencies
+  L2Cache-2 -> L2Cache-0 net_lat: 13
+  L2Cache-2 -> L2Cache-1 net_lat: 13
+  L2Cache-2 -> L2Cache-3 net_lat: 13
+  L2Cache-2 -> L2Cache-4 net_lat: 13
+  L2Cache-2 -> L2Cache-5 net_lat: 13
+  L2Cache-2 -> L2Cache-6 net_lat: 13
+  L2Cache-2 -> L2Cache-7 net_lat: 13
+  L2Cache-2 -> L2Cache-8 net_lat: 13
+  L2Cache-2 -> L2Cache-9 net_lat: 13
+  L2Cache-2 -> L2Cache-10 net_lat: 13
+  L2Cache-2 -> L2Cache-11 net_lat: 13
+  L2Cache-2 -> L2Cache-12 net_lat: 13
+  L2Cache-2 -> L2Cache-13 net_lat: 13
+  L2Cache-2 -> L2Cache-14 net_lat: 13
+  L2Cache-2 -> L2Cache-15 net_lat: 13
+  L2Cache-2 -> L1Cache-0 net_lat: 13
+  L2Cache-2 -> L1Cache-1 net_lat: 13
+  L2Cache-2 -> L1Cache-2 net_lat: 13
+  L2Cache-2 -> L1Cache-3 net_lat: 13
+  L2Cache-2 -> L1Cache-4 net_lat: 13
+  L2Cache-2 -> L1Cache-5 net_lat: 13
+  L2Cache-2 -> L1Cache-6 net_lat: 13
+  L2Cache-2 -> L1Cache-7 net_lat: 13
+  L2Cache-2 -> L1Cache-8 net_lat: 13
+  L2Cache-2 -> L1Cache-9 net_lat: 13
+  L2Cache-2 -> L1Cache-10 net_lat: 13
+  L2Cache-2 -> L1Cache-11 net_lat: 13
+  L2Cache-2 -> L1Cache-12 net_lat: 13
+  L2Cache-2 -> L1Cache-13 net_lat: 13
+  L2Cache-2 -> L1Cache-14 net_lat: 13
+  L2Cache-2 -> L1Cache-15 net_lat: 13
+  L2Cache-2 -> Directory-0 net_lat: 13
+  L2Cache-2 -> Directory-1 net_lat: 13
+  L2Cache-2 -> Directory-2 net_lat: 13
+  L2Cache-2 -> Directory-3 net_lat: 13
+  L2Cache-2 -> Directory-4 net_lat: 13
+  L2Cache-2 -> Directory-5 net_lat: 13
+  L2Cache-2 -> Directory-6 net_lat: 13
+  L2Cache-2 -> Directory-7 net_lat: 13
+  L2Cache-2 -> Directory-8 net_lat: 13
+  L2Cache-2 -> Directory-9 net_lat: 13
+  L2Cache-2 -> Directory-10 net_lat: 13
+  L2Cache-2 -> Directory-11 net_lat: 13
+  L2Cache-2 -> Directory-12 net_lat: 13
+  L2Cache-2 -> Directory-13 net_lat: 13
+  L2Cache-2 -> Directory-14 net_lat: 13
+  L2Cache-2 -> Directory-15 net_lat: 13
+
+L2Cache-3 Network Latencies
+  L2Cache-3 -> L2Cache-0 net_lat: 13
+  L2Cache-3 -> L2Cache-1 net_lat: 13
+  L2Cache-3 -> L2Cache-2 net_lat: 13
+  L2Cache-3 -> L2Cache-4 net_lat: 13
+  L2Cache-3 -> L2Cache-5 net_lat: 13
+  L2Cache-3 -> L2Cache-6 net_lat: 13
+  L2Cache-3 -> L2Cache-7 net_lat: 13
+  L2Cache-3 -> L2Cache-8 net_lat: 13
+  L2Cache-3 -> L2Cache-9 net_lat: 13
+  L2Cache-3 -> L2Cache-10 net_lat: 13
+  L2Cache-3 -> L2Cache-11 net_lat: 13
+  L2Cache-3 -> L2Cache-12 net_lat: 13
+  L2Cache-3 -> L2Cache-13 net_lat: 13
+  L2Cache-3 -> L2Cache-14 net_lat: 13
+  L2Cache-3 -> L2Cache-15 net_lat: 13
+  L2Cache-3 -> L1Cache-0 net_lat: 13
+  L2Cache-3 -> L1Cache-1 net_lat: 13
+  L2Cache-3 -> L1Cache-2 net_lat: 13
+  L2Cache-3 -> L1Cache-3 net_lat: 13
+  L2Cache-3 -> L1Cache-4 net_lat: 13
+  L2Cache-3 -> L1Cache-5 net_lat: 13
+  L2Cache-3 -> L1Cache-6 net_lat: 13
+  L2Cache-3 -> L1Cache-7 net_lat: 13
+  L2Cache-3 -> L1Cache-8 net_lat: 13
+  L2Cache-3 -> L1Cache-9 net_lat: 13
+  L2Cache-3 -> L1Cache-10 net_lat: 13
+  L2Cache-3 -> L1Cache-11 net_lat: 13
+  L2Cache-3 -> L1Cache-12 net_lat: 13
+  L2Cache-3 -> L1Cache-13 net_lat: 13
+  L2Cache-3 -> L1Cache-14 net_lat: 13
+  L2Cache-3 -> L1Cache-15 net_lat: 13
+  L2Cache-3 -> Directory-0 net_lat: 13
+  L2Cache-3 -> Directory-1 net_lat: 13
+  L2Cache-3 -> Directory-2 net_lat: 13
+  L2Cache-3 -> Directory-3 net_lat: 13
+  L2Cache-3 -> Directory-4 net_lat: 13
+  L2Cache-3 -> Directory-5 net_lat: 13
+  L2Cache-3 -> Directory-6 net_lat: 13
+  L2Cache-3 -> Directory-7 net_lat: 13
+  L2Cache-3 -> Directory-8 net_lat: 13
+  L2Cache-3 -> Directory-9 net_lat: 13
+  L2Cache-3 -> Directory-10 net_lat: 13
+  L2Cache-3 -> Directory-11 net_lat: 13
+  L2Cache-3 -> Directory-12 net_lat: 13
+  L2Cache-3 -> Directory-13 net_lat: 13
+  L2Cache-3 -> Directory-14 net_lat: 13
+  L2Cache-3 -> Directory-15 net_lat: 13
+
+L2Cache-4 Network Latencies
+  L2Cache-4 -> L2Cache-0 net_lat: 13
+  L2Cache-4 -> L2Cache-1 net_lat: 13
+  L2Cache-4 -> L2Cache-2 net_lat: 13
+  L2Cache-4 -> L2Cache-3 net_lat: 13
+  L2Cache-4 -> L2Cache-5 net_lat: 13
+  L2Cache-4 -> L2Cache-6 net_lat: 13
+  L2Cache-4 -> L2Cache-7 net_lat: 13
+  L2Cache-4 -> L2Cache-8 net_lat: 13
+  L2Cache-4 -> L2Cache-9 net_lat: 13
+  L2Cache-4 -> L2Cache-10 net_lat: 13
+  L2Cache-4 -> L2Cache-11 net_lat: 13
+  L2Cache-4 -> L2Cache-12 net_lat: 13
+  L2Cache-4 -> L2Cache-13 net_lat: 13
+  L2Cache-4 -> L2Cache-14 net_lat: 13
+  L2Cache-4 -> L2Cache-15 net_lat: 13
+  L2Cache-4 -> L1Cache-0 net_lat: 13
+  L2Cache-4 -> L1Cache-1 net_lat: 13
+  L2Cache-4 -> L1Cache-2 net_lat: 13
+  L2Cache-4 -> L1Cache-3 net_lat: 13
+  L2Cache-4 -> L1Cache-4 net_lat: 13
+  L2Cache-4 -> L1Cache-5 net_lat: 13
+  L2Cache-4 -> L1Cache-6 net_lat: 13
+  L2Cache-4 -> L1Cache-7 net_lat: 13
+  L2Cache-4 -> L1Cache-8 net_lat: 13
+  L2Cache-4 -> L1Cache-9 net_lat: 13
+  L2Cache-4 -> L1Cache-10 net_lat: 13
+  L2Cache-4 -> L1Cache-11 net_lat: 13
+  L2Cache-4 -> L1Cache-12 net_lat: 13
+  L2Cache-4 -> L1Cache-13 net_lat: 13
+  L2Cache-4 -> L1Cache-14 net_lat: 13
+  L2Cache-4 -> L1Cache-15 net_lat: 13
+  L2Cache-4 -> Directory-0 net_lat: 13
+  L2Cache-4 -> Directory-1 net_lat: 13
+  L2Cache-4 -> Directory-2 net_lat: 13
+  L2Cache-4 -> Directory-3 net_lat: 13
+  L2Cache-4 -> Directory-4 net_lat: 13
+  L2Cache-4 -> Directory-5 net_lat: 13
+  L2Cache-4 -> Directory-6 net_lat: 13
+  L2Cache-4 -> Directory-7 net_lat: 13
+  L2Cache-4 -> Directory-8 net_lat: 13
+  L2Cache-4 -> Directory-9 net_lat: 13
+  L2Cache-4 -> Directory-10 net_lat: 13
+  L2Cache-4 -> Directory-11 net_lat: 13
+  L2Cache-4 -> Directory-12 net_lat: 13
+  L2Cache-4 -> Directory-13 net_lat: 13
+  L2Cache-4 -> Directory-14 net_lat: 13
+  L2Cache-4 -> Directory-15 net_lat: 13
+
+L2Cache-5 Network Latencies
+  L2Cache-5 -> L2Cache-0 net_lat: 13
+  L2Cache-5 -> L2Cache-1 net_lat: 13
+  L2Cache-5 -> L2Cache-2 net_lat: 13
+  L2Cache-5 -> L2Cache-3 net_lat: 13
+  L2Cache-5 -> L2Cache-4 net_lat: 13
+  L2Cache-5 -> L2Cache-6 net_lat: 13
+  L2Cache-5 -> L2Cache-7 net_lat: 13
+  L2Cache-5 -> L2Cache-8 net_lat: 13
+  L2Cache-5 -> L2Cache-9 net_lat: 13
+  L2Cache-5 -> L2Cache-10 net_lat: 13
+  L2Cache-5 -> L2Cache-11 net_lat: 13
+  L2Cache-5 -> L2Cache-12 net_lat: 13
+  L2Cache-5 -> L2Cache-13 net_lat: 13
+  L2Cache-5 -> L2Cache-14 net_lat: 13
+  L2Cache-5 -> L2Cache-15 net_lat: 13
+  L2Cache-5 -> L1Cache-0 net_lat: 13
+  L2Cache-5 -> L1Cache-1 net_lat: 13
+  L2Cache-5 -> L1Cache-2 net_lat: 13
+  L2Cache-5 -> L1Cache-3 net_lat: 13
+  L2Cache-5 -> L1Cache-4 net_lat: 13
+  L2Cache-5 -> L1Cache-5 net_lat: 13
+  L2Cache-5 -> L1Cache-6 net_lat: 13
+  L2Cache-5 -> L1Cache-7 net_lat: 13
+  L2Cache-5 -> L1Cache-8 net_lat: 13
+  L2Cache-5 -> L1Cache-9 net_lat: 13
+  L2Cache-5 -> L1Cache-10 net_lat: 13
+  L2Cache-5 -> L1Cache-11 net_lat: 13
+  L2Cache-5 -> L1Cache-12 net_lat: 13
+  L2Cache-5 -> L1Cache-13 net_lat: 13
+  L2Cache-5 -> L1Cache-14 net_lat: 13
+  L2Cache-5 -> L1Cache-15 net_lat: 13
+  L2Cache-5 -> Directory-0 net_lat: 13
+  L2Cache-5 -> Directory-1 net_lat: 13
+  L2Cache-5 -> Directory-2 net_lat: 13
+  L2Cache-5 -> Directory-3 net_lat: 13
+  L2Cache-5 -> Directory-4 net_lat: 13
+  L2Cache-5 -> Directory-5 net_lat: 13
+  L2Cache-5 -> Directory-6 net_lat: 13
+  L2Cache-5 -> Directory-7 net_lat: 13
+  L2Cache-5 -> Directory-8 net_lat: 13
+  L2Cache-5 -> Directory-9 net_lat: 13
+  L2Cache-5 -> Directory-10 net_lat: 13
+  L2Cache-5 -> Directory-11 net_lat: 13
+  L2Cache-5 -> Directory-12 net_lat: 13
+  L2Cache-5 -> Directory-13 net_lat: 13
+  L2Cache-5 -> Directory-14 net_lat: 13
+  L2Cache-5 -> Directory-15 net_lat: 13
+
+L2Cache-6 Network Latencies
+  L2Cache-6 -> L2Cache-0 net_lat: 13
+  L2Cache-6 -> L2Cache-1 net_lat: 13
+  L2Cache-6 -> L2Cache-2 net_lat: 13
+  L2Cache-6 -> L2Cache-3 net_lat: 13
+  L2Cache-6 -> L2Cache-4 net_lat: 13
+  L2Cache-6 -> L2Cache-5 net_lat: 13
+  L2Cache-6 -> L2Cache-7 net_lat: 13
+  L2Cache-6 -> L2Cache-8 net_lat: 13
+  L2Cache-6 -> L2Cache-9 net_lat: 13
+  L2Cache-6 -> L2Cache-10 net_lat: 13
+  L2Cache-6 -> L2Cache-11 net_lat: 13
+  L2Cache-6 -> L2Cache-12 net_lat: 13
+  L2Cache-6 -> L2Cache-13 net_lat: 13
+  L2Cache-6 -> L2Cache-14 net_lat: 13
+  L2Cache-6 -> L2Cache-15 net_lat: 13
+  L2Cache-6 -> L1Cache-0 net_lat: 13
+  L2Cache-6 -> L1Cache-1 net_lat: 13
+  L2Cache-6 -> L1Cache-2 net_lat: 13
+  L2Cache-6 -> L1Cache-3 net_lat: 13
+  L2Cache-6 -> L1Cache-4 net_lat: 13
+  L2Cache-6 -> L1Cache-5 net_lat: 13
+  L2Cache-6 -> L1Cache-6 net_lat: 13
+  L2Cache-6 -> L1Cache-7 net_lat: 13
+  L2Cache-6 -> L1Cache-8 net_lat: 13
+  L2Cache-6 -> L1Cache-9 net_lat: 13
+  L2Cache-6 -> L1Cache-10 net_lat: 13
+  L2Cache-6 -> L1Cache-11 net_lat: 13
+  L2Cache-6 -> L1Cache-12 net_lat: 13
+  L2Cache-6 -> L1Cache-13 net_lat: 13
+  L2Cache-6 -> L1Cache-14 net_lat: 13
+  L2Cache-6 -> L1Cache-15 net_lat: 13
+  L2Cache-6 -> Directory-0 net_lat: 13
+  L2Cache-6 -> Directory-1 net_lat: 13
+  L2Cache-6 -> Directory-2 net_lat: 13
+  L2Cache-6 -> Directory-3 net_lat: 13
+  L2Cache-6 -> Directory-4 net_lat: 13
+  L2Cache-6 -> Directory-5 net_lat: 13
+  L2Cache-6 -> Directory-6 net_lat: 13
+  L2Cache-6 -> Directory-7 net_lat: 13
+  L2Cache-6 -> Directory-8 net_lat: 13
+  L2Cache-6 -> Directory-9 net_lat: 13
+  L2Cache-6 -> Directory-10 net_lat: 13
+  L2Cache-6 -> Directory-11 net_lat: 13
+  L2Cache-6 -> Directory-12 net_lat: 13
+  L2Cache-6 -> Directory-13 net_lat: 13
+  L2Cache-6 -> Directory-14 net_lat: 13
+  L2Cache-6 -> Directory-15 net_lat: 13
+
+L2Cache-7 Network Latencies
+  L2Cache-7 -> L2Cache-0 net_lat: 13
+  L2Cache-7 -> L2Cache-1 net_lat: 13
+  L2Cache-7 -> L2Cache-2 net_lat: 13
+  L2Cache-7 -> L2Cache-3 net_lat: 13
+  L2Cache-7 -> L2Cache-4 net_lat: 13
+  L2Cache-7 -> L2Cache-5 net_lat: 13
+  L2Cache-7 -> L2Cache-6 net_lat: 13
+  L2Cache-7 -> L2Cache-8 net_lat: 13
+  L2Cache-7 -> L2Cache-9 net_lat: 13
+  L2Cache-7 -> L2Cache-10 net_lat: 13
+  L2Cache-7 -> L2Cache-11 net_lat: 13
+  L2Cache-7 -> L2Cache-12 net_lat: 13
+  L2Cache-7 -> L2Cache-13 net_lat: 13
+  L2Cache-7 -> L2Cache-14 net_lat: 13
+  L2Cache-7 -> L2Cache-15 net_lat: 13
+  L2Cache-7 -> L1Cache-0 net_lat: 13
+  L2Cache-7 -> L1Cache-1 net_lat: 13
+  L2Cache-7 -> L1Cache-2 net_lat: 13
+  L2Cache-7 -> L1Cache-3 net_lat: 13
+  L2Cache-7 -> L1Cache-4 net_lat: 13
+  L2Cache-7 -> L1Cache-5 net_lat: 13
+  L2Cache-7 -> L1Cache-6 net_lat: 13
+  L2Cache-7 -> L1Cache-7 net_lat: 13
+  L2Cache-7 -> L1Cache-8 net_lat: 13
+  L2Cache-7 -> L1Cache-9 net_lat: 13
+  L2Cache-7 -> L1Cache-10 net_lat: 13
+  L2Cache-7 -> L1Cache-11 net_lat: 13
+  L2Cache-7 -> L1Cache-12 net_lat: 13
+  L2Cache-7 -> L1Cache-13 net_lat: 13
+  L2Cache-7 -> L1Cache-14 net_lat: 13
+  L2Cache-7 -> L1Cache-15 net_lat: 13
+  L2Cache-7 -> Directory-0 net_lat: 13
+  L2Cache-7 -> Directory-1 net_lat: 13
+  L2Cache-7 -> Directory-2 net_lat: 13
+  L2Cache-7 -> Directory-3 net_lat: 13
+  L2Cache-7 -> Directory-4 net_lat: 13
+  L2Cache-7 -> Directory-5 net_lat: 13
+  L2Cache-7 -> Directory-6 net_lat: 13
+  L2Cache-7 -> Directory-7 net_lat: 13
+  L2Cache-7 -> Directory-8 net_lat: 13
+  L2Cache-7 -> Directory-9 net_lat: 13
+  L2Cache-7 -> Directory-10 net_lat: 13
+  L2Cache-7 -> Directory-11 net_lat: 13
+  L2Cache-7 -> Directory-12 net_lat: 13
+  L2Cache-7 -> Directory-13 net_lat: 13
+  L2Cache-7 -> Directory-14 net_lat: 13
+  L2Cache-7 -> Directory-15 net_lat: 13
+
+L2Cache-8 Network Latencies
+  L2Cache-8 -> L2Cache-0 net_lat: 13
+  L2Cache-8 -> L2Cache-1 net_lat: 13
+  L2Cache-8 -> L2Cache-2 net_lat: 13
+  L2Cache-8 -> L2Cache-3 net_lat: 13
+  L2Cache-8 -> L2Cache-4 net_lat: 13
+  L2Cache-8 -> L2Cache-5 net_lat: 13
+  L2Cache-8 -> L2Cache-6 net_lat: 13
+  L2Cache-8 -> L2Cache-7 net_lat: 13
+  L2Cache-8 -> L2Cache-9 net_lat: 13
+  L2Cache-8 -> L2Cache-10 net_lat: 13
+  L2Cache-8 -> L2Cache-11 net_lat: 13
+  L2Cache-8 -> L2Cache-12 net_lat: 13
+  L2Cache-8 -> L2Cache-13 net_lat: 13
+  L2Cache-8 -> L2Cache-14 net_lat: 13
+  L2Cache-8 -> L2Cache-15 net_lat: 13
+  L2Cache-8 -> L1Cache-0 net_lat: 13
+  L2Cache-8 -> L1Cache-1 net_lat: 13
+  L2Cache-8 -> L1Cache-2 net_lat: 13
+  L2Cache-8 -> L1Cache-3 net_lat: 13
+  L2Cache-8 -> L1Cache-4 net_lat: 13
+  L2Cache-8 -> L1Cache-5 net_lat: 13
+  L2Cache-8 -> L1Cache-6 net_lat: 13
+  L2Cache-8 -> L1Cache-7 net_lat: 13
+  L2Cache-8 -> L1Cache-8 net_lat: 13
+  L2Cache-8 -> L1Cache-9 net_lat: 13
+  L2Cache-8 -> L1Cache-10 net_lat: 13
+  L2Cache-8 -> L1Cache-11 net_lat: 13
+  L2Cache-8 -> L1Cache-12 net_lat: 13
+  L2Cache-8 -> L1Cache-13 net_lat: 13
+  L2Cache-8 -> L1Cache-14 net_lat: 13
+  L2Cache-8 -> L1Cache-15 net_lat: 13
+  L2Cache-8 -> Directory-0 net_lat: 13
+  L2Cache-8 -> Directory-1 net_lat: 13
+  L2Cache-8 -> Directory-2 net_lat: 13
+  L2Cache-8 -> Directory-3 net_lat: 13
+  L2Cache-8 -> Directory-4 net_lat: 13
+  L2Cache-8 -> Directory-5 net_lat: 13
+  L2Cache-8 -> Directory-6 net_lat: 13
+  L2Cache-8 -> Directory-7 net_lat: 13
+  L2Cache-8 -> Directory-8 net_lat: 13
+  L2Cache-8 -> Directory-9 net_lat: 13
+  L2Cache-8 -> Directory-10 net_lat: 13
+  L2Cache-8 -> Directory-11 net_lat: 13
+  L2Cache-8 -> Directory-12 net_lat: 13
+  L2Cache-8 -> Directory-13 net_lat: 13
+  L2Cache-8 -> Directory-14 net_lat: 13
+  L2Cache-8 -> Directory-15 net_lat: 13
+
+L2Cache-9 Network Latencies
+  L2Cache-9 -> L2Cache-0 net_lat: 13
+  L2Cache-9 -> L2Cache-1 net_lat: 13
+  L2Cache-9 -> L2Cache-2 net_lat: 13
+  L2Cache-9 -> L2Cache-3 net_lat: 13
+  L2Cache-9 -> L2Cache-4 net_lat: 13
+  L2Cache-9 -> L2Cache-5 net_lat: 13
+  L2Cache-9 -> L2Cache-6 net_lat: 13
+  L2Cache-9 -> L2Cache-7 net_lat: 13
+  L2Cache-9 -> L2Cache-8 net_lat: 13
+  L2Cache-9 -> L2Cache-10 net_lat: 13
+  L2Cache-9 -> L2Cache-11 net_lat: 13
+  L2Cache-9 -> L2Cache-12 net_lat: 13
+  L2Cache-9 -> L2Cache-13 net_lat: 13
+  L2Cache-9 -> L2Cache-14 net_lat: 13
+  L2Cache-9 -> L2Cache-15 net_lat: 13
+  L2Cache-9 -> L1Cache-0 net_lat: 13
+  L2Cache-9 -> L1Cache-1 net_lat: 13
+  L2Cache-9 -> L1Cache-2 net_lat: 13
+  L2Cache-9 -> L1Cache-3 net_lat: 13
+  L2Cache-9 -> L1Cache-4 net_lat: 13
+  L2Cache-9 -> L1Cache-5 net_lat: 13
+  L2Cache-9 -> L1Cache-6 net_lat: 13
+  L2Cache-9 -> L1Cache-7 net_lat: 13
+  L2Cache-9 -> L1Cache-8 net_lat: 13
+  L2Cache-9 -> L1Cache-9 net_lat: 13
+  L2Cache-9 -> L1Cache-10 net_lat: 13
+  L2Cache-9 -> L1Cache-11 net_lat: 13
+  L2Cache-9 -> L1Cache-12 net_lat: 13
+  L2Cache-9 -> L1Cache-13 net_lat: 13
+  L2Cache-9 -> L1Cache-14 net_lat: 13
+  L2Cache-9 -> L1Cache-15 net_lat: 13
+  L2Cache-9 -> Directory-0 net_lat: 13
+  L2Cache-9 -> Directory-1 net_lat: 13
+  L2Cache-9 -> Directory-2 net_lat: 13
+  L2Cache-9 -> Directory-3 net_lat: 13
+  L2Cache-9 -> Directory-4 net_lat: 13
+  L2Cache-9 -> Directory-5 net_lat: 13
+  L2Cache-9 -> Directory-6 net_lat: 13
+  L2Cache-9 -> Directory-7 net_lat: 13
+  L2Cache-9 -> Directory-8 net_lat: 13
+  L2Cache-9 -> Directory-9 net_lat: 13
+  L2Cache-9 -> Directory-10 net_lat: 13
+  L2Cache-9 -> Directory-11 net_lat: 13
+  L2Cache-9 -> Directory-12 net_lat: 13
+  L2Cache-9 -> Directory-13 net_lat: 13
+  L2Cache-9 -> Directory-14 net_lat: 13
+  L2Cache-9 -> Directory-15 net_lat: 13
+
+L2Cache-10 Network Latencies
+  L2Cache-10 -> L2Cache-0 net_lat: 13
+  L2Cache-10 -> L2Cache-1 net_lat: 13
+  L2Cache-10 -> L2Cache-2 net_lat: 13
+  L2Cache-10 -> L2Cache-3 net_lat: 13
+  L2Cache-10 -> L2Cache-4 net_lat: 13
+  L2Cache-10 -> L2Cache-5 net_lat: 13
+  L2Cache-10 -> L2Cache-6 net_lat: 13
+  L2Cache-10 -> L2Cache-7 net_lat: 13
+  L2Cache-10 -> L2Cache-8 net_lat: 13
+  L2Cache-10 -> L2Cache-9 net_lat: 13
+  L2Cache-10 -> L2Cache-11 net_lat: 13
+  L2Cache-10 -> L2Cache-12 net_lat: 13
+  L2Cache-10 -> L2Cache-13 net_lat: 13
+  L2Cache-10 -> L2Cache-14 net_lat: 13
+  L2Cache-10 -> L2Cache-15 net_lat: 13
+  L2Cache-10 -> L1Cache-0 net_lat: 13
+  L2Cache-10 -> L1Cache-1 net_lat: 13
+  L2Cache-10 -> L1Cache-2 net_lat: 13
+  L2Cache-10 -> L1Cache-3 net_lat: 13
+  L2Cache-10 -> L1Cache-4 net_lat: 13
+  L2Cache-10 -> L1Cache-5 net_lat: 13
+  L2Cache-10 -> L1Cache-6 net_lat: 13
+  L2Cache-10 -> L1Cache-7 net_lat: 13
+  L2Cache-10 -> L1Cache-8 net_lat: 13
+  L2Cache-10 -> L1Cache-9 net_lat: 13
+  L2Cache-10 -> L1Cache-10 net_lat: 13
+  L2Cache-10 -> L1Cache-11 net_lat: 13
+  L2Cache-10 -> L1Cache-12 net_lat: 13
+  L2Cache-10 -> L1Cache-13 net_lat: 13
+  L2Cache-10 -> L1Cache-14 net_lat: 13
+  L2Cache-10 -> L1Cache-15 net_lat: 13
+  L2Cache-10 -> Directory-0 net_lat: 13
+  L2Cache-10 -> Directory-1 net_lat: 13
+  L2Cache-10 -> Directory-2 net_lat: 13
+  L2Cache-10 -> Directory-3 net_lat: 13
+  L2Cache-10 -> Directory-4 net_lat: 13
+  L2Cache-10 -> Directory-5 net_lat: 13
+  L2Cache-10 -> Directory-6 net_lat: 13
+  L2Cache-10 -> Directory-7 net_lat: 13
+  L2Cache-10 -> Directory-8 net_lat: 13
+  L2Cache-10 -> Directory-9 net_lat: 13
+  L2Cache-10 -> Directory-10 net_lat: 13
+  L2Cache-10 -> Directory-11 net_lat: 13
+  L2Cache-10 -> Directory-12 net_lat: 13
+  L2Cache-10 -> Directory-13 net_lat: 13
+  L2Cache-10 -> Directory-14 net_lat: 13
+  L2Cache-10 -> Directory-15 net_lat: 13
+
+L2Cache-11 Network Latencies
+  L2Cache-11 -> L2Cache-0 net_lat: 13
+  L2Cache-11 -> L2Cache-1 net_lat: 13
+  L2Cache-11 -> L2Cache-2 net_lat: 13
+  L2Cache-11 -> L2Cache-3 net_lat: 13
+  L2Cache-11 -> L2Cache-4 net_lat: 13
+  L2Cache-11 -> L2Cache-5 net_lat: 13
+  L2Cache-11 -> L2Cache-6 net_lat: 13
+  L2Cache-11 -> L2Cache-7 net_lat: 13
+  L2Cache-11 -> L2Cache-8 net_lat: 13
+  L2Cache-11 -> L2Cache-9 net_lat: 13
+  L2Cache-11 -> L2Cache-10 net_lat: 13
+  L2Cache-11 -> L2Cache-12 net_lat: 13
+  L2Cache-11 -> L2Cache-13 net_lat: 13
+  L2Cache-11 -> L2Cache-14 net_lat: 13
+  L2Cache-11 -> L2Cache-15 net_lat: 13
+  L2Cache-11 -> L1Cache-0 net_lat: 13
+  L2Cache-11 -> L1Cache-1 net_lat: 13
+  L2Cache-11 -> L1Cache-2 net_lat: 13
+  L2Cache-11 -> L1Cache-3 net_lat: 13
+  L2Cache-11 -> L1Cache-4 net_lat: 13
+  L2Cache-11 -> L1Cache-5 net_lat: 13
+  L2Cache-11 -> L1Cache-6 net_lat: 13
+  L2Cache-11 -> L1Cache-7 net_lat: 13
+  L2Cache-11 -> L1Cache-8 net_lat: 13
+  L2Cache-11 -> L1Cache-9 net_lat: 13
+  L2Cache-11 -> L1Cache-10 net_lat: 13
+  L2Cache-11 -> L1Cache-11 net_lat: 13
+  L2Cache-11 -> L1Cache-12 net_lat: 13
+  L2Cache-11 -> L1Cache-13 net_lat: 13
+  L2Cache-11 -> L1Cache-14 net_lat: 13
+  L2Cache-11 -> L1Cache-15 net_lat: 13
+  L2Cache-11 -> Directory-0 net_lat: 13
+  L2Cache-11 -> Directory-1 net_lat: 13
+  L2Cache-11 -> Directory-2 net_lat: 13
+  L2Cache-11 -> Directory-3 net_lat: 13
+  L2Cache-11 -> Directory-4 net_lat: 13
+  L2Cache-11 -> Directory-5 net_lat: 13
+  L2Cache-11 -> Directory-6 net_lat: 13
+  L2Cache-11 -> Directory-7 net_lat: 13
+  L2Cache-11 -> Directory-8 net_lat: 13
+  L2Cache-11 -> Directory-9 net_lat: 13
+  L2Cache-11 -> Directory-10 net_lat: 13
+  L2Cache-11 -> Directory-11 net_lat: 13
+  L2Cache-11 -> Directory-12 net_lat: 13
+  L2Cache-11 -> Directory-13 net_lat: 13
+  L2Cache-11 -> Directory-14 net_lat: 13
+  L2Cache-11 -> Directory-15 net_lat: 13
+
+L2Cache-12 Network Latencies
+  L2Cache-12 -> L2Cache-0 net_lat: 13
+  L2Cache-12 -> L2Cache-1 net_lat: 13
+  L2Cache-12 -> L2Cache-2 net_lat: 13
+  L2Cache-12 -> L2Cache-3 net_lat: 13
+  L2Cache-12 -> L2Cache-4 net_lat: 13
+  L2Cache-12 -> L2Cache-5 net_lat: 13
+  L2Cache-12 -> L2Cache-6 net_lat: 13
+  L2Cache-12 -> L2Cache-7 net_lat: 13
+  L2Cache-12 -> L2Cache-8 net_lat: 13
+  L2Cache-12 -> L2Cache-9 net_lat: 13
+  L2Cache-12 -> L2Cache-10 net_lat: 13
+  L2Cache-12 -> L2Cache-11 net_lat: 13
+  L2Cache-12 -> L2Cache-13 net_lat: 13
+  L2Cache-12 -> L2Cache-14 net_lat: 13
+  L2Cache-12 -> L2Cache-15 net_lat: 13
+  L2Cache-12 -> L1Cache-0 net_lat: 13
+  L2Cache-12 -> L1Cache-1 net_lat: 13
+  L2Cache-12 -> L1Cache-2 net_lat: 13
+  L2Cache-12 -> L1Cache-3 net_lat: 13
+  L2Cache-12 -> L1Cache-4 net_lat: 13
+  L2Cache-12 -> L1Cache-5 net_lat: 13
+  L2Cache-12 -> L1Cache-6 net_lat: 13
+  L2Cache-12 -> L1Cache-7 net_lat: 13
+  L2Cache-12 -> L1Cache-8 net_lat: 13
+  L2Cache-12 -> L1Cache-9 net_lat: 13
+  L2Cache-12 -> L1Cache-10 net_lat: 13
+  L2Cache-12 -> L1Cache-11 net_lat: 13
+  L2Cache-12 -> L1Cache-12 net_lat: 13
+  L2Cache-12 -> L1Cache-13 net_lat: 13
+  L2Cache-12 -> L1Cache-14 net_lat: 13
+  L2Cache-12 -> L1Cache-15 net_lat: 13
+  L2Cache-12 -> Directory-0 net_lat: 13
+  L2Cache-12 -> Directory-1 net_lat: 13
+  L2Cache-12 -> Directory-2 net_lat: 13
+  L2Cache-12 -> Directory-3 net_lat: 13
+  L2Cache-12 -> Directory-4 net_lat: 13
+  L2Cache-12 -> Directory-5 net_lat: 13
+  L2Cache-12 -> Directory-6 net_lat: 13
+  L2Cache-12 -> Directory-7 net_lat: 13
+  L2Cache-12 -> Directory-8 net_lat: 13
+  L2Cache-12 -> Directory-9 net_lat: 13
+  L2Cache-12 -> Directory-10 net_lat: 13
+  L2Cache-12 -> Directory-11 net_lat: 13
+  L2Cache-12 -> Directory-12 net_lat: 13
+  L2Cache-12 -> Directory-13 net_lat: 13
+  L2Cache-12 -> Directory-14 net_lat: 13
+  L2Cache-12 -> Directory-15 net_lat: 13
+
+L2Cache-13 Network Latencies
+  L2Cache-13 -> L2Cache-0 net_lat: 13
+  L2Cache-13 -> L2Cache-1 net_lat: 13
+  L2Cache-13 -> L2Cache-2 net_lat: 13
+  L2Cache-13 -> L2Cache-3 net_lat: 13
+  L2Cache-13 -> L2Cache-4 net_lat: 13
+  L2Cache-13 -> L2Cache-5 net_lat: 13
+  L2Cache-13 -> L2Cache-6 net_lat: 13
+  L2Cache-13 -> L2Cache-7 net_lat: 13
+  L2Cache-13 -> L2Cache-8 net_lat: 13
+  L2Cache-13 -> L2Cache-9 net_lat: 13
+  L2Cache-13 -> L2Cache-10 net_lat: 13
+  L2Cache-13 -> L2Cache-11 net_lat: 13
+  L2Cache-13 -> L2Cache-12 net_lat: 13
+  L2Cache-13 -> L2Cache-14 net_lat: 13
+  L2Cache-13 -> L2Cache-15 net_lat: 13
+  L2Cache-13 -> L1Cache-0 net_lat: 13
+  L2Cache-13 -> L1Cache-1 net_lat: 13
+  L2Cache-13 -> L1Cache-2 net_lat: 13
+  L2Cache-13 -> L1Cache-3 net_lat: 13
+  L2Cache-13 -> L1Cache-4 net_lat: 13
+  L2Cache-13 -> L1Cache-5 net_lat: 13
+  L2Cache-13 -> L1Cache-6 net_lat: 13
+  L2Cache-13 -> L1Cache-7 net_lat: 13
+  L2Cache-13 -> L1Cache-8 net_lat: 13
+  L2Cache-13 -> L1Cache-9 net_lat: 13
+  L2Cache-13 -> L1Cache-10 net_lat: 13
+  L2Cache-13 -> L1Cache-11 net_lat: 13
+  L2Cache-13 -> L1Cache-12 net_lat: 13
+  L2Cache-13 -> L1Cache-13 net_lat: 13
+  L2Cache-13 -> L1Cache-14 net_lat: 13
+  L2Cache-13 -> L1Cache-15 net_lat: 13
+  L2Cache-13 -> Directory-0 net_lat: 13
+  L2Cache-13 -> Directory-1 net_lat: 13
+  L2Cache-13 -> Directory-2 net_lat: 13
+  L2Cache-13 -> Directory-3 net_lat: 13
+  L2Cache-13 -> Directory-4 net_lat: 13
+  L2Cache-13 -> Directory-5 net_lat: 13
+  L2Cache-13 -> Directory-6 net_lat: 13
+  L2Cache-13 -> Directory-7 net_lat: 13
+  L2Cache-13 -> Directory-8 net_lat: 13
+  L2Cache-13 -> Directory-9 net_lat: 13
+  L2Cache-13 -> Directory-10 net_lat: 13
+  L2Cache-13 -> Directory-11 net_lat: 13
+  L2Cache-13 -> Directory-12 net_lat: 13
+  L2Cache-13 -> Directory-13 net_lat: 13
+  L2Cache-13 -> Directory-14 net_lat: 13
+  L2Cache-13 -> Directory-15 net_lat: 13
+
+L2Cache-14 Network Latencies
+  L2Cache-14 -> L2Cache-0 net_lat: 13
+  L2Cache-14 -> L2Cache-1 net_lat: 13
+  L2Cache-14 -> L2Cache-2 net_lat: 13
+  L2Cache-14 -> L2Cache-3 net_lat: 13
+  L2Cache-14 -> L2Cache-4 net_lat: 13
+  L2Cache-14 -> L2Cache-5 net_lat: 13
+  L2Cache-14 -> L2Cache-6 net_lat: 13
+  L2Cache-14 -> L2Cache-7 net_lat: 13
+  L2Cache-14 -> L2Cache-8 net_lat: 13
+  L2Cache-14 -> L2Cache-9 net_lat: 13
+  L2Cache-14 -> L2Cache-10 net_lat: 13
+  L2Cache-14 -> L2Cache-11 net_lat: 13
+  L2Cache-14 -> L2Cache-12 net_lat: 13
+  L2Cache-14 -> L2Cache-13 net_lat: 13
+  L2Cache-14 -> L2Cache-15 net_lat: 13
+  L2Cache-14 -> L1Cache-0 net_lat: 13
+  L2Cache-14 -> L1Cache-1 net_lat: 13
+  L2Cache-14 -> L1Cache-2 net_lat: 13
+  L2Cache-14 -> L1Cache-3 net_lat: 13
+  L2Cache-14 -> L1Cache-4 net_lat: 13
+  L2Cache-14 -> L1Cache-5 net_lat: 13
+  L2Cache-14 -> L1Cache-6 net_lat: 13
+  L2Cache-14 -> L1Cache-7 net_lat: 13
+  L2Cache-14 -> L1Cache-8 net_lat: 13
+  L2Cache-14 -> L1Cache-9 net_lat: 13
+  L2Cache-14 -> L1Cache-10 net_lat: 13
+  L2Cache-14 -> L1Cache-11 net_lat: 13
+  L2Cache-14 -> L1Cache-12 net_lat: 13
+  L2Cache-14 -> L1Cache-13 net_lat: 13
+  L2Cache-14 -> L1Cache-14 net_lat: 13
+  L2Cache-14 -> L1Cache-15 net_lat: 13
+  L2Cache-14 -> Directory-0 net_lat: 13
+  L2Cache-14 -> Directory-1 net_lat: 13
+  L2Cache-14 -> Directory-2 net_lat: 13
+  L2Cache-14 -> Directory-3 net_lat: 13
+  L2Cache-14 -> Directory-4 net_lat: 13
+  L2Cache-14 -> Directory-5 net_lat: 13
+  L2Cache-14 -> Directory-6 net_lat: 13
+  L2Cache-14 -> Directory-7 net_lat: 13
+  L2Cache-14 -> Directory-8 net_lat: 13
+  L2Cache-14 -> Directory-9 net_lat: 13
+  L2Cache-14 -> Directory-10 net_lat: 13
+  L2Cache-14 -> Directory-11 net_lat: 13
+  L2Cache-14 -> Directory-12 net_lat: 13
+  L2Cache-14 -> Directory-13 net_lat: 13
+  L2Cache-14 -> Directory-14 net_lat: 13
+  L2Cache-14 -> Directory-15 net_lat: 13
+
+L2Cache-15 Network Latencies
+  L2Cache-15 -> L2Cache-0 net_lat: 13
+  L2Cache-15 -> L2Cache-1 net_lat: 13
+  L2Cache-15 -> L2Cache-2 net_lat: 13
+  L2Cache-15 -> L2Cache-3 net_lat: 13
+  L2Cache-15 -> L2Cache-4 net_lat: 13
+  L2Cache-15 -> L2Cache-5 net_lat: 13
+  L2Cache-15 -> L2Cache-6 net_lat: 13
+  L2Cache-15 -> L2Cache-7 net_lat: 13
+  L2Cache-15 -> L2Cache-8 net_lat: 13
+  L2Cache-15 -> L2Cache-9 net_lat: 13
+  L2Cache-15 -> L2Cache-10 net_lat: 13
+  L2Cache-15 -> L2Cache-11 net_lat: 13
+  L2Cache-15 -> L2Cache-12 net_lat: 13
+  L2Cache-15 -> L2Cache-13 net_lat: 13
+  L2Cache-15 -> L2Cache-14 net_lat: 13
+  L2Cache-15 -> L1Cache-0 net_lat: 13
+  L2Cache-15 -> L1Cache-1 net_lat: 13
+  L2Cache-15 -> L1Cache-2 net_lat: 13
+  L2Cache-15 -> L1Cache-3 net_lat: 13
+  L2Cache-15 -> L1Cache-4 net_lat: 13
+  L2Cache-15 -> L1Cache-5 net_lat: 13
+  L2Cache-15 -> L1Cache-6 net_lat: 13
+  L2Cache-15 -> L1Cache-7 net_lat: 13
+  L2Cache-15 -> L1Cache-8 net_lat: 13
+  L2Cache-15 -> L1Cache-9 net_lat: 13
+  L2Cache-15 -> L1Cache-10 net_lat: 13
+  L2Cache-15 -> L1Cache-11 net_lat: 13
+  L2Cache-15 -> L1Cache-12 net_lat: 13
+  L2Cache-15 -> L1Cache-13 net_lat: 13
+  L2Cache-15 -> L1Cache-14 net_lat: 13
+  L2Cache-15 -> L1Cache-15 net_lat: 13
+  L2Cache-15 -> Directory-0 net_lat: 13
+  L2Cache-15 -> Directory-1 net_lat: 13
+  L2Cache-15 -> Directory-2 net_lat: 13
+  L2Cache-15 -> Directory-3 net_lat: 13
+  L2Cache-15 -> Directory-4 net_lat: 13
+  L2Cache-15 -> Directory-5 net_lat: 13
+  L2Cache-15 -> Directory-6 net_lat: 13
+  L2Cache-15 -> Directory-7 net_lat: 13
+  L2Cache-15 -> Directory-8 net_lat: 13
+  L2Cache-15 -> Directory-9 net_lat: 13
+  L2Cache-15 -> Directory-10 net_lat: 13
+  L2Cache-15 -> Directory-11 net_lat: 13
+  L2Cache-15 -> Directory-12 net_lat: 13
+  L2Cache-15 -> Directory-13 net_lat: 13
+  L2Cache-15 -> Directory-14 net_lat: 13
+  L2Cache-15 -> Directory-15 net_lat: 13
+
+L1Cache-0 Network Latencies
+  L1Cache-0 -> L2Cache-0 net_lat: 13
+  L1Cache-0 -> L2Cache-1 net_lat: 13
+  L1Cache-0 -> L2Cache-2 net_lat: 13
+  L1Cache-0 -> L2Cache-3 net_lat: 13
+  L1Cache-0 -> L2Cache-4 net_lat: 13
+  L1Cache-0 -> L2Cache-5 net_lat: 13
+  L1Cache-0 -> L2Cache-6 net_lat: 13
+  L1Cache-0 -> L2Cache-7 net_lat: 13
+  L1Cache-0 -> L2Cache-8 net_lat: 13
+  L1Cache-0 -> L2Cache-9 net_lat: 13
+  L1Cache-0 -> L2Cache-10 net_lat: 13
+  L1Cache-0 -> L2Cache-11 net_lat: 13
+  L1Cache-0 -> L2Cache-12 net_lat: 13
+  L1Cache-0 -> L2Cache-13 net_lat: 13
+  L1Cache-0 -> L2Cache-14 net_lat: 13
+  L1Cache-0 -> L2Cache-15 net_lat: 13
+  L1Cache-0 -> L1Cache-1 net_lat: 13
+  L1Cache-0 -> L1Cache-2 net_lat: 13
+  L1Cache-0 -> L1Cache-3 net_lat: 13
+  L1Cache-0 -> L1Cache-4 net_lat: 13
+  L1Cache-0 -> L1Cache-5 net_lat: 13
+  L1Cache-0 -> L1Cache-6 net_lat: 13
+  L1Cache-0 -> L1Cache-7 net_lat: 13
+  L1Cache-0 -> L1Cache-8 net_lat: 13
+  L1Cache-0 -> L1Cache-9 net_lat: 13
+  L1Cache-0 -> L1Cache-10 net_lat: 13
+  L1Cache-0 -> L1Cache-11 net_lat: 13
+  L1Cache-0 -> L1Cache-12 net_lat: 13
+  L1Cache-0 -> L1Cache-13 net_lat: 13
+  L1Cache-0 -> L1Cache-14 net_lat: 13
+  L1Cache-0 -> L1Cache-15 net_lat: 13
+  L1Cache-0 -> Directory-0 net_lat: 13
+  L1Cache-0 -> Directory-1 net_lat: 13
+  L1Cache-0 -> Directory-2 net_lat: 13
+  L1Cache-0 -> Directory-3 net_lat: 13
+  L1Cache-0 -> Directory-4 net_lat: 13
+  L1Cache-0 -> Directory-5 net_lat: 13
+  L1Cache-0 -> Directory-6 net_lat: 13
+  L1Cache-0 -> Directory-7 net_lat: 13
+  L1Cache-0 -> Directory-8 net_lat: 13
+  L1Cache-0 -> Directory-9 net_lat: 13
+  L1Cache-0 -> Directory-10 net_lat: 13
+  L1Cache-0 -> Directory-11 net_lat: 13
+  L1Cache-0 -> Directory-12 net_lat: 13
+  L1Cache-0 -> Directory-13 net_lat: 13
+  L1Cache-0 -> Directory-14 net_lat: 13
+  L1Cache-0 -> Directory-15 net_lat: 13
+
+L1Cache-1 Network Latencies
+  L1Cache-1 -> L2Cache-0 net_lat: 13
+  L1Cache-1 -> L2Cache-1 net_lat: 13
+  L1Cache-1 -> L2Cache-2 net_lat: 13
+  L1Cache-1 -> L2Cache-3 net_lat: 13
+  L1Cache-1 -> L2Cache-4 net_lat: 13
+  L1Cache-1 -> L2Cache-5 net_lat: 13
+  L1Cache-1 -> L2Cache-6 net_lat: 13
+  L1Cache-1 -> L2Cache-7 net_lat: 13
+  L1Cache-1 -> L2Cache-8 net_lat: 13
+  L1Cache-1 -> L2Cache-9 net_lat: 13
+  L1Cache-1 -> L2Cache-10 net_lat: 13
+  L1Cache-1 -> L2Cache-11 net_lat: 13
+  L1Cache-1 -> L2Cache-12 net_lat: 13
+  L1Cache-1 -> L2Cache-13 net_lat: 13
+  L1Cache-1 -> L2Cache-14 net_lat: 13
+  L1Cache-1 -> L2Cache-15 net_lat: 13
+  L1Cache-1 -> L1Cache-0 net_lat: 13
+  L1Cache-1 -> L1Cache-2 net_lat: 13
+  L1Cache-1 -> L1Cache-3 net_lat: 13
+  L1Cache-1 -> L1Cache-4 net_lat: 13
+  L1Cache-1 -> L1Cache-5 net_lat: 13
+  L1Cache-1 -> L1Cache-6 net_lat: 13
+  L1Cache-1 -> L1Cache-7 net_lat: 13
+  L1Cache-1 -> L1Cache-8 net_lat: 13
+  L1Cache-1 -> L1Cache-9 net_lat: 13
+  L1Cache-1 -> L1Cache-10 net_lat: 13
+  L1Cache-1 -> L1Cache-11 net_lat: 13
+  L1Cache-1 -> L1Cache-12 net_lat: 13
+  L1Cache-1 -> L1Cache-13 net_lat: 13
+  L1Cache-1 -> L1Cache-14 net_lat: 13
+  L1Cache-1 -> L1Cache-15 net_lat: 13
+  L1Cache-1 -> Directory-0 net_lat: 13
+  L1Cache-1 -> Directory-1 net_lat: 13
+  L1Cache-1 -> Directory-2 net_lat: 13
+  L1Cache-1 -> Directory-3 net_lat: 13
+  L1Cache-1 -> Directory-4 net_lat: 13
+  L1Cache-1 -> Directory-5 net_lat: 13
+  L1Cache-1 -> Directory-6 net_lat: 13
+  L1Cache-1 -> Directory-7 net_lat: 13
+  L1Cache-1 -> Directory-8 net_lat: 13
+  L1Cache-1 -> Directory-9 net_lat: 13
+  L1Cache-1 -> Directory-10 net_lat: 13
+  L1Cache-1 -> Directory-11 net_lat: 13
+  L1Cache-1 -> Directory-12 net_lat: 13
+  L1Cache-1 -> Directory-13 net_lat: 13
+  L1Cache-1 -> Directory-14 net_lat: 13
+  L1Cache-1 -> Directory-15 net_lat: 13
+
+L1Cache-2 Network Latencies
+  L1Cache-2 -> L2Cache-0 net_lat: 13
+  L1Cache-2 -> L2Cache-1 net_lat: 13
+  L1Cache-2 -> L2Cache-2 net_lat: 13
+  L1Cache-2 -> L2Cache-3 net_lat: 13
+  L1Cache-2 -> L2Cache-4 net_lat: 13
+  L1Cache-2 -> L2Cache-5 net_lat: 13
+  L1Cache-2 -> L2Cache-6 net_lat: 13
+  L1Cache-2 -> L2Cache-7 net_lat: 13
+  L1Cache-2 -> L2Cache-8 net_lat: 13
+  L1Cache-2 -> L2Cache-9 net_lat: 13
+  L1Cache-2 -> L2Cache-10 net_lat: 13
+  L1Cache-2 -> L2Cache-11 net_lat: 13
+  L1Cache-2 -> L2Cache-12 net_lat: 13
+  L1Cache-2 -> L2Cache-13 net_lat: 13
+  L1Cache-2 -> L2Cache-14 net_lat: 13
+  L1Cache-2 -> L2Cache-15 net_lat: 13
+  L1Cache-2 -> L1Cache-0 net_lat: 13
+  L1Cache-2 -> L1Cache-1 net_lat: 13
+  L1Cache-2 -> L1Cache-3 net_lat: 13
+  L1Cache-2 -> L1Cache-4 net_lat: 13
+  L1Cache-2 -> L1Cache-5 net_lat: 13
+  L1Cache-2 -> L1Cache-6 net_lat: 13
+  L1Cache-2 -> L1Cache-7 net_lat: 13
+  L1Cache-2 -> L1Cache-8 net_lat: 13
+  L1Cache-2 -> L1Cache-9 net_lat: 13
+  L1Cache-2 -> L1Cache-10 net_lat: 13
+  L1Cache-2 -> L1Cache-11 net_lat: 13
+  L1Cache-2 -> L1Cache-12 net_lat: 13
+  L1Cache-2 -> L1Cache-13 net_lat: 13
+  L1Cache-2 -> L1Cache-14 net_lat: 13
+  L1Cache-2 -> L1Cache-15 net_lat: 13
+  L1Cache-2 -> Directory-0 net_lat: 13
+  L1Cache-2 -> Directory-1 net_lat: 13
+  L1Cache-2 -> Directory-2 net_lat: 13
+  L1Cache-2 -> Directory-3 net_lat: 13
+  L1Cache-2 -> Directory-4 net_lat: 13
+  L1Cache-2 -> Directory-5 net_lat: 13
+  L1Cache-2 -> Directory-6 net_lat: 13
+  L1Cache-2 -> Directory-7 net_lat: 13
+  L1Cache-2 -> Directory-8 net_lat: 13
+  L1Cache-2 -> Directory-9 net_lat: 13
+  L1Cache-2 -> Directory-10 net_lat: 13
+  L1Cache-2 -> Directory-11 net_lat: 13
+  L1Cache-2 -> Directory-12 net_lat: 13
+  L1Cache-2 -> Directory-13 net_lat: 13
+  L1Cache-2 -> Directory-14 net_lat: 13
+  L1Cache-2 -> Directory-15 net_lat: 13
+
+L1Cache-3 Network Latencies
+  L1Cache-3 -> L2Cache-0 net_lat: 13
+  L1Cache-3 -> L2Cache-1 net_lat: 13
+  L1Cache-3 -> L2Cache-2 net_lat: 13
+  L1Cache-3 -> L2Cache-3 net_lat: 13
+  L1Cache-3 -> L2Cache-4 net_lat: 13
+  L1Cache-3 -> L2Cache-5 net_lat: 13
+  L1Cache-3 -> L2Cache-6 net_lat: 13
+  L1Cache-3 -> L2Cache-7 net_lat: 13
+  L1Cache-3 -> L2Cache-8 net_lat: 13
+  L1Cache-3 -> L2Cache-9 net_lat: 13
+  L1Cache-3 -> L2Cache-10 net_lat: 13
+  L1Cache-3 -> L2Cache-11 net_lat: 13
+  L1Cache-3 -> L2Cache-12 net_lat: 13
+  L1Cache-3 -> L2Cache-13 net_lat: 13
+  L1Cache-3 -> L2Cache-14 net_lat: 13
+  L1Cache-3 -> L2Cache-15 net_lat: 13
+  L1Cache-3 -> L1Cache-0 net_lat: 13
+  L1Cache-3 -> L1Cache-1 net_lat: 13
+  L1Cache-3 -> L1Cache-2 net_lat: 13
+  L1Cache-3 -> L1Cache-4 net_lat: 13
+  L1Cache-3 -> L1Cache-5 net_lat: 13
+  L1Cache-3 -> L1Cache-6 net_lat: 13
+  L1Cache-3 -> L1Cache-7 net_lat: 13
+  L1Cache-3 -> L1Cache-8 net_lat: 13
+  L1Cache-3 -> L1Cache-9 net_lat: 13
+  L1Cache-3 -> L1Cache-10 net_lat: 13
+  L1Cache-3 -> L1Cache-11 net_lat: 13
+  L1Cache-3 -> L1Cache-12 net_lat: 13
+  L1Cache-3 -> L1Cache-13 net_lat: 13
+  L1Cache-3 -> L1Cache-14 net_lat: 13
+  L1Cache-3 -> L1Cache-15 net_lat: 13
+  L1Cache-3 -> Directory-0 net_lat: 13
+  L1Cache-3 -> Directory-1 net_lat: 13
+  L1Cache-3 -> Directory-2 net_lat: 13
+  L1Cache-3 -> Directory-3 net_lat: 13
+  L1Cache-3 -> Directory-4 net_lat: 13
+  L1Cache-3 -> Directory-5 net_lat: 13
+  L1Cache-3 -> Directory-6 net_lat: 13
+  L1Cache-3 -> Directory-7 net_lat: 13
+  L1Cache-3 -> Directory-8 net_lat: 13
+  L1Cache-3 -> Directory-9 net_lat: 13
+  L1Cache-3 -> Directory-10 net_lat: 13
+  L1Cache-3 -> Directory-11 net_lat: 13
+  L1Cache-3 -> Directory-12 net_lat: 13
+  L1Cache-3 -> Directory-13 net_lat: 13
+  L1Cache-3 -> Directory-14 net_lat: 13
+  L1Cache-3 -> Directory-15 net_lat: 13
+
+L1Cache-4 Network Latencies
+  L1Cache-4 -> L2Cache-0 net_lat: 13
+  L1Cache-4 -> L2Cache-1 net_lat: 13
+  L1Cache-4 -> L2Cache-2 net_lat: 13
+  L1Cache-4 -> L2Cache-3 net_lat: 13
+  L1Cache-4 -> L2Cache-4 net_lat: 13
+  L1Cache-4 -> L2Cache-5 net_lat: 13
+  L1Cache-4 -> L2Cache-6 net_lat: 13
+  L1Cache-4 -> L2Cache-7 net_lat: 13
+  L1Cache-4 -> L2Cache-8 net_lat: 13
+  L1Cache-4 -> L2Cache-9 net_lat: 13
+  L1Cache-4 -> L2Cache-10 net_lat: 13
+  L1Cache-4 -> L2Cache-11 net_lat: 13
+  L1Cache-4 -> L2Cache-12 net_lat: 13
+  L1Cache-4 -> L2Cache-13 net_lat: 13
+  L1Cache-4 -> L2Cache-14 net_lat: 13
+  L1Cache-4 -> L2Cache-15 net_lat: 13
+  L1Cache-4 -> L1Cache-0 net_lat: 13
+  L1Cache-4 -> L1Cache-1 net_lat: 13
+  L1Cache-4 -> L1Cache-2 net_lat: 13
+  L1Cache-4 -> L1Cache-3 net_lat: 13
+  L1Cache-4 -> L1Cache-5 net_lat: 13
+  L1Cache-4 -> L1Cache-6 net_lat: 13
+  L1Cache-4 -> L1Cache-7 net_lat: 13
+  L1Cache-4 -> L1Cache-8 net_lat: 13
+  L1Cache-4 -> L1Cache-9 net_lat: 13
+  L1Cache-4 -> L1Cache-10 net_lat: 13
+  L1Cache-4 -> L1Cache-11 net_lat: 13
+  L1Cache-4 -> L1Cache-12 net_lat: 13
+  L1Cache-4 -> L1Cache-13 net_lat: 13
+  L1Cache-4 -> L1Cache-14 net_lat: 13
+  L1Cache-4 -> L1Cache-15 net_lat: 13
+  L1Cache-4 -> Directory-0 net_lat: 13
+  L1Cache-4 -> Directory-1 net_lat: 13
+  L1Cache-4 -> Directory-2 net_lat: 13
+  L1Cache-4 -> Directory-3 net_lat: 13
+  L1Cache-4 -> Directory-4 net_lat: 13
+  L1Cache-4 -> Directory-5 net_lat: 13
+  L1Cache-4 -> Directory-6 net_lat: 13
+  L1Cache-4 -> Directory-7 net_lat: 13
+  L1Cache-4 -> Directory-8 net_lat: 13
+  L1Cache-4 -> Directory-9 net_lat: 13
+  L1Cache-4 -> Directory-10 net_lat: 13
+  L1Cache-4 -> Directory-11 net_lat: 13
+  L1Cache-4 -> Directory-12 net_lat: 13
+  L1Cache-4 -> Directory-13 net_lat: 13
+  L1Cache-4 -> Directory-14 net_lat: 13
+  L1Cache-4 -> Directory-15 net_lat: 13
+
+L1Cache-5 Network Latencies
+  L1Cache-5 -> L2Cache-0 net_lat: 13
+  L1Cache-5 -> L2Cache-1 net_lat: 13
+  L1Cache-5 -> L2Cache-2 net_lat: 13
+  L1Cache-5 -> L2Cache-3 net_lat: 13
+  L1Cache-5 -> L2Cache-4 net_lat: 13
+  L1Cache-5 -> L2Cache-5 net_lat: 13
+  L1Cache-5 -> L2Cache-6 net_lat: 13
+  L1Cache-5 -> L2Cache-7 net_lat: 13
+  L1Cache-5 -> L2Cache-8 net_lat: 13
+  L1Cache-5 -> L2Cache-9 net_lat: 13
+  L1Cache-5 -> L2Cache-10 net_lat: 13
+  L1Cache-5 -> L2Cache-11 net_lat: 13
+  L1Cache-5 -> L2Cache-12 net_lat: 13
+  L1Cache-5 -> L2Cache-13 net_lat: 13
+  L1Cache-5 -> L2Cache-14 net_lat: 13
+  L1Cache-5 -> L2Cache-15 net_lat: 13
+  L1Cache-5 -> L1Cache-0 net_lat: 13
+  L1Cache-5 -> L1Cache-1 net_lat: 13
+  L1Cache-5 -> L1Cache-2 net_lat: 13
+  L1Cache-5 -> L1Cache-3 net_lat: 13
+  L1Cache-5 -> L1Cache-4 net_lat: 13
+  L1Cache-5 -> L1Cache-6 net_lat: 13
+  L1Cache-5 -> L1Cache-7 net_lat: 13
+  L1Cache-5 -> L1Cache-8 net_lat: 13
+  L1Cache-5 -> L1Cache-9 net_lat: 13
+  L1Cache-5 -> L1Cache-10 net_lat: 13
+  L1Cache-5 -> L1Cache-11 net_lat: 13
+  L1Cache-5 -> L1Cache-12 net_lat: 13
+  L1Cache-5 -> L1Cache-13 net_lat: 13
+  L1Cache-5 -> L1Cache-14 net_lat: 13
+  L1Cache-5 -> L1Cache-15 net_lat: 13
+  L1Cache-5 -> Directory-0 net_lat: 13
+  L1Cache-5 -> Directory-1 net_lat: 13
+  L1Cache-5 -> Directory-2 net_lat: 13
+  L1Cache-5 -> Directory-3 net_lat: 13
+  L1Cache-5 -> Directory-4 net_lat: 13
+  L1Cache-5 -> Directory-5 net_lat: 13
+  L1Cache-5 -> Directory-6 net_lat: 13
+  L1Cache-5 -> Directory-7 net_lat: 13
+  L1Cache-5 -> Directory-8 net_lat: 13
+  L1Cache-5 -> Directory-9 net_lat: 13
+  L1Cache-5 -> Directory-10 net_lat: 13
+  L1Cache-5 -> Directory-11 net_lat: 13
+  L1Cache-5 -> Directory-12 net_lat: 13
+  L1Cache-5 -> Directory-13 net_lat: 13
+  L1Cache-5 -> Directory-14 net_lat: 13
+  L1Cache-5 -> Directory-15 net_lat: 13
+
+L1Cache-6 Network Latencies
+  L1Cache-6 -> L2Cache-0 net_lat: 13
+  L1Cache-6 -> L2Cache-1 net_lat: 13
+  L1Cache-6 -> L2Cache-2 net_lat: 13
+  L1Cache-6 -> L2Cache-3 net_lat: 13
+  L1Cache-6 -> L2Cache-4 net_lat: 13
+  L1Cache-6 -> L2Cache-5 net_lat: 13
+  L1Cache-6 -> L2Cache-6 net_lat: 13
+  L1Cache-6 -> L2Cache-7 net_lat: 13
+  L1Cache-6 -> L2Cache-8 net_lat: 13
+  L1Cache-6 -> L2Cache-9 net_lat: 13
+  L1Cache-6 -> L2Cache-10 net_lat: 13
+  L1Cache-6 -> L2Cache-11 net_lat: 13
+  L1Cache-6 -> L2Cache-12 net_lat: 13
+  L1Cache-6 -> L2Cache-13 net_lat: 13
+  L1Cache-6 -> L2Cache-14 net_lat: 13
+  L1Cache-6 -> L2Cache-15 net_lat: 13
+  L1Cache-6 -> L1Cache-0 net_lat: 13
+  L1Cache-6 -> L1Cache-1 net_lat: 13
+  L1Cache-6 -> L1Cache-2 net_lat: 13
+  L1Cache-6 -> L1Cache-3 net_lat: 13
+  L1Cache-6 -> L1Cache-4 net_lat: 13
+  L1Cache-6 -> L1Cache-5 net_lat: 13
+  L1Cache-6 -> L1Cache-7 net_lat: 13
+  L1Cache-6 -> L1Cache-8 net_lat: 13
+  L1Cache-6 -> L1Cache-9 net_lat: 13
+  L1Cache-6 -> L1Cache-10 net_lat: 13
+  L1Cache-6 -> L1Cache-11 net_lat: 13
+  L1Cache-6 -> L1Cache-12 net_lat: 13
+  L1Cache-6 -> L1Cache-13 net_lat: 13
+  L1Cache-6 -> L1Cache-14 net_lat: 13
+  L1Cache-6 -> L1Cache-15 net_lat: 13
+  L1Cache-6 -> Directory-0 net_lat: 13
+  L1Cache-6 -> Directory-1 net_lat: 13
+  L1Cache-6 -> Directory-2 net_lat: 13
+  L1Cache-6 -> Directory-3 net_lat: 13
+  L1Cache-6 -> Directory-4 net_lat: 13
+  L1Cache-6 -> Directory-5 net_lat: 13
+  L1Cache-6 -> Directory-6 net_lat: 13
+  L1Cache-6 -> Directory-7 net_lat: 13
+  L1Cache-6 -> Directory-8 net_lat: 13
+  L1Cache-6 -> Directory-9 net_lat: 13
+  L1Cache-6 -> Directory-10 net_lat: 13
+  L1Cache-6 -> Directory-11 net_lat: 13
+  L1Cache-6 -> Directory-12 net_lat: 13
+  L1Cache-6 -> Directory-13 net_lat: 13
+  L1Cache-6 -> Directory-14 net_lat: 13
+  L1Cache-6 -> Directory-15 net_lat: 13
+
+L1Cache-7 Network Latencies
+  L1Cache-7 -> L2Cache-0 net_lat: 13
+  L1Cache-7 -> L2Cache-1 net_lat: 13
+  L1Cache-7 -> L2Cache-2 net_lat: 13
+  L1Cache-7 -> L2Cache-3 net_lat: 13
+  L1Cache-7 -> L2Cache-4 net_lat: 13
+  L1Cache-7 -> L2Cache-5 net_lat: 13
+  L1Cache-7 -> L2Cache-6 net_lat: 13
+  L1Cache-7 -> L2Cache-7 net_lat: 13
+  L1Cache-7 -> L2Cache-8 net_lat: 13
+  L1Cache-7 -> L2Cache-9 net_lat: 13
+  L1Cache-7 -> L2Cache-10 net_lat: 13
+  L1Cache-7 -> L2Cache-11 net_lat: 13
+  L1Cache-7 -> L2Cache-12 net_lat: 13
+  L1Cache-7 -> L2Cache-13 net_lat: 13
+  L1Cache-7 -> L2Cache-14 net_lat: 13
+  L1Cache-7 -> L2Cache-15 net_lat: 13
+  L1Cache-7 -> L1Cache-0 net_lat: 13
+  L1Cache-7 -> L1Cache-1 net_lat: 13
+  L1Cache-7 -> L1Cache-2 net_lat: 13
+  L1Cache-7 -> L1Cache-3 net_lat: 13
+  L1Cache-7 -> L1Cache-4 net_lat: 13
+  L1Cache-7 -> L1Cache-5 net_lat: 13
+  L1Cache-7 -> L1Cache-6 net_lat: 13
+  L1Cache-7 -> L1Cache-8 net_lat: 13
+  L1Cache-7 -> L1Cache-9 net_lat: 13
+  L1Cache-7 -> L1Cache-10 net_lat: 13
+  L1Cache-7 -> L1Cache-11 net_lat: 13
+  L1Cache-7 -> L1Cache-12 net_lat: 13
+  L1Cache-7 -> L1Cache-13 net_lat: 13
+  L1Cache-7 -> L1Cache-14 net_lat: 13
+  L1Cache-7 -> L1Cache-15 net_lat: 13
+  L1Cache-7 -> Directory-0 net_lat: 13
+  L1Cache-7 -> Directory-1 net_lat: 13
+  L1Cache-7 -> Directory-2 net_lat: 13
+  L1Cache-7 -> Directory-3 net_lat: 13
+  L1Cache-7 -> Directory-4 net_lat: 13
+  L1Cache-7 -> Directory-5 net_lat: 13
+  L1Cache-7 -> Directory-6 net_lat: 13
+  L1Cache-7 -> Directory-7 net_lat: 13
+  L1Cache-7 -> Directory-8 net_lat: 13
+  L1Cache-7 -> Directory-9 net_lat: 13
+  L1Cache-7 -> Directory-10 net_lat: 13
+  L1Cache-7 -> Directory-11 net_lat: 13
+  L1Cache-7 -> Directory-12 net_lat: 13
+  L1Cache-7 -> Directory-13 net_lat: 13
+  L1Cache-7 -> Directory-14 net_lat: 13
+  L1Cache-7 -> Directory-15 net_lat: 13
+
+L1Cache-8 Network Latencies
+  L1Cache-8 -> L2Cache-0 net_lat: 13
+  L1Cache-8 -> L2Cache-1 net_lat: 13
+  L1Cache-8 -> L2Cache-2 net_lat: 13
+  L1Cache-8 -> L2Cache-3 net_lat: 13
+  L1Cache-8 -> L2Cache-4 net_lat: 13
+  L1Cache-8 -> L2Cache-5 net_lat: 13
+  L1Cache-8 -> L2Cache-6 net_lat: 13
+  L1Cache-8 -> L2Cache-7 net_lat: 13
+  L1Cache-8 -> L2Cache-8 net_lat: 13
+  L1Cache-8 -> L2Cache-9 net_lat: 13
+  L1Cache-8 -> L2Cache-10 net_lat: 13
+  L1Cache-8 -> L2Cache-11 net_lat: 13
+  L1Cache-8 -> L2Cache-12 net_lat: 13
+  L1Cache-8 -> L2Cache-13 net_lat: 13
+  L1Cache-8 -> L2Cache-14 net_lat: 13
+  L1Cache-8 -> L2Cache-15 net_lat: 13
+  L1Cache-8 -> L1Cache-0 net_lat: 13
+  L1Cache-8 -> L1Cache-1 net_lat: 13
+  L1Cache-8 -> L1Cache-2 net_lat: 13
+  L1Cache-8 -> L1Cache-3 net_lat: 13
+  L1Cache-8 -> L1Cache-4 net_lat: 13
+  L1Cache-8 -> L1Cache-5 net_lat: 13
+  L1Cache-8 -> L1Cache-6 net_lat: 13
+  L1Cache-8 -> L1Cache-7 net_lat: 13
+  L1Cache-8 -> L1Cache-9 net_lat: 13
+  L1Cache-8 -> L1Cache-10 net_lat: 13
+  L1Cache-8 -> L1Cache-11 net_lat: 13
+  L1Cache-8 -> L1Cache-12 net_lat: 13
+  L1Cache-8 -> L1Cache-13 net_lat: 13
+  L1Cache-8 -> L1Cache-14 net_lat: 13
+  L1Cache-8 -> L1Cache-15 net_lat: 13
+  L1Cache-8 -> Directory-0 net_lat: 13
+  L1Cache-8 -> Directory-1 net_lat: 13
+  L1Cache-8 -> Directory-2 net_lat: 13
+  L1Cache-8 -> Directory-3 net_lat: 13
+  L1Cache-8 -> Directory-4 net_lat: 13
+  L1Cache-8 -> Directory-5 net_lat: 13
+  L1Cache-8 -> Directory-6 net_lat: 13
+  L1Cache-8 -> Directory-7 net_lat: 13
+  L1Cache-8 -> Directory-8 net_lat: 13
+  L1Cache-8 -> Directory-9 net_lat: 13
+  L1Cache-8 -> Directory-10 net_lat: 13
+  L1Cache-8 -> Directory-11 net_lat: 13
+  L1Cache-8 -> Directory-12 net_lat: 13
+  L1Cache-8 -> Directory-13 net_lat: 13
+  L1Cache-8 -> Directory-14 net_lat: 13
+  L1Cache-8 -> Directory-15 net_lat: 13
+
+L1Cache-9 Network Latencies
+  L1Cache-9 -> L2Cache-0 net_lat: 13
+  L1Cache-9 -> L2Cache-1 net_lat: 13
+  L1Cache-9 -> L2Cache-2 net_lat: 13
+  L1Cache-9 -> L2Cache-3 net_lat: 13
+  L1Cache-9 -> L2Cache-4 net_lat: 13
+  L1Cache-9 -> L2Cache-5 net_lat: 13
+  L1Cache-9 -> L2Cache-6 net_lat: 13
+  L1Cache-9 -> L2Cache-7 net_lat: 13
+  L1Cache-9 -> L2Cache-8 net_lat: 13
+  L1Cache-9 -> L2Cache-9 net_lat: 13
+  L1Cache-9 -> L2Cache-10 net_lat: 13
+  L1Cache-9 -> L2Cache-11 net_lat: 13
+  L1Cache-9 -> L2Cache-12 net_lat: 13
+  L1Cache-9 -> L2Cache-13 net_lat: 13
+  L1Cache-9 -> L2Cache-14 net_lat: 13
+  L1Cache-9 -> L2Cache-15 net_lat: 13
+  L1Cache-9 -> L1Cache-0 net_lat: 13
+  L1Cache-9 -> L1Cache-1 net_lat: 13
+  L1Cache-9 -> L1Cache-2 net_lat: 13
+  L1Cache-9 -> L1Cache-3 net_lat: 13
+  L1Cache-9 -> L1Cache-4 net_lat: 13
+  L1Cache-9 -> L1Cache-5 net_lat: 13
+  L1Cache-9 -> L1Cache-6 net_lat: 13
+  L1Cache-9 -> L1Cache-7 net_lat: 13
+  L1Cache-9 -> L1Cache-8 net_lat: 13
+  L1Cache-9 -> L1Cache-10 net_lat: 13
+  L1Cache-9 -> L1Cache-11 net_lat: 13
+  L1Cache-9 -> L1Cache-12 net_lat: 13
+  L1Cache-9 -> L1Cache-13 net_lat: 13
+  L1Cache-9 -> L1Cache-14 net_lat: 13
+  L1Cache-9 -> L1Cache-15 net_lat: 13
+  L1Cache-9 -> Directory-0 net_lat: 13
+  L1Cache-9 -> Directory-1 net_lat: 13
+  L1Cache-9 -> Directory-2 net_lat: 13
+  L1Cache-9 -> Directory-3 net_lat: 13
+  L1Cache-9 -> Directory-4 net_lat: 13
+  L1Cache-9 -> Directory-5 net_lat: 13
+  L1Cache-9 -> Directory-6 net_lat: 13
+  L1Cache-9 -> Directory-7 net_lat: 13
+  L1Cache-9 -> Directory-8 net_lat: 13
+  L1Cache-9 -> Directory-9 net_lat: 13
+  L1Cache-9 -> Directory-10 net_lat: 13
+  L1Cache-9 -> Directory-11 net_lat: 13
+  L1Cache-9 -> Directory-12 net_lat: 13
+  L1Cache-9 -> Directory-13 net_lat: 13
+  L1Cache-9 -> Directory-14 net_lat: 13
+  L1Cache-9 -> Directory-15 net_lat: 13
+
+L1Cache-10 Network Latencies
+  L1Cache-10 -> L2Cache-0 net_lat: 13
+  L1Cache-10 -> L2Cache-1 net_lat: 13
+  L1Cache-10 -> L2Cache-2 net_lat: 13
+  L1Cache-10 -> L2Cache-3 net_lat: 13
+  L1Cache-10 -> L2Cache-4 net_lat: 13
+  L1Cache-10 -> L2Cache-5 net_lat: 13
+  L1Cache-10 -> L2Cache-6 net_lat: 13
+  L1Cache-10 -> L2Cache-7 net_lat: 13
+  L1Cache-10 -> L2Cache-8 net_lat: 13
+  L1Cache-10 -> L2Cache-9 net_lat: 13
+  L1Cache-10 -> L2Cache-10 net_lat: 13
+  L1Cache-10 -> L2Cache-11 net_lat: 13
+  L1Cache-10 -> L2Cache-12 net_lat: 13
+  L1Cache-10 -> L2Cache-13 net_lat: 13
+  L1Cache-10 -> L2Cache-14 net_lat: 13
+  L1Cache-10 -> L2Cache-15 net_lat: 13
+  L1Cache-10 -> L1Cache-0 net_lat: 13
+  L1Cache-10 -> L1Cache-1 net_lat: 13
+  L1Cache-10 -> L1Cache-2 net_lat: 13
+  L1Cache-10 -> L1Cache-3 net_lat: 13
+  L1Cache-10 -> L1Cache-4 net_lat: 13
+  L1Cache-10 -> L1Cache-5 net_lat: 13
+  L1Cache-10 -> L1Cache-6 net_lat: 13
+  L1Cache-10 -> L1Cache-7 net_lat: 13
+  L1Cache-10 -> L1Cache-8 net_lat: 13
+  L1Cache-10 -> L1Cache-9 net_lat: 13
+  L1Cache-10 -> L1Cache-11 net_lat: 13
+  L1Cache-10 -> L1Cache-12 net_lat: 13
+  L1Cache-10 -> L1Cache-13 net_lat: 13
+  L1Cache-10 -> L1Cache-14 net_lat: 13
+  L1Cache-10 -> L1Cache-15 net_lat: 13
+  L1Cache-10 -> Directory-0 net_lat: 13
+  L1Cache-10 -> Directory-1 net_lat: 13
+  L1Cache-10 -> Directory-2 net_lat: 13
+  L1Cache-10 -> Directory-3 net_lat: 13
+  L1Cache-10 -> Directory-4 net_lat: 13
+  L1Cache-10 -> Directory-5 net_lat: 13
+  L1Cache-10 -> Directory-6 net_lat: 13
+  L1Cache-10 -> Directory-7 net_lat: 13
+  L1Cache-10 -> Directory-8 net_lat: 13
+  L1Cache-10 -> Directory-9 net_lat: 13
+  L1Cache-10 -> Directory-10 net_lat: 13
+  L1Cache-10 -> Directory-11 net_lat: 13
+  L1Cache-10 -> Directory-12 net_lat: 13
+  L1Cache-10 -> Directory-13 net_lat: 13
+  L1Cache-10 -> Directory-14 net_lat: 13
+  L1Cache-10 -> Directory-15 net_lat: 13
+
+L1Cache-11 Network Latencies
+  L1Cache-11 -> L2Cache-0 net_lat: 13
+  L1Cache-11 -> L2Cache-1 net_lat: 13
+  L1Cache-11 -> L2Cache-2 net_lat: 13
+  L1Cache-11 -> L2Cache-3 net_lat: 13
+  L1Cache-11 -> L2Cache-4 net_lat: 13
+  L1Cache-11 -> L2Cache-5 net_lat: 13
+  L1Cache-11 -> L2Cache-6 net_lat: 13
+  L1Cache-11 -> L2Cache-7 net_lat: 13
+  L1Cache-11 -> L2Cache-8 net_lat: 13
+  L1Cache-11 -> L2Cache-9 net_lat: 13
+  L1Cache-11 -> L2Cache-10 net_lat: 13
+  L1Cache-11 -> L2Cache-11 net_lat: 13
+  L1Cache-11 -> L2Cache-12 net_lat: 13
+  L1Cache-11 -> L2Cache-13 net_lat: 13
+  L1Cache-11 -> L2Cache-14 net_lat: 13
+  L1Cache-11 -> L2Cache-15 net_lat: 13
+  L1Cache-11 -> L1Cache-0 net_lat: 13
+  L1Cache-11 -> L1Cache-1 net_lat: 13
+  L1Cache-11 -> L1Cache-2 net_lat: 13
+  L1Cache-11 -> L1Cache-3 net_lat: 13
+  L1Cache-11 -> L1Cache-4 net_lat: 13
+  L1Cache-11 -> L1Cache-5 net_lat: 13
+  L1Cache-11 -> L1Cache-6 net_lat: 13
+  L1Cache-11 -> L1Cache-7 net_lat: 13
+  L1Cache-11 -> L1Cache-8 net_lat: 13
+  L1Cache-11 -> L1Cache-9 net_lat: 13
+  L1Cache-11 -> L1Cache-10 net_lat: 13
+  L1Cache-11 -> L1Cache-12 net_lat: 13
+  L1Cache-11 -> L1Cache-13 net_lat: 13
+  L1Cache-11 -> L1Cache-14 net_lat: 13
+  L1Cache-11 -> L1Cache-15 net_lat: 13
+  L1Cache-11 -> Directory-0 net_lat: 13
+  L1Cache-11 -> Directory-1 net_lat: 13
+  L1Cache-11 -> Directory-2 net_lat: 13
+  L1Cache-11 -> Directory-3 net_lat: 13
+  L1Cache-11 -> Directory-4 net_lat: 13
+  L1Cache-11 -> Directory-5 net_lat: 13
+  L1Cache-11 -> Directory-6 net_lat: 13
+  L1Cache-11 -> Directory-7 net_lat: 13
+  L1Cache-11 -> Directory-8 net_lat: 13
+  L1Cache-11 -> Directory-9 net_lat: 13
+  L1Cache-11 -> Directory-10 net_lat: 13
+  L1Cache-11 -> Directory-11 net_lat: 13
+  L1Cache-11 -> Directory-12 net_lat: 13
+  L1Cache-11 -> Directory-13 net_lat: 13
+  L1Cache-11 -> Directory-14 net_lat: 13
+  L1Cache-11 -> Directory-15 net_lat: 13
+
+L1Cache-12 Network Latencies
+  L1Cache-12 -> L2Cache-0 net_lat: 13
+  L1Cache-12 -> L2Cache-1 net_lat: 13
+  L1Cache-12 -> L2Cache-2 net_lat: 13
+  L1Cache-12 -> L2Cache-3 net_lat: 13
+  L1Cache-12 -> L2Cache-4 net_lat: 13
+  L1Cache-12 -> L2Cache-5 net_lat: 13
+  L1Cache-12 -> L2Cache-6 net_lat: 13
+  L1Cache-12 -> L2Cache-7 net_lat: 13
+  L1Cache-12 -> L2Cache-8 net_lat: 13
+  L1Cache-12 -> L2Cache-9 net_lat: 13
+  L1Cache-12 -> L2Cache-10 net_lat: 13
+  L1Cache-12 -> L2Cache-11 net_lat: 13
+  L1Cache-12 -> L2Cache-12 net_lat: 13
+  L1Cache-12 -> L2Cache-13 net_lat: 13
+  L1Cache-12 -> L2Cache-14 net_lat: 13
+  L1Cache-12 -> L2Cache-15 net_lat: 13
+  L1Cache-12 -> L1Cache-0 net_lat: 13
+  L1Cache-12 -> L1Cache-1 net_lat: 13
+  L1Cache-12 -> L1Cache-2 net_lat: 13
+  L1Cache-12 -> L1Cache-3 net_lat: 13
+  L1Cache-12 -> L1Cache-4 net_lat: 13
+  L1Cache-12 -> L1Cache-5 net_lat: 13
+  L1Cache-12 -> L1Cache-6 net_lat: 13
+  L1Cache-12 -> L1Cache-7 net_lat: 13
+  L1Cache-12 -> L1Cache-8 net_lat: 13
+  L1Cache-12 -> L1Cache-9 net_lat: 13
+  L1Cache-12 -> L1Cache-10 net_lat: 13
+  L1Cache-12 -> L1Cache-11 net_lat: 13
+  L1Cache-12 -> L1Cache-13 net_lat: 13
+  L1Cache-12 -> L1Cache-14 net_lat: 13
+  L1Cache-12 -> L1Cache-15 net_lat: 13
+  L1Cache-12 -> Directory-0 net_lat: 13
+  L1Cache-12 -> Directory-1 net_lat: 13
+  L1Cache-12 -> Directory-2 net_lat: 13
+  L1Cache-12 -> Directory-3 net_lat: 13
+  L1Cache-12 -> Directory-4 net_lat: 13
+  L1Cache-12 -> Directory-5 net_lat: 13
+  L1Cache-12 -> Directory-6 net_lat: 13
+  L1Cache-12 -> Directory-7 net_lat: 13
+  L1Cache-12 -> Directory-8 net_lat: 13
+  L1Cache-12 -> Directory-9 net_lat: 13
+  L1Cache-12 -> Directory-10 net_lat: 13
+  L1Cache-12 -> Directory-11 net_lat: 13
+  L1Cache-12 -> Directory-12 net_lat: 13
+  L1Cache-12 -> Directory-13 net_lat: 13
+  L1Cache-12 -> Directory-14 net_lat: 13
+  L1Cache-12 -> Directory-15 net_lat: 13
+
+L1Cache-13 Network Latencies
+  L1Cache-13 -> L2Cache-0 net_lat: 13
+  L1Cache-13 -> L2Cache-1 net_lat: 13
+  L1Cache-13 -> L2Cache-2 net_lat: 13
+  L1Cache-13 -> L2Cache-3 net_lat: 13
+  L1Cache-13 -> L2Cache-4 net_lat: 13
+  L1Cache-13 -> L2Cache-5 net_lat: 13
+  L1Cache-13 -> L2Cache-6 net_lat: 13
+  L1Cache-13 -> L2Cache-7 net_lat: 13
+  L1Cache-13 -> L2Cache-8 net_lat: 13
+  L1Cache-13 -> L2Cache-9 net_lat: 13
+  L1Cache-13 -> L2Cache-10 net_lat: 13
+  L1Cache-13 -> L2Cache-11 net_lat: 13
+  L1Cache-13 -> L2Cache-12 net_lat: 13
+  L1Cache-13 -> L2Cache-13 net_lat: 13
+  L1Cache-13 -> L2Cache-14 net_lat: 13
+  L1Cache-13 -> L2Cache-15 net_lat: 13
+  L1Cache-13 -> L1Cache-0 net_lat: 13
+  L1Cache-13 -> L1Cache-1 net_lat: 13
+  L1Cache-13 -> L1Cache-2 net_lat: 13
+  L1Cache-13 -> L1Cache-3 net_lat: 13
+  L1Cache-13 -> L1Cache-4 net_lat: 13
+  L1Cache-13 -> L1Cache-5 net_lat: 13
+  L1Cache-13 -> L1Cache-6 net_lat: 13
+  L1Cache-13 -> L1Cache-7 net_lat: 13
+  L1Cache-13 -> L1Cache-8 net_lat: 13
+  L1Cache-13 -> L1Cache-9 net_lat: 13
+  L1Cache-13 -> L1Cache-10 net_lat: 13
+  L1Cache-13 -> L1Cache-11 net_lat: 13
+  L1Cache-13 -> L1Cache-12 net_lat: 13
+  L1Cache-13 -> L1Cache-14 net_lat: 13
+  L1Cache-13 -> L1Cache-15 net_lat: 13
+  L1Cache-13 -> Directory-0 net_lat: 13
+  L1Cache-13 -> Directory-1 net_lat: 13
+  L1Cache-13 -> Directory-2 net_lat: 13
+  L1Cache-13 -> Directory-3 net_lat: 13
+  L1Cache-13 -> Directory-4 net_lat: 13
+  L1Cache-13 -> Directory-5 net_lat: 13
+  L1Cache-13 -> Directory-6 net_lat: 13
+  L1Cache-13 -> Directory-7 net_lat: 13
+  L1Cache-13 -> Directory-8 net_lat: 13
+  L1Cache-13 -> Directory-9 net_lat: 13
+  L1Cache-13 -> Directory-10 net_lat: 13
+  L1Cache-13 -> Directory-11 net_lat: 13
+  L1Cache-13 -> Directory-12 net_lat: 13
+  L1Cache-13 -> Directory-13 net_lat: 13
+  L1Cache-13 -> Directory-14 net_lat: 13
+  L1Cache-13 -> Directory-15 net_lat: 13
+
+L1Cache-14 Network Latencies
+  L1Cache-14 -> L2Cache-0 net_lat: 13
+  L1Cache-14 -> L2Cache-1 net_lat: 13
+  L1Cache-14 -> L2Cache-2 net_lat: 13
+  L1Cache-14 -> L2Cache-3 net_lat: 13
+  L1Cache-14 -> L2Cache-4 net_lat: 13
+  L1Cache-14 -> L2Cache-5 net_lat: 13
+  L1Cache-14 -> L2Cache-6 net_lat: 13
+  L1Cache-14 -> L2Cache-7 net_lat: 13
+  L1Cache-14 -> L2Cache-8 net_lat: 13
+  L1Cache-14 -> L2Cache-9 net_lat: 13
+  L1Cache-14 -> L2Cache-10 net_lat: 13
+  L1Cache-14 -> L2Cache-11 net_lat: 13
+  L1Cache-14 -> L2Cache-12 net_lat: 13
+  L1Cache-14 -> L2Cache-13 net_lat: 13
+  L1Cache-14 -> L2Cache-14 net_lat: 13
+  L1Cache-14 -> L2Cache-15 net_lat: 13
+  L1Cache-14 -> L1Cache-0 net_lat: 13
+  L1Cache-14 -> L1Cache-1 net_lat: 13
+  L1Cache-14 -> L1Cache-2 net_lat: 13
+  L1Cache-14 -> L1Cache-3 net_lat: 13
+  L1Cache-14 -> L1Cache-4 net_lat: 13
+  L1Cache-14 -> L1Cache-5 net_lat: 13
+  L1Cache-14 -> L1Cache-6 net_lat: 13
+  L1Cache-14 -> L1Cache-7 net_lat: 13
+  L1Cache-14 -> L1Cache-8 net_lat: 13
+  L1Cache-14 -> L1Cache-9 net_lat: 13
+  L1Cache-14 -> L1Cache-10 net_lat: 13
+  L1Cache-14 -> L1Cache-11 net_lat: 13
+  L1Cache-14 -> L1Cache-12 net_lat: 13
+  L1Cache-14 -> L1Cache-13 net_lat: 13
+  L1Cache-14 -> L1Cache-15 net_lat: 13
+  L1Cache-14 -> Directory-0 net_lat: 13
+  L1Cache-14 -> Directory-1 net_lat: 13
+  L1Cache-14 -> Directory-2 net_lat: 13
+  L1Cache-14 -> Directory-3 net_lat: 13
+  L1Cache-14 -> Directory-4 net_lat: 13
+  L1Cache-14 -> Directory-5 net_lat: 13
+  L1Cache-14 -> Directory-6 net_lat: 13
+  L1Cache-14 -> Directory-7 net_lat: 13
+  L1Cache-14 -> Directory-8 net_lat: 13
+  L1Cache-14 -> Directory-9 net_lat: 13
+  L1Cache-14 -> Directory-10 net_lat: 13
+  L1Cache-14 -> Directory-11 net_lat: 13
+  L1Cache-14 -> Directory-12 net_lat: 13
+  L1Cache-14 -> Directory-13 net_lat: 13
+  L1Cache-14 -> Directory-14 net_lat: 13
+  L1Cache-14 -> Directory-15 net_lat: 13
+
+L1Cache-15 Network Latencies
+  L1Cache-15 -> L2Cache-0 net_lat: 13
+  L1Cache-15 -> L2Cache-1 net_lat: 13
+  L1Cache-15 -> L2Cache-2 net_lat: 13
+  L1Cache-15 -> L2Cache-3 net_lat: 13
+  L1Cache-15 -> L2Cache-4 net_lat: 13
+  L1Cache-15 -> L2Cache-5 net_lat: 13
+  L1Cache-15 -> L2Cache-6 net_lat: 13
+  L1Cache-15 -> L2Cache-7 net_lat: 13
+  L1Cache-15 -> L2Cache-8 net_lat: 13
+  L1Cache-15 -> L2Cache-9 net_lat: 13
+  L1Cache-15 -> L2Cache-10 net_lat: 13
+  L1Cache-15 -> L2Cache-11 net_lat: 13
+  L1Cache-15 -> L2Cache-12 net_lat: 13
+  L1Cache-15 -> L2Cache-13 net_lat: 13
+  L1Cache-15 -> L2Cache-14 net_lat: 13
+  L1Cache-15 -> L2Cache-15 net_lat: 13
+  L1Cache-15 -> L1Cache-0 net_lat: 13
+  L1Cache-15 -> L1Cache-1 net_lat: 13
+  L1Cache-15 -> L1Cache-2 net_lat: 13
+  L1Cache-15 -> L1Cache-3 net_lat: 13
+  L1Cache-15 -> L1Cache-4 net_lat: 13
+  L1Cache-15 -> L1Cache-5 net_lat: 13
+  L1Cache-15 -> L1Cache-6 net_lat: 13
+  L1Cache-15 -> L1Cache-7 net_lat: 13
+  L1Cache-15 -> L1Cache-8 net_lat: 13
+  L1Cache-15 -> L1Cache-9 net_lat: 13
+  L1Cache-15 -> L1Cache-10 net_lat: 13
+  L1Cache-15 -> L1Cache-11 net_lat: 13
+  L1Cache-15 -> L1Cache-12 net_lat: 13
+  L1Cache-15 -> L1Cache-13 net_lat: 13
+  L1Cache-15 -> L1Cache-14 net_lat: 13
+  L1Cache-15 -> Directory-0 net_lat: 13
+  L1Cache-15 -> Directory-1 net_lat: 13
+  L1Cache-15 -> Directory-2 net_lat: 13
+  L1Cache-15 -> Directory-3 net_lat: 13
+  L1Cache-15 -> Directory-4 net_lat: 13
+  L1Cache-15 -> Directory-5 net_lat: 13
+  L1Cache-15 -> Directory-6 net_lat: 13
+  L1Cache-15 -> Directory-7 net_lat: 13
+  L1Cache-15 -> Directory-8 net_lat: 13
+  L1Cache-15 -> Directory-9 net_lat: 13
+  L1Cache-15 -> Directory-10 net_lat: 13
+  L1Cache-15 -> Directory-11 net_lat: 13
+  L1Cache-15 -> Directory-12 net_lat: 13
+  L1Cache-15 -> Directory-13 net_lat: 13
+  L1Cache-15 -> Directory-14 net_lat: 13
+  L1Cache-15 -> Directory-15 net_lat: 13
+
+Directory-0 Network Latencies
+  Directory-0 -> L2Cache-0 net_lat: 13
+  Directory-0 -> L2Cache-1 net_lat: 13
+  Directory-0 -> L2Cache-2 net_lat: 13
+  Directory-0 -> L2Cache-3 net_lat: 13
+  Directory-0 -> L2Cache-4 net_lat: 13
+  Directory-0 -> L2Cache-5 net_lat: 13
+  Directory-0 -> L2Cache-6 net_lat: 13
+  Directory-0 -> L2Cache-7 net_lat: 13
+  Directory-0 -> L2Cache-8 net_lat: 13
+  Directory-0 -> L2Cache-9 net_lat: 13
+  Directory-0 -> L2Cache-10 net_lat: 13
+  Directory-0 -> L2Cache-11 net_lat: 13
+  Directory-0 -> L2Cache-12 net_lat: 13
+  Directory-0 -> L2Cache-13 net_lat: 13
+  Directory-0 -> L2Cache-14 net_lat: 13
+  Directory-0 -> L2Cache-15 net_lat: 13
+  Directory-0 -> L1Cache-0 net_lat: 13
+  Directory-0 -> L1Cache-1 net_lat: 13
+  Directory-0 -> L1Cache-2 net_lat: 13
+  Directory-0 -> L1Cache-3 net_lat: 13
+  Directory-0 -> L1Cache-4 net_lat: 13
+  Directory-0 -> L1Cache-5 net_lat: 13
+  Directory-0 -> L1Cache-6 net_lat: 13
+  Directory-0 -> L1Cache-7 net_lat: 13
+  Directory-0 -> L1Cache-8 net_lat: 13
+  Directory-0 -> L1Cache-9 net_lat: 13
+  Directory-0 -> L1Cache-10 net_lat: 13
+  Directory-0 -> L1Cache-11 net_lat: 13
+  Directory-0 -> L1Cache-12 net_lat: 13
+  Directory-0 -> L1Cache-13 net_lat: 13
+  Directory-0 -> L1Cache-14 net_lat: 13
+  Directory-0 -> L1Cache-15 net_lat: 13
+  Directory-0 -> Directory-1 net_lat: 13
+  Directory-0 -> Directory-2 net_lat: 13
+  Directory-0 -> Directory-3 net_lat: 13
+  Directory-0 -> Directory-4 net_lat: 13
+  Directory-0 -> Directory-5 net_lat: 13
+  Directory-0 -> Directory-6 net_lat: 13
+  Directory-0 -> Directory-7 net_lat: 13
+  Directory-0 -> Directory-8 net_lat: 13
+  Directory-0 -> Directory-9 net_lat: 13
+  Directory-0 -> Directory-10 net_lat: 13
+  Directory-0 -> Directory-11 net_lat: 13
+  Directory-0 -> Directory-12 net_lat: 13
+  Directory-0 -> Directory-13 net_lat: 13
+  Directory-0 -> Directory-14 net_lat: 13
+  Directory-0 -> Directory-15 net_lat: 13
+
+Directory-1 Network Latencies
+  Directory-1 -> L2Cache-0 net_lat: 13
+  Directory-1 -> L2Cache-1 net_lat: 13
+  Directory-1 -> L2Cache-2 net_lat: 13
+  Directory-1 -> L2Cache-3 net_lat: 13
+  Directory-1 -> L2Cache-4 net_lat: 13
+  Directory-1 -> L2Cache-5 net_lat: 13
+  Directory-1 -> L2Cache-6 net_lat: 13
+  Directory-1 -> L2Cache-7 net_lat: 13
+  Directory-1 -> L2Cache-8 net_lat: 13
+  Directory-1 -> L2Cache-9 net_lat: 13
+  Directory-1 -> L2Cache-10 net_lat: 13
+  Directory-1 -> L2Cache-11 net_lat: 13
+  Directory-1 -> L2Cache-12 net_lat: 13
+  Directory-1 -> L2Cache-13 net_lat: 13
+  Directory-1 -> L2Cache-14 net_lat: 13
+  Directory-1 -> L2Cache-15 net_lat: 13
+  Directory-1 -> L1Cache-0 net_lat: 13
+  Directory-1 -> L1Cache-1 net_lat: 13
+  Directory-1 -> L1Cache-2 net_lat: 13
+  Directory-1 -> L1Cache-3 net_lat: 13
+  Directory-1 -> L1Cache-4 net_lat: 13
+  Directory-1 -> L1Cache-5 net_lat: 13
+  Directory-1 -> L1Cache-6 net_lat: 13
+  Directory-1 -> L1Cache-7 net_lat: 13
+  Directory-1 -> L1Cache-8 net_lat: 13
+  Directory-1 -> L1Cache-9 net_lat: 13
+  Directory-1 -> L1Cache-10 net_lat: 13
+  Directory-1 -> L1Cache-11 net_lat: 13
+  Directory-1 -> L1Cache-12 net_lat: 13
+  Directory-1 -> L1Cache-13 net_lat: 13
+  Directory-1 -> L1Cache-14 net_lat: 13
+  Directory-1 -> L1Cache-15 net_lat: 13
+  Directory-1 -> Directory-0 net_lat: 13
+  Directory-1 -> Directory-2 net_lat: 13
+  Directory-1 -> Directory-3 net_lat: 13
+  Directory-1 -> Directory-4 net_lat: 13
+  Directory-1 -> Directory-5 net_lat: 13
+  Directory-1 -> Directory-6 net_lat: 13
+  Directory-1 -> Directory-7 net_lat: 13
+  Directory-1 -> Directory-8 net_lat: 13
+  Directory-1 -> Directory-9 net_lat: 13
+  Directory-1 -> Directory-10 net_lat: 13
+  Directory-1 -> Directory-11 net_lat: 13
+  Directory-1 -> Directory-12 net_lat: 13
+  Directory-1 -> Directory-13 net_lat: 13
+  Directory-1 -> Directory-14 net_lat: 13
+  Directory-1 -> Directory-15 net_lat: 13
+
+Directory-2 Network Latencies
+  Directory-2 -> L2Cache-0 net_lat: 13
+  Directory-2 -> L2Cache-1 net_lat: 13
+  Directory-2 -> L2Cache-2 net_lat: 13
+  Directory-2 -> L2Cache-3 net_lat: 13
+  Directory-2 -> L2Cache-4 net_lat: 13
+  Directory-2 -> L2Cache-5 net_lat: 13
+  Directory-2 -> L2Cache-6 net_lat: 13
+  Directory-2 -> L2Cache-7 net_lat: 13
+  Directory-2 -> L2Cache-8 net_lat: 13
+  Directory-2 -> L2Cache-9 net_lat: 13
+  Directory-2 -> L2Cache-10 net_lat: 13
+  Directory-2 -> L2Cache-11 net_lat: 13
+  Directory-2 -> L2Cache-12 net_lat: 13
+  Directory-2 -> L2Cache-13 net_lat: 13
+  Directory-2 -> L2Cache-14 net_lat: 13
+  Directory-2 -> L2Cache-15 net_lat: 13
+  Directory-2 -> L1Cache-0 net_lat: 13
+  Directory-2 -> L1Cache-1 net_lat: 13
+  Directory-2 -> L1Cache-2 net_lat: 13
+  Directory-2 -> L1Cache-3 net_lat: 13
+  Directory-2 -> L1Cache-4 net_lat: 13
+  Directory-2 -> L1Cache-5 net_lat: 13
+  Directory-2 -> L1Cache-6 net_lat: 13
+  Directory-2 -> L1Cache-7 net_lat: 13
+  Directory-2 -> L1Cache-8 net_lat: 13
+  Directory-2 -> L1Cache-9 net_lat: 13
+  Directory-2 -> L1Cache-10 net_lat: 13
+  Directory-2 -> L1Cache-11 net_lat: 13
+  Directory-2 -> L1Cache-12 net_lat: 13
+  Directory-2 -> L1Cache-13 net_lat: 13
+  Directory-2 -> L1Cache-14 net_lat: 13
+  Directory-2 -> L1Cache-15 net_lat: 13
+  Directory-2 -> Directory-0 net_lat: 13
+  Directory-2 -> Directory-1 net_lat: 13
+  Directory-2 -> Directory-3 net_lat: 13
+  Directory-2 -> Directory-4 net_lat: 13
+  Directory-2 -> Directory-5 net_lat: 13
+  Directory-2 -> Directory-6 net_lat: 13
+  Directory-2 -> Directory-7 net_lat: 13
+  Directory-2 -> Directory-8 net_lat: 13
+  Directory-2 -> Directory-9 net_lat: 13
+  Directory-2 -> Directory-10 net_lat: 13
+  Directory-2 -> Directory-11 net_lat: 13
+  Directory-2 -> Directory-12 net_lat: 13
+  Directory-2 -> Directory-13 net_lat: 13
+  Directory-2 -> Directory-14 net_lat: 13
+  Directory-2 -> Directory-15 net_lat: 13
+
+Directory-3 Network Latencies
+  Directory-3 -> L2Cache-0 net_lat: 13
+  Directory-3 -> L2Cache-1 net_lat: 13
+  Directory-3 -> L2Cache-2 net_lat: 13
+  Directory-3 -> L2Cache-3 net_lat: 13
+  Directory-3 -> L2Cache-4 net_lat: 13
+  Directory-3 -> L2Cache-5 net_lat: 13
+  Directory-3 -> L2Cache-6 net_lat: 13
+  Directory-3 -> L2Cache-7 net_lat: 13
+  Directory-3 -> L2Cache-8 net_lat: 13
+  Directory-3 -> L2Cache-9 net_lat: 13
+  Directory-3 -> L2Cache-10 net_lat: 13
+  Directory-3 -> L2Cache-11 net_lat: 13
+  Directory-3 -> L2Cache-12 net_lat: 13
+  Directory-3 -> L2Cache-13 net_lat: 13
+  Directory-3 -> L2Cache-14 net_lat: 13
+  Directory-3 -> L2Cache-15 net_lat: 13
+  Directory-3 -> L1Cache-0 net_lat: 13
+  Directory-3 -> L1Cache-1 net_lat: 13
+  Directory-3 -> L1Cache-2 net_lat: 13
+  Directory-3 -> L1Cache-3 net_lat: 13
+  Directory-3 -> L1Cache-4 net_lat: 13
+  Directory-3 -> L1Cache-5 net_lat: 13
+  Directory-3 -> L1Cache-6 net_lat: 13
+  Directory-3 -> L1Cache-7 net_lat: 13
+  Directory-3 -> L1Cache-8 net_lat: 13
+  Directory-3 -> L1Cache-9 net_lat: 13
+  Directory-3 -> L1Cache-10 net_lat: 13
+  Directory-3 -> L1Cache-11 net_lat: 13
+  Directory-3 -> L1Cache-12 net_lat: 13
+  Directory-3 -> L1Cache-13 net_lat: 13
+  Directory-3 -> L1Cache-14 net_lat: 13
+  Directory-3 -> L1Cache-15 net_lat: 13
+  Directory-3 -> Directory-0 net_lat: 13
+  Directory-3 -> Directory-1 net_lat: 13
+  Directory-3 -> Directory-2 net_lat: 13
+  Directory-3 -> Directory-4 net_lat: 13
+  Directory-3 -> Directory-5 net_lat: 13
+  Directory-3 -> Directory-6 net_lat: 13
+  Directory-3 -> Directory-7 net_lat: 13
+  Directory-3 -> Directory-8 net_lat: 13
+  Directory-3 -> Directory-9 net_lat: 13
+  Directory-3 -> Directory-10 net_lat: 13
+  Directory-3 -> Directory-11 net_lat: 13
+  Directory-3 -> Directory-12 net_lat: 13
+  Directory-3 -> Directory-13 net_lat: 13
+  Directory-3 -> Directory-14 net_lat: 13
+  Directory-3 -> Directory-15 net_lat: 13
+
+Directory-4 Network Latencies
+  Directory-4 -> L2Cache-0 net_lat: 13
+  Directory-4 -> L2Cache-1 net_lat: 13
+  Directory-4 -> L2Cache-2 net_lat: 13
+  Directory-4 -> L2Cache-3 net_lat: 13
+  Directory-4 -> L2Cache-4 net_lat: 13
+  Directory-4 -> L2Cache-5 net_lat: 13
+  Directory-4 -> L2Cache-6 net_lat: 13
+  Directory-4 -> L2Cache-7 net_lat: 13
+  Directory-4 -> L2Cache-8 net_lat: 13
+  Directory-4 -> L2Cache-9 net_lat: 13
+  Directory-4 -> L2Cache-10 net_lat: 13
+  Directory-4 -> L2Cache-11 net_lat: 13
+  Directory-4 -> L2Cache-12 net_lat: 13
+  Directory-4 -> L2Cache-13 net_lat: 13
+  Directory-4 -> L2Cache-14 net_lat: 13
+  Directory-4 -> L2Cache-15 net_lat: 13
+  Directory-4 -> L1Cache-0 net_lat: 13
+  Directory-4 -> L1Cache-1 net_lat: 13
+  Directory-4 -> L1Cache-2 net_lat: 13
+  Directory-4 -> L1Cache-3 net_lat: 13
+  Directory-4 -> L1Cache-4 net_lat: 13
+  Directory-4 -> L1Cache-5 net_lat: 13
+  Directory-4 -> L1Cache-6 net_lat: 13
+  Directory-4 -> L1Cache-7 net_lat: 13
+  Directory-4 -> L1Cache-8 net_lat: 13
+  Directory-4 -> L1Cache-9 net_lat: 13
+  Directory-4 -> L1Cache-10 net_lat: 13
+  Directory-4 -> L1Cache-11 net_lat: 13
+  Directory-4 -> L1Cache-12 net_lat: 13
+  Directory-4 -> L1Cache-13 net_lat: 13
+  Directory-4 -> L1Cache-14 net_lat: 13
+  Directory-4 -> L1Cache-15 net_lat: 13
+  Directory-4 -> Directory-0 net_lat: 13
+  Directory-4 -> Directory-1 net_lat: 13
+  Directory-4 -> Directory-2 net_lat: 13
+  Directory-4 -> Directory-3 net_lat: 13
+  Directory-4 -> Directory-5 net_lat: 13
+  Directory-4 -> Directory-6 net_lat: 13
+  Directory-4 -> Directory-7 net_lat: 13
+  Directory-4 -> Directory-8 net_lat: 13
+  Directory-4 -> Directory-9 net_lat: 13
+  Directory-4 -> Directory-10 net_lat: 13
+  Directory-4 -> Directory-11 net_lat: 13
+  Directory-4 -> Directory-12 net_lat: 13
+  Directory-4 -> Directory-13 net_lat: 13
+  Directory-4 -> Directory-14 net_lat: 13
+  Directory-4 -> Directory-15 net_lat: 13
+
+Directory-5 Network Latencies
+  Directory-5 -> L2Cache-0 net_lat: 13
+  Directory-5 -> L2Cache-1 net_lat: 13
+  Directory-5 -> L2Cache-2 net_lat: 13
+  Directory-5 -> L2Cache-3 net_lat: 13
+  Directory-5 -> L2Cache-4 net_lat: 13
+  Directory-5 -> L2Cache-5 net_lat: 13
+  Directory-5 -> L2Cache-6 net_lat: 13
+  Directory-5 -> L2Cache-7 net_lat: 13
+  Directory-5 -> L2Cache-8 net_lat: 13
+  Directory-5 -> L2Cache-9 net_lat: 13
+  Directory-5 -> L2Cache-10 net_lat: 13
+  Directory-5 -> L2Cache-11 net_lat: 13
+  Directory-5 -> L2Cache-12 net_lat: 13
+  Directory-5 -> L2Cache-13 net_lat: 13
+  Directory-5 -> L2Cache-14 net_lat: 13
+  Directory-5 -> L2Cache-15 net_lat: 13
+  Directory-5 -> L1Cache-0 net_lat: 13
+  Directory-5 -> L1Cache-1 net_lat: 13
+  Directory-5 -> L1Cache-2 net_lat: 13
+  Directory-5 -> L1Cache-3 net_lat: 13
+  Directory-5 -> L1Cache-4 net_lat: 13
+  Directory-5 -> L1Cache-5 net_lat: 13
+  Directory-5 -> L1Cache-6 net_lat: 13
+  Directory-5 -> L1Cache-7 net_lat: 13
+  Directory-5 -> L1Cache-8 net_lat: 13
+  Directory-5 -> L1Cache-9 net_lat: 13
+  Directory-5 -> L1Cache-10 net_lat: 13
+  Directory-5 -> L1Cache-11 net_lat: 13
+  Directory-5 -> L1Cache-12 net_lat: 13
+  Directory-5 -> L1Cache-13 net_lat: 13
+  Directory-5 -> L1Cache-14 net_lat: 13
+  Directory-5 -> L1Cache-15 net_lat: 13
+  Directory-5 -> Directory-0 net_lat: 13
+  Directory-5 -> Directory-1 net_lat: 13
+  Directory-5 -> Directory-2 net_lat: 13
+  Directory-5 -> Directory-3 net_lat: 13
+  Directory-5 -> Directory-4 net_lat: 13
+  Directory-5 -> Directory-6 net_lat: 13
+  Directory-5 -> Directory-7 net_lat: 13
+  Directory-5 -> Directory-8 net_lat: 13
+  Directory-5 -> Directory-9 net_lat: 13
+  Directory-5 -> Directory-10 net_lat: 13
+  Directory-5 -> Directory-11 net_lat: 13
+  Directory-5 -> Directory-12 net_lat: 13
+  Directory-5 -> Directory-13 net_lat: 13
+  Directory-5 -> Directory-14 net_lat: 13
+  Directory-5 -> Directory-15 net_lat: 13
+
+Directory-6 Network Latencies
+  Directory-6 -> L2Cache-0 net_lat: 13
+  Directory-6 -> L2Cache-1 net_lat: 13
+  Directory-6 -> L2Cache-2 net_lat: 13
+  Directory-6 -> L2Cache-3 net_lat: 13
+  Directory-6 -> L2Cache-4 net_lat: 13
+  Directory-6 -> L2Cache-5 net_lat: 13
+  Directory-6 -> L2Cache-6 net_lat: 13
+  Directory-6 -> L2Cache-7 net_lat: 13
+  Directory-6 -> L2Cache-8 net_lat: 13
+  Directory-6 -> L2Cache-9 net_lat: 13
+  Directory-6 -> L2Cache-10 net_lat: 13
+  Directory-6 -> L2Cache-11 net_lat: 13
+  Directory-6 -> L2Cache-12 net_lat: 13
+  Directory-6 -> L2Cache-13 net_lat: 13
+  Directory-6 -> L2Cache-14 net_lat: 13
+  Directory-6 -> L2Cache-15 net_lat: 13
+  Directory-6 -> L1Cache-0 net_lat: 13
+  Directory-6 -> L1Cache-1 net_lat: 13
+  Directory-6 -> L1Cache-2 net_lat: 13
+  Directory-6 -> L1Cache-3 net_lat: 13
+  Directory-6 -> L1Cache-4 net_lat: 13
+  Directory-6 -> L1Cache-5 net_lat: 13
+  Directory-6 -> L1Cache-6 net_lat: 13
+  Directory-6 -> L1Cache-7 net_lat: 13
+  Directory-6 -> L1Cache-8 net_lat: 13
+  Directory-6 -> L1Cache-9 net_lat: 13
+  Directory-6 -> L1Cache-10 net_lat: 13
+  Directory-6 -> L1Cache-11 net_lat: 13
+  Directory-6 -> L1Cache-12 net_lat: 13
+  Directory-6 -> L1Cache-13 net_lat: 13
+  Directory-6 -> L1Cache-14 net_lat: 13
+  Directory-6 -> L1Cache-15 net_lat: 13
+  Directory-6 -> Directory-0 net_lat: 13
+  Directory-6 -> Directory-1 net_lat: 13
+  Directory-6 -> Directory-2 net_lat: 13
+  Directory-6 -> Directory-3 net_lat: 13
+  Directory-6 -> Directory-4 net_lat: 13
+  Directory-6 -> Directory-5 net_lat: 13
+  Directory-6 -> Directory-7 net_lat: 13
+  Directory-6 -> Directory-8 net_lat: 13
+  Directory-6 -> Directory-9 net_lat: 13
+  Directory-6 -> Directory-10 net_lat: 13
+  Directory-6 -> Directory-11 net_lat: 13
+  Directory-6 -> Directory-12 net_lat: 13
+  Directory-6 -> Directory-13 net_lat: 13
+  Directory-6 -> Directory-14 net_lat: 13
+  Directory-6 -> Directory-15 net_lat: 13
+
+Directory-7 Network Latencies
+  Directory-7 -> L2Cache-0 net_lat: 13
+  Directory-7 -> L2Cache-1 net_lat: 13
+  Directory-7 -> L2Cache-2 net_lat: 13
+  Directory-7 -> L2Cache-3 net_lat: 13
+  Directory-7 -> L2Cache-4 net_lat: 13
+  Directory-7 -> L2Cache-5 net_lat: 13
+  Directory-7 -> L2Cache-6 net_lat: 13
+  Directory-7 -> L2Cache-7 net_lat: 13
+  Directory-7 -> L2Cache-8 net_lat: 13
+  Directory-7 -> L2Cache-9 net_lat: 13
+  Directory-7 -> L2Cache-10 net_lat: 13
+  Directory-7 -> L2Cache-11 net_lat: 13
+  Directory-7 -> L2Cache-12 net_lat: 13
+  Directory-7 -> L2Cache-13 net_lat: 13
+  Directory-7 -> L2Cache-14 net_lat: 13
+  Directory-7 -> L2Cache-15 net_lat: 13
+  Directory-7 -> L1Cache-0 net_lat: 13
+  Directory-7 -> L1Cache-1 net_lat: 13
+  Directory-7 -> L1Cache-2 net_lat: 13
+  Directory-7 -> L1Cache-3 net_lat: 13
+  Directory-7 -> L1Cache-4 net_lat: 13
+  Directory-7 -> L1Cache-5 net_lat: 13
+  Directory-7 -> L1Cache-6 net_lat: 13
+  Directory-7 -> L1Cache-7 net_lat: 13
+  Directory-7 -> L1Cache-8 net_lat: 13
+  Directory-7 -> L1Cache-9 net_lat: 13
+  Directory-7 -> L1Cache-10 net_lat: 13
+  Directory-7 -> L1Cache-11 net_lat: 13
+  Directory-7 -> L1Cache-12 net_lat: 13
+  Directory-7 -> L1Cache-13 net_lat: 13
+  Directory-7 -> L1Cache-14 net_lat: 13
+  Directory-7 -> L1Cache-15 net_lat: 13
+  Directory-7 -> Directory-0 net_lat: 13
+  Directory-7 -> Directory-1 net_lat: 13
+  Directory-7 -> Directory-2 net_lat: 13
+  Directory-7 -> Directory-3 net_lat: 13
+  Directory-7 -> Directory-4 net_lat: 13
+  Directory-7 -> Directory-5 net_lat: 13
+  Directory-7 -> Directory-6 net_lat: 13
+  Directory-7 -> Directory-8 net_lat: 13
+  Directory-7 -> Directory-9 net_lat: 13
+  Directory-7 -> Directory-10 net_lat: 13
+  Directory-7 -> Directory-11 net_lat: 13
+  Directory-7 -> Directory-12 net_lat: 13
+  Directory-7 -> Directory-13 net_lat: 13
+  Directory-7 -> Directory-14 net_lat: 13
+  Directory-7 -> Directory-15 net_lat: 13
+
+Directory-8 Network Latencies
+  Directory-8 -> L2Cache-0 net_lat: 13
+  Directory-8 -> L2Cache-1 net_lat: 13
+  Directory-8 -> L2Cache-2 net_lat: 13
+  Directory-8 -> L2Cache-3 net_lat: 13
+  Directory-8 -> L2Cache-4 net_lat: 13
+  Directory-8 -> L2Cache-5 net_lat: 13
+  Directory-8 -> L2Cache-6 net_lat: 13
+  Directory-8 -> L2Cache-7 net_lat: 13
+  Directory-8 -> L2Cache-8 net_lat: 13
+  Directory-8 -> L2Cache-9 net_lat: 13
+  Directory-8 -> L2Cache-10 net_lat: 13
+  Directory-8 -> L2Cache-11 net_lat: 13
+  Directory-8 -> L2Cache-12 net_lat: 13
+  Directory-8 -> L2Cache-13 net_lat: 13
+  Directory-8 -> L2Cache-14 net_lat: 13
+  Directory-8 -> L2Cache-15 net_lat: 13
+  Directory-8 -> L1Cache-0 net_lat: 13
+  Directory-8 -> L1Cache-1 net_lat: 13
+  Directory-8 -> L1Cache-2 net_lat: 13
+  Directory-8 -> L1Cache-3 net_lat: 13
+  Directory-8 -> L1Cache-4 net_lat: 13
+  Directory-8 -> L1Cache-5 net_lat: 13
+  Directory-8 -> L1Cache-6 net_lat: 13
+  Directory-8 -> L1Cache-7 net_lat: 13
+  Directory-8 -> L1Cache-8 net_lat: 13
+  Directory-8 -> L1Cache-9 net_lat: 13
+  Directory-8 -> L1Cache-10 net_lat: 13
+  Directory-8 -> L1Cache-11 net_lat: 13
+  Directory-8 -> L1Cache-12 net_lat: 13
+  Directory-8 -> L1Cache-13 net_lat: 13
+  Directory-8 -> L1Cache-14 net_lat: 13
+  Directory-8 -> L1Cache-15 net_lat: 13
+  Directory-8 -> Directory-0 net_lat: 13
+  Directory-8 -> Directory-1 net_lat: 13
+  Directory-8 -> Directory-2 net_lat: 13
+  Directory-8 -> Directory-3 net_lat: 13
+  Directory-8 -> Directory-4 net_lat: 13
+  Directory-8 -> Directory-5 net_lat: 13
+  Directory-8 -> Directory-6 net_lat: 13
+  Directory-8 -> Directory-7 net_lat: 13
+  Directory-8 -> Directory-9 net_lat: 13
+  Directory-8 -> Directory-10 net_lat: 13
+  Directory-8 -> Directory-11 net_lat: 13
+  Directory-8 -> Directory-12 net_lat: 13
+  Directory-8 -> Directory-13 net_lat: 13
+  Directory-8 -> Directory-14 net_lat: 13
+  Directory-8 -> Directory-15 net_lat: 13
+
+Directory-9 Network Latencies
+  Directory-9 -> L2Cache-0 net_lat: 13
+  Directory-9 -> L2Cache-1 net_lat: 13
+  Directory-9 -> L2Cache-2 net_lat: 13
+  Directory-9 -> L2Cache-3 net_lat: 13
+  Directory-9 -> L2Cache-4 net_lat: 13
+  Directory-9 -> L2Cache-5 net_lat: 13
+  Directory-9 -> L2Cache-6 net_lat: 13
+  Directory-9 -> L2Cache-7 net_lat: 13
+  Directory-9 -> L2Cache-8 net_lat: 13
+  Directory-9 -> L2Cache-9 net_lat: 13
+  Directory-9 -> L2Cache-10 net_lat: 13
+  Directory-9 -> L2Cache-11 net_lat: 13
+  Directory-9 -> L2Cache-12 net_lat: 13
+  Directory-9 -> L2Cache-13 net_lat: 13
+  Directory-9 -> L2Cache-14 net_lat: 13
+  Directory-9 -> L2Cache-15 net_lat: 13
+  Directory-9 -> L1Cache-0 net_lat: 13
+  Directory-9 -> L1Cache-1 net_lat: 13
+  Directory-9 -> L1Cache-2 net_lat: 13
+  Directory-9 -> L1Cache-3 net_lat: 13
+  Directory-9 -> L1Cache-4 net_lat: 13
+  Directory-9 -> L1Cache-5 net_lat: 13
+  Directory-9 -> L1Cache-6 net_lat: 13
+  Directory-9 -> L1Cache-7 net_lat: 13
+  Directory-9 -> L1Cache-8 net_lat: 13
+  Directory-9 -> L1Cache-9 net_lat: 13
+  Directory-9 -> L1Cache-10 net_lat: 13
+  Directory-9 -> L1Cache-11 net_lat: 13
+  Directory-9 -> L1Cache-12 net_lat: 13
+  Directory-9 -> L1Cache-13 net_lat: 13
+  Directory-9 -> L1Cache-14 net_lat: 13
+  Directory-9 -> L1Cache-15 net_lat: 13
+  Directory-9 -> Directory-0 net_lat: 13
+  Directory-9 -> Directory-1 net_lat: 13
+  Directory-9 -> Directory-2 net_lat: 13
+  Directory-9 -> Directory-3 net_lat: 13
+  Directory-9 -> Directory-4 net_lat: 13
+  Directory-9 -> Directory-5 net_lat: 13
+  Directory-9 -> Directory-6 net_lat: 13
+  Directory-9 -> Directory-7 net_lat: 13
+  Directory-9 -> Directory-8 net_lat: 13
+  Directory-9 -> Directory-10 net_lat: 13
+  Directory-9 -> Directory-11 net_lat: 13
+  Directory-9 -> Directory-12 net_lat: 13
+  Directory-9 -> Directory-13 net_lat: 13
+  Directory-9 -> Directory-14 net_lat: 13
+  Directory-9 -> Directory-15 net_lat: 13
+
+Directory-10 Network Latencies
+  Directory-10 -> L2Cache-0 net_lat: 13
+  Directory-10 -> L2Cache-1 net_lat: 13
+  Directory-10 -> L2Cache-2 net_lat: 13
+  Directory-10 -> L2Cache-3 net_lat: 13
+  Directory-10 -> L2Cache-4 net_lat: 13
+  Directory-10 -> L2Cache-5 net_lat: 13
+  Directory-10 -> L2Cache-6 net_lat: 13
+  Directory-10 -> L2Cache-7 net_lat: 13
+  Directory-10 -> L2Cache-8 net_lat: 13
+  Directory-10 -> L2Cache-9 net_lat: 13
+  Directory-10 -> L2Cache-10 net_lat: 13
+  Directory-10 -> L2Cache-11 net_lat: 13
+  Directory-10 -> L2Cache-12 net_lat: 13
+  Directory-10 -> L2Cache-13 net_lat: 13
+  Directory-10 -> L2Cache-14 net_lat: 13
+  Directory-10 -> L2Cache-15 net_lat: 13
+  Directory-10 -> L1Cache-0 net_lat: 13
+  Directory-10 -> L1Cache-1 net_lat: 13
+  Directory-10 -> L1Cache-2 net_lat: 13
+  Directory-10 -> L1Cache-3 net_lat: 13
+  Directory-10 -> L1Cache-4 net_lat: 13
+  Directory-10 -> L1Cache-5 net_lat: 13
+  Directory-10 -> L1Cache-6 net_lat: 13
+  Directory-10 -> L1Cache-7 net_lat: 13
+  Directory-10 -> L1Cache-8 net_lat: 13
+  Directory-10 -> L1Cache-9 net_lat: 13
+  Directory-10 -> L1Cache-10 net_lat: 13
+  Directory-10 -> L1Cache-11 net_lat: 13
+  Directory-10 -> L1Cache-12 net_lat: 13
+  Directory-10 -> L1Cache-13 net_lat: 13
+  Directory-10 -> L1Cache-14 net_lat: 13
+  Directory-10 -> L1Cache-15 net_lat: 13
+  Directory-10 -> Directory-0 net_lat: 13
+  Directory-10 -> Directory-1 net_lat: 13
+  Directory-10 -> Directory-2 net_lat: 13
+  Directory-10 -> Directory-3 net_lat: 13
+  Directory-10 -> Directory-4 net_lat: 13
+  Directory-10 -> Directory-5 net_lat: 13
+  Directory-10 -> Directory-6 net_lat: 13
+  Directory-10 -> Directory-7 net_lat: 13
+  Directory-10 -> Directory-8 net_lat: 13
+  Directory-10 -> Directory-9 net_lat: 13
+  Directory-10 -> Directory-11 net_lat: 13
+  Directory-10 -> Directory-12 net_lat: 13
+  Directory-10 -> Directory-13 net_lat: 13
+  Directory-10 -> Directory-14 net_lat: 13
+  Directory-10 -> Directory-15 net_lat: 13
+
+Directory-11 Network Latencies
+  Directory-11 -> L2Cache-0 net_lat: 13
+  Directory-11 -> L2Cache-1 net_lat: 13
+  Directory-11 -> L2Cache-2 net_lat: 13
+  Directory-11 -> L2Cache-3 net_lat: 13
+  Directory-11 -> L2Cache-4 net_lat: 13
+  Directory-11 -> L2Cache-5 net_lat: 13
+  Directory-11 -> L2Cache-6 net_lat: 13
+  Directory-11 -> L2Cache-7 net_lat: 13
+  Directory-11 -> L2Cache-8 net_lat: 13
+  Directory-11 -> L2Cache-9 net_lat: 13
+  Directory-11 -> L2Cache-10 net_lat: 13
+  Directory-11 -> L2Cache-11 net_lat: 13
+  Directory-11 -> L2Cache-12 net_lat: 13
+  Directory-11 -> L2Cache-13 net_lat: 13
+  Directory-11 -> L2Cache-14 net_lat: 13
+  Directory-11 -> L2Cache-15 net_lat: 13
+  Directory-11 -> L1Cache-0 net_lat: 13
+  Directory-11 -> L1Cache-1 net_lat: 13
+  Directory-11 -> L1Cache-2 net_lat: 13
+  Directory-11 -> L1Cache-3 net_lat: 13
+  Directory-11 -> L1Cache-4 net_lat: 13
+  Directory-11 -> L1Cache-5 net_lat: 13
+  Directory-11 -> L1Cache-6 net_lat: 13
+  Directory-11 -> L1Cache-7 net_lat: 13
+  Directory-11 -> L1Cache-8 net_lat: 13
+  Directory-11 -> L1Cache-9 net_lat: 13
+  Directory-11 -> L1Cache-10 net_lat: 13
+  Directory-11 -> L1Cache-11 net_lat: 13
+  Directory-11 -> L1Cache-12 net_lat: 13
+  Directory-11 -> L1Cache-13 net_lat: 13
+  Directory-11 -> L1Cache-14 net_lat: 13
+  Directory-11 -> L1Cache-15 net_lat: 13
+  Directory-11 -> Directory-0 net_lat: 13
+  Directory-11 -> Directory-1 net_lat: 13
+  Directory-11 -> Directory-2 net_lat: 13
+  Directory-11 -> Directory-3 net_lat: 13
+  Directory-11 -> Directory-4 net_lat: 13
+  Directory-11 -> Directory-5 net_lat: 13
+  Directory-11 -> Directory-6 net_lat: 13
+  Directory-11 -> Directory-7 net_lat: 13
+  Directory-11 -> Directory-8 net_lat: 13
+  Directory-11 -> Directory-9 net_lat: 13
+  Directory-11 -> Directory-10 net_lat: 13
+  Directory-11 -> Directory-12 net_lat: 13
+  Directory-11 -> Directory-13 net_lat: 13
+  Directory-11 -> Directory-14 net_lat: 13
+  Directory-11 -> Directory-15 net_lat: 13
+
+Directory-12 Network Latencies
+  Directory-12 -> L2Cache-0 net_lat: 13
+  Directory-12 -> L2Cache-1 net_lat: 13
+  Directory-12 -> L2Cache-2 net_lat: 13
+  Directory-12 -> L2Cache-3 net_lat: 13
+  Directory-12 -> L2Cache-4 net_lat: 13
+  Directory-12 -> L2Cache-5 net_lat: 13
+  Directory-12 -> L2Cache-6 net_lat: 13
+  Directory-12 -> L2Cache-7 net_lat: 13
+  Directory-12 -> L2Cache-8 net_lat: 13
+  Directory-12 -> L2Cache-9 net_lat: 13
+  Directory-12 -> L2Cache-10 net_lat: 13
+  Directory-12 -> L2Cache-11 net_lat: 13
+  Directory-12 -> L2Cache-12 net_lat: 13
+  Directory-12 -> L2Cache-13 net_lat: 13
+  Directory-12 -> L2Cache-14 net_lat: 13
+  Directory-12 -> L2Cache-15 net_lat: 13
+  Directory-12 -> L1Cache-0 net_lat: 13
+  Directory-12 -> L1Cache-1 net_lat: 13
+  Directory-12 -> L1Cache-2 net_lat: 13
+  Directory-12 -> L1Cache-3 net_lat: 13
+  Directory-12 -> L1Cache-4 net_lat: 13
+  Directory-12 -> L1Cache-5 net_lat: 13
+  Directory-12 -> L1Cache-6 net_lat: 13
+  Directory-12 -> L1Cache-7 net_lat: 13
+  Directory-12 -> L1Cache-8 net_lat: 13
+  Directory-12 -> L1Cache-9 net_lat: 13
+  Directory-12 -> L1Cache-10 net_lat: 13
+  Directory-12 -> L1Cache-11 net_lat: 13
+  Directory-12 -> L1Cache-12 net_lat: 13
+  Directory-12 -> L1Cache-13 net_lat: 13
+  Directory-12 -> L1Cache-14 net_lat: 13
+  Directory-12 -> L1Cache-15 net_lat: 13
+  Directory-12 -> Directory-0 net_lat: 13
+  Directory-12 -> Directory-1 net_lat: 13
+  Directory-12 -> Directory-2 net_lat: 13
+  Directory-12 -> Directory-3 net_lat: 13
+  Directory-12 -> Directory-4 net_lat: 13
+  Directory-12 -> Directory-5 net_lat: 13
+  Directory-12 -> Directory-6 net_lat: 13
+  Directory-12 -> Directory-7 net_lat: 13
+  Directory-12 -> Directory-8 net_lat: 13
+  Directory-12 -> Directory-9 net_lat: 13
+  Directory-12 -> Directory-10 net_lat: 13
+  Directory-12 -> Directory-11 net_lat: 13
+  Directory-12 -> Directory-13 net_lat: 13
+  Directory-12 -> Directory-14 net_lat: 13
+  Directory-12 -> Directory-15 net_lat: 13
+
+Directory-13 Network Latencies
+  Directory-13 -> L2Cache-0 net_lat: 13
+  Directory-13 -> L2Cache-1 net_lat: 13
+  Directory-13 -> L2Cache-2 net_lat: 13
+  Directory-13 -> L2Cache-3 net_lat: 13
+  Directory-13 -> L2Cache-4 net_lat: 13
+  Directory-13 -> L2Cache-5 net_lat: 13
+  Directory-13 -> L2Cache-6 net_lat: 13
+  Directory-13 -> L2Cache-7 net_lat: 13
+  Directory-13 -> L2Cache-8 net_lat: 13
+  Directory-13 -> L2Cache-9 net_lat: 13
+  Directory-13 -> L2Cache-10 net_lat: 13
+  Directory-13 -> L2Cache-11 net_lat: 13
+  Directory-13 -> L2Cache-12 net_lat: 13
+  Directory-13 -> L2Cache-13 net_lat: 13
+  Directory-13 -> L2Cache-14 net_lat: 13
+  Directory-13 -> L2Cache-15 net_lat: 13
+  Directory-13 -> L1Cache-0 net_lat: 13
+  Directory-13 -> L1Cache-1 net_lat: 13
+  Directory-13 -> L1Cache-2 net_lat: 13
+  Directory-13 -> L1Cache-3 net_lat: 13
+  Directory-13 -> L1Cache-4 net_lat: 13
+  Directory-13 -> L1Cache-5 net_lat: 13
+  Directory-13 -> L1Cache-6 net_lat: 13
+  Directory-13 -> L1Cache-7 net_lat: 13
+  Directory-13 -> L1Cache-8 net_lat: 13
+  Directory-13 -> L1Cache-9 net_lat: 13
+  Directory-13 -> L1Cache-10 net_lat: 13
+  Directory-13 -> L1Cache-11 net_lat: 13
+  Directory-13 -> L1Cache-12 net_lat: 13
+  Directory-13 -> L1Cache-13 net_lat: 13
+  Directory-13 -> L1Cache-14 net_lat: 13
+  Directory-13 -> L1Cache-15 net_lat: 13
+  Directory-13 -> Directory-0 net_lat: 13
+  Directory-13 -> Directory-1 net_lat: 13
+  Directory-13 -> Directory-2 net_lat: 13
+  Directory-13 -> Directory-3 net_lat: 13
+  Directory-13 -> Directory-4 net_lat: 13
+  Directory-13 -> Directory-5 net_lat: 13
+  Directory-13 -> Directory-6 net_lat: 13
+  Directory-13 -> Directory-7 net_lat: 13
+  Directory-13 -> Directory-8 net_lat: 13
+  Directory-13 -> Directory-9 net_lat: 13
+  Directory-13 -> Directory-10 net_lat: 13
+  Directory-13 -> Directory-11 net_lat: 13
+  Directory-13 -> Directory-12 net_lat: 13
+  Directory-13 -> Directory-14 net_lat: 13
+  Directory-13 -> Directory-15 net_lat: 13
+
+Directory-14 Network Latencies
+  Directory-14 -> L2Cache-0 net_lat: 13
+  Directory-14 -> L2Cache-1 net_lat: 13
+  Directory-14 -> L2Cache-2 net_lat: 13
+  Directory-14 -> L2Cache-3 net_lat: 13
+  Directory-14 -> L2Cache-4 net_lat: 13
+  Directory-14 -> L2Cache-5 net_lat: 13
+  Directory-14 -> L2Cache-6 net_lat: 13
+  Directory-14 -> L2Cache-7 net_lat: 13
+  Directory-14 -> L2Cache-8 net_lat: 13
+  Directory-14 -> L2Cache-9 net_lat: 13
+  Directory-14 -> L2Cache-10 net_lat: 13
+  Directory-14 -> L2Cache-11 net_lat: 13
+  Directory-14 -> L2Cache-12 net_lat: 13
+  Directory-14 -> L2Cache-13 net_lat: 13
+  Directory-14 -> L2Cache-14 net_lat: 13
+  Directory-14 -> L2Cache-15 net_lat: 13
+  Directory-14 -> L1Cache-0 net_lat: 13
+  Directory-14 -> L1Cache-1 net_lat: 13
+  Directory-14 -> L1Cache-2 net_lat: 13
+  Directory-14 -> L1Cache-3 net_lat: 13
+  Directory-14 -> L1Cache-4 net_lat: 13
+  Directory-14 -> L1Cache-5 net_lat: 13
+  Directory-14 -> L1Cache-6 net_lat: 13
+  Directory-14 -> L1Cache-7 net_lat: 13
+  Directory-14 -> L1Cache-8 net_lat: 13
+  Directory-14 -> L1Cache-9 net_lat: 13
+  Directory-14 -> L1Cache-10 net_lat: 13
+  Directory-14 -> L1Cache-11 net_lat: 13
+  Directory-14 -> L1Cache-12 net_lat: 13
+  Directory-14 -> L1Cache-13 net_lat: 13
+  Directory-14 -> L1Cache-14 net_lat: 13
+  Directory-14 -> L1Cache-15 net_lat: 13
+  Directory-14 -> Directory-0 net_lat: 13
+  Directory-14 -> Directory-1 net_lat: 13
+  Directory-14 -> Directory-2 net_lat: 13
+  Directory-14 -> Directory-3 net_lat: 13
+  Directory-14 -> Directory-4 net_lat: 13
+  Directory-14 -> Directory-5 net_lat: 13
+  Directory-14 -> Directory-6 net_lat: 13
+  Directory-14 -> Directory-7 net_lat: 13
+  Directory-14 -> Directory-8 net_lat: 13
+  Directory-14 -> Directory-9 net_lat: 13
+  Directory-14 -> Directory-10 net_lat: 13
+  Directory-14 -> Directory-11 net_lat: 13
+  Directory-14 -> Directory-12 net_lat: 13
+  Directory-14 -> Directory-13 net_lat: 13
+  Directory-14 -> Directory-15 net_lat: 13
+
+Directory-15 Network Latencies
+  Directory-15 -> L2Cache-0 net_lat: 13
+  Directory-15 -> L2Cache-1 net_lat: 13
+  Directory-15 -> L2Cache-2 net_lat: 13
+  Directory-15 -> L2Cache-3 net_lat: 13
+  Directory-15 -> L2Cache-4 net_lat: 13
+  Directory-15 -> L2Cache-5 net_lat: 13
+  Directory-15 -> L2Cache-6 net_lat: 13
+  Directory-15 -> L2Cache-7 net_lat: 13
+  Directory-15 -> L2Cache-8 net_lat: 13
+  Directory-15 -> L2Cache-9 net_lat: 13
+  Directory-15 -> L2Cache-10 net_lat: 13
+  Directory-15 -> L2Cache-11 net_lat: 13
+  Directory-15 -> L2Cache-12 net_lat: 13
+  Directory-15 -> L2Cache-13 net_lat: 13
+  Directory-15 -> L2Cache-14 net_lat: 13
+  Directory-15 -> L2Cache-15 net_lat: 13
+  Directory-15 -> L1Cache-0 net_lat: 13
+  Directory-15 -> L1Cache-1 net_lat: 13
+  Directory-15 -> L1Cache-2 net_lat: 13
+  Directory-15 -> L1Cache-3 net_lat: 13
+  Directory-15 -> L1Cache-4 net_lat: 13
+  Directory-15 -> L1Cache-5 net_lat: 13
+  Directory-15 -> L1Cache-6 net_lat: 13
+  Directory-15 -> L1Cache-7 net_lat: 13
+  Directory-15 -> L1Cache-8 net_lat: 13
+  Directory-15 -> L1Cache-9 net_lat: 13
+  Directory-15 -> L1Cache-10 net_lat: 13
+  Directory-15 -> L1Cache-11 net_lat: 13
+  Directory-15 -> L1Cache-12 net_lat: 13
+  Directory-15 -> L1Cache-13 net_lat: 13
+  Directory-15 -> L1Cache-14 net_lat: 13
+  Directory-15 -> L1Cache-15 net_lat: 13
+  Directory-15 -> Directory-0 net_lat: 13
+  Directory-15 -> Directory-1 net_lat: 13
+  Directory-15 -> Directory-2 net_lat: 13
+  Directory-15 -> Directory-3 net_lat: 13
+  Directory-15 -> Directory-4 net_lat: 13
+  Directory-15 -> Directory-5 net_lat: 13
+  Directory-15 -> Directory-6 net_lat: 13
+  Directory-15 -> Directory-7 net_lat: 13
+  Directory-15 -> Directory-8 net_lat: 13
+  Directory-15 -> Directory-9 net_lat: 13
+  Directory-15 -> Directory-10 net_lat: 13
+  Directory-15 -> Directory-11 net_lat: 13
+  Directory-15 -> Directory-12 net_lat: 13
+  Directory-15 -> Directory-13 net_lat: 13
+  Directory-15 -> Directory-14 net_lat: 13
+
+--- End Topology Print ---
+
+Profiler Configuration
+----------------------
+periodic_stats_period: 1000000
+
+================ End System Configuration Print ================
+
+Testing clear stats...Done.
+Reading trace from file 'little.trace'...
+      1   7  -1        Seq               Begin       >       [0x400, line 0x400] LD
+      4   7   0    L1Cache                Load     NP>IS     [0x400, line 0x400] 
+    139   7   0    L2Cache             L1_GETS     NP>ISS    [0x400, line 0x400] [NetDest (3) 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  - 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0  - 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  - ]
+    170   0   0  Directory               Fetch      I>I      [0x400, line 0x400] 
+Warning: in fn void MessageBuffer::enqueue(const MsgPtr&, Time) in buffers/MessageBuffer.C:210: *this is [MessageBuffer: [PrioHeap: ]] 
+
+Warning: in fn void MessageBuffer::enqueue(const MsgPtr&, Time) in buffers/MessageBuffer.C:211: m_name is 
+Fatal Error: in fn void MessageBuffer::enqueue(const MsgPtr&, Time) in buffers/MessageBuffer.C:212: Ordering property of this queue has not been set

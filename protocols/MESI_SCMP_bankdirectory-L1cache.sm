@@ -1,0 +1,1399 @@
+
+/*
+    Copyright (C) 1999-2005 by Mark D. Hill and David A. Wood for the
+    Wisconsin Multifacet Project.  Contact: gems@cs.wisc.edu
+    http://www.cs.wisc.edu/gems/
+
+    --------------------------------------------------------------------
+
+    This file is part of the SLICC (Specification Language for
+    Implementing Cache Coherence), a component of the Multifacet GEMS
+    (General Execution-driven Multiprocessor Simulator) software
+    toolset originally developed at the University of Wisconsin-Madison.
+                                                                                
+    SLICC was originally developed by Milo Martin with substantial
+    contributions from Daniel Sorin.
+
+    Substantial further development of Multifacet GEMS at the
+    University of Wisconsin was performed by Alaa Alameldeen, Brad
+    Beckmann, Ross Dickson, Pacia Harper, Milo Martin, Michael Marty,
+    Carl Mauer, Kevin Moore, Manoj Plakal, Daniel Sorin, Min Xu, and
+    Luke Yen.
+
+    --------------------------------------------------------------------
+
+    If your use of this software contributes to a published paper, we
+    request that you (1) cite our summary paper that appears on our
+    website (http://www.cs.wisc.edu/gems/) and (2) e-mail a citation
+    for your published paper to gems@cs.wisc.edu.
+
+    If you redistribute derivatives of this software, we request that
+    you notify us and either (1) ask people to register with us at our
+    website (http://www.cs.wisc.edu/gems/) or (2) collect registration
+    information and periodically send it to us.
+
+    --------------------------------------------------------------------
+
+    Multifacet GEMS is free software; you can redistribute it and/or
+    modify it under the terms of version 2 of the GNU General Public
+    License as published by the Free Software Foundation.
+
+    Multifacet GEMS is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with the Multifacet GEMS; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+    02111-1307, USA
+
+    The GNU General Public License is contained in the file LICENSE.
+
+### END HEADER ###
+*/
+/*
+ * $Id: MSI_MOSI_CMP_directory-L1cache.sm 1.10 05/01/19 15:55:40-06:00 beckmann@s0-28.cs.wisc.edu $
+ *
+ */
+
+
+machine(L1Cache, "MSI Directory L1 Cache CMP") {
+
+  // NODE L1 CACHE
+  // From this node's L1 cache TO the network
+  // a local L1 -> this L2 bank, currently ordered with directory forwarded requests
+  MessageBuffer requestFromL1Cache, network="To", virtual_network="0", ordered="false";
+  // a local L1 -> this L2 bank
+  MessageBuffer responseFromL1Cache, network="To", virtual_network="3", ordered="false";
+  MessageBuffer unblockFromL1Cache, network="To", virtual_network="4", ordered="false";
+  
+  
+  // To this node's L1 cache FROM the network
+  // a L2 bank -> this L1
+  MessageBuffer requestToL1Cache, network="From", virtual_network="1", ordered="false";
+  // a L2 bank -> this L1
+  MessageBuffer responseToL1Cache, network="From", virtual_network="3", ordered="false";
+  
+  // STATES
+  enumeration(State, desc="Cache states", default="L1Cache_State_I") {
+    // Base states
+    NP, desc="Not present in either cache";
+    I, desc="a L1 cache entry Idle";
+    S, desc="a L1 cache entry Shared";
+    E, desc="a L1 cache entry Exclusive";
+    M, desc="a L1 cache entry Modified", format="!b";
+    TM, desc="a L1 cache entry Transactionally Modified", format="!b";
+
+    // Transient States
+    IS, desc="L1 idle, issued GETS, have not seen response yet";
+    IM, desc="L1 idle, issued GETX, have not seen response yet";
+    ITM, desc="L1 idle, issued TGETX, have not seen response yet. Will go to TM in the end";
+    SM, desc="L1 idle, issued GETX, have not seen response yet";
+    IS_I, desc="L1 idle, issued GETS, saw Inv before data because directory doesn't block on GETS hit";
+
+    M_I, desc="L1 replacing, waiting for ACK";
+    E_I, desc="L1 replacing, waiting for ACK";
+
+  }
+
+  // EVENTS
+  enumeration(Event, desc="Cache events") {
+    // L1 events
+    Load,            desc="Load request from the home processor";
+    TLoad,            desc="Transactional load request from the home processor";
+    Ifetch,          desc="I-fetch request from the home processor";
+    Store,           desc="Store request from the home processor";
+    TStore,          desc="Transactional store request from home processor";
+
+    Inv,           desc="Invalidate request from L2 bank";
+    
+    // internal generated request
+    L1_Replacement,  desc="L1 Replacement", format="!r";    
+
+    // other requests
+    Fwd_GETX,   desc="GETX from other processor";
+    Fwd_GETS,   desc="GETS from other processor";
+    Fwd_GET_INSTR,   desc="GET_INSTR from other processor";
+    Fwd_TGETS,  desc="TGETS from other processor";
+    Fwd_TGETX, desc="TGETX from other processor";
+
+
+    // I get a TGETX and my read/write filter has address threaten.
+    // I get a TGETS and my write filter has address threaten.  On every Fwd request check filter. If in filter and non-tx line abort.
+    // If tx line simply send the appropriate msg. 
+
+
+    Data,       desc="Data for processor";
+    Data_Exclusive,       desc="Data for processor";
+    Data_all_Acks,       desc="Data for processor, all acks";
+    Data_all_Acks_Threat, desc="Data from another processor was threatened. Can't trust the data. Need L2 to send.";
+
+    Ack,        desc="Ack for processor";
+    Ack_all,      desc="Last ack for processor";
+    Ack_all_Threat,      desc="Last ack for processor";
+    WB_Ack,        desc="Ack for replacement";
+  }
+
+  // TYPES
+
+  // CacheEntry
+  structure(Entry, desc="...", interface="AbstractCacheEntry" ) {
+    State CacheState,        desc="cache state";
+    DataBlock DataBlk,       desc="data for the block";
+    bool Trans,              desc="data is transactional";
+    bool Abort,              desc="If aborted after TM"; // On Abort set Abort based on Trans. If Trans = true , set abort to true. Then clean Trans
+    bool Dirty, default="false",   desc="data is dirty"; // 
+  }
+
+  // TBE fields
+  structure(TBE, desc="...") {
+    Address Address,              desc="Physical address for this TBE";
+    State TBEState,        desc="Transient state";
+    DataBlock DataBlk,                desc="Buffer for the data block";
+    bool Dirty, default="false",   desc="data is dirty";
+    bool Trans, default="false",    desc="data is Transactional";
+    bool Threat, default="false",  desc="data is threatened";
+    bool TStore, default="false", desc="I am writing. Helps note down conflicts.";
+    bool FWD, default="false", desc="Another L1 Forwarded data; assume L2 stall so when unblocking forward data to L2";
+    bool isPrefetch,       desc="Set if this was caused by a prefetch";
+    int pendingAcks, default="0", desc="number of pending acks";
+  }
+
+  external_type(CacheMemory) {
+    bool cacheAvail(Address);
+    Address cacheProbe(Address);
+    void allocate(Address);
+    void deallocate(Address);
+    Entry lookup(Address);
+    void changePermission(Address, AccessPermission);
+    bool isTagPresent(Address);
+  }
+
+  external_type(TBETable) {
+    TBE lookup(Address);
+    void allocate(Address);
+    void deallocate(Address);
+    bool isPresent(Address);
+  }
+
+  TBETable L1_TBEs, template_hack="<L1Cache_TBE>";
+
+  CacheMemory L1IcacheMemory, template_hack="<L1Cache_Entry>", constructor_hack='L1_CACHE_NUM_SETS_BITS,L1_CACHE_ASSOC,MachineType_L1Cache,int_to_string(i)+"_L1I"', abstract_chip_ptr="true";
+  CacheMemory L1DcacheMemory, template_hack="<L1Cache_Entry>", constructor_hack='L1_CACHE_NUM_SETS_BITS,L1_CACHE_ASSOC,MachineType_L1Cache,int_to_string(i)+"_L1D"', abstract_chip_ptr="true";
+
+  MessageBuffer mandatoryQueue, ordered="false", rank="100", abstract_chip_ptr="true";
+
+  Sequencer sequencer, abstract_chip_ptr="true", constructor_hack="i";
+
+  int cache_state_to_int(State state);
+
+  // inclusive cache returns L1 entries only
+  Entry getL1CacheEntry(Address addr), return_by_ref="yes" {
+    if (L1DcacheMemory.isTagPresent(addr)) {
+      return L1DcacheMemory[addr];
+    } else {
+      return L1IcacheMemory[addr];
+    }
+  }
+
+  void changeL1Permission(Address addr, AccessPermission permission) {
+    if (L1DcacheMemory.isTagPresent(addr)) {
+      return L1DcacheMemory.changePermission(addr, permission);
+    } else if(L1IcacheMemory.isTagPresent(addr)) {
+      return L1IcacheMemory.changePermission(addr, permission);
+    } else {
+      error("cannot change permission, L1 block not present");
+    }
+  }
+
+  bool isL1CacheTagPresent(Address addr) {
+    return (L1DcacheMemory.isTagPresent(addr) || L1IcacheMemory.isTagPresent(addr));
+  }
+
+  State getState(Address addr) {
+    if((L1DcacheMemory.isTagPresent(addr) && L1IcacheMemory.isTagPresent(addr)) == true){
+      DEBUG_EXPR(id);
+      DEBUG_EXPR(addr);
+    }
+    assert((L1DcacheMemory.isTagPresent(addr) && L1IcacheMemory.isTagPresent(addr)) == false);
+
+    if(L1_TBEs.isPresent(addr)) { 
+      return L1_TBEs[addr].TBEState;
+    } else if (isL1CacheTagPresent(addr)) {
+
+      if (getL1CacheEntry(addr).CacheState == State:TM) 
+        {
+          if (getL1CacheEntry(addr).Trans == true)
+          {
+            return State:TM; // Either I am TM
+          }
+          else if ((getL1CacheEntry(addr).Trans == false) && (getL1CacheEntry(addr).Abort == true))
+          {
+            getL1CacheEntry(addr).CacheState := State:I; // Or TM that went to abort
+            return State:I;
+          }
+          else if ((getL1CacheEntry(addr).Trans == false) && (getL1CacheEntry(addr).Abort == false))
+          {
+            getL1CacheEntry(addr).CacheState := State:M; // Or TM that went to commit
+            return State:M;
+          }
+        } else if ((getL1CacheEntry(addr).Trans == true) && (getL1CacheEntry(addr).CacheState == State:I)) {
+          return State:S;
+        }else {
+        return getL1CacheEntry(addr).CacheState;
+      
+        }
+      }
+    return State:NP;
+}
+
+  void setState(Address addr, State state) {
+    assert((L1DcacheMemory.isTagPresent(addr) && L1IcacheMemory.isTagPresent(addr)) == false);
+
+    // MUST CHANGE
+    if(L1_TBEs.isPresent(addr)) { 
+      L1_TBEs[addr].TBEState := state;
+    }
+
+    if (isL1CacheTagPresent(addr)) {
+      getL1CacheEntry(addr).CacheState := state;
+    
+      // Set permission  
+      if (state == State:I) {
+        changeL1Permission(addr, AccessPermission:Invalid);
+      } else if (state == State:S || state == State:E) {         
+        changeL1Permission(addr, AccessPermission:Read_Only);
+      } else if (state == State:M) { 
+        changeL1Permission(addr, AccessPermission:Read_Write);
+      } else {
+        changeL1Permission(addr, AccessPermission:Busy);
+      }
+    }
+  }
+
+  Event mandatory_request_type_to_event(CacheRequestType type) {
+    if (type == CacheRequestType:LD) {
+      return Event:Load;
+    }  if (type == CacheRequestType:LD_XACT) {
+      return Event:TLoad;
+    } else if(type == CacheRequestType:ST_XACT) {
+      return Event:TStore;      
+    }
+    else if (type == CacheRequestType:IFETCH) {
+      return Event:Ifetch;
+    } else if ((type == CacheRequestType:ST) || (type == CacheRequestType:ATOMIC)) {
+      return Event:Store;
+    } else {
+      error("Invalid CacheRequestType");
+    }
+  }
+
+  GenericMachineType getNondirectHitMachType(Address addr, MachineID sender) {
+    if (machineIDToMachineType(sender) == MachineType:L1Cache) {
+      return GenericMachineType:L1Cache_wCC;  // NOTE direct L1 hits should not call this
+    } else if (machineIDToMachineType(sender) == MachineType:L2Cache) {
+      return GenericMachineType:L2Cache;
+    } else {
+      return ConvertMachToGenericMach(machineIDToMachineType(sender));
+    }
+  }
+
+
+  out_port(requestIntraChipL1Network_out, RequestMsg, requestFromL1Cache);
+  out_port(responseIntraChipL1Network_out, ResponseMsg, responseFromL1Cache);
+  out_port(unblockNetwork_out, ResponseMsg, unblockFromL1Cache);
+
+  // Response IntraChip L1 Network - response msg to this L1 cache
+  in_port(responseIntraChipL1Network_in, ResponseMsg, responseToL1Cache) {
+    if (responseIntraChipL1Network_in.isReady()) {
+      peek(responseIntraChipL1Network_in, ResponseMsg) {
+        assert(in_msg.Destination.isElement(machineID));
+        if(in_msg.Type == CoherenceResponseType:DATA_EXCLUSIVE) {
+          trigger(Event:Data_Exclusive, in_msg.Address);
+        } else if(in_msg.Type == CoherenceResponseType:DATA) {
+          if ( (L1_TBEs[in_msg.Address].pendingAcks - in_msg.AckCount) == 0 ) {
+           if (((L1_TBEs[in_msg.Address].Threat == true) && (L1_TBEs[in_msg.Address].TBEState == State:IS)) && ((L1_TBEs[in_msg.Address].Threat == true) || (in_msg.Threat == true))) {
+          trigger(Event:Data_all_Acks_Threat, in_msg.Address);
+        } else  {
+          trigger(Event:Data_all_Acks,in_msg.Address);
+        }
+      } else {
+        trigger(Event:Data, in_msg.Address);
+      }
+    } else if (in_msg.Type == CoherenceResponseType:ACK) {
+      if ( (L1_TBEs[in_msg.Address].pendingAcks - in_msg.AckCount) == 0 ) {
+           if (((L1_TBEs[in_msg.Address].Threat == true) && (L1_TBEs[in_msg.Address].TBEState == State:IS)) && ((L1_TBEs[in_msg.Address].Threat == true) || (in_msg.Threat == true))) {
+            trigger(Event:Ack_all,in_msg.Address);
+          } else {
+            trigger(Event:Ack_all_Threat,in_msg.Address);
+          }
+    }
+      else {
+        trigger(Event:Ack, in_msg.Address);
+      }
+    }  else if (in_msg.Type == CoherenceResponseType:WB_ACK) {
+      trigger(Event:WB_Ack, in_msg.Address);
+    } else {
+      error("Invalid L1 response type");
+    }
+  }
+}
+}
+  
+
+  // Request InterChip network - request from this L1 cache to the shared L2
+  in_port(requestIntraChipL1Network_in, RequestMsg, requestToL1Cache) {
+    if(requestIntraChipL1Network_in.isReady()) {
+      peek(requestIntraChipL1Network_in, RequestMsg) {
+        assert(in_msg.Destination.isElement(machineID));
+        if (in_msg.Type == CoherenceRequestType:INV) {
+          trigger(Event:Inv, in_msg.Address);  
+        } else if (in_msg.Type == CoherenceRequestType:GETX || in_msg.Type == CoherenceRequestType:UPGRADE) {
+          // upgrade transforms to GETX due to race
+          trigger(Event:Fwd_GETX, in_msg.Address);  
+        } else if (in_msg.Type == CoherenceRequestType:GETS) {
+          trigger(Event:Fwd_GETS, in_msg.Address);  
+        } else if (in_msg.Type == CoherenceRequestType:GET_INSTR) {
+          trigger(Event:Fwd_GET_INSTR, in_msg.Address);  
+        } else if (in_msg.Type == CoherenceRequestType:TGETX) {
+          // upgrade transforms to GETX due to race
+          trigger(Event:Fwd_TGETX, in_msg.Address);  
+        } else if (in_msg.Type == CoherenceRequestType:TGETS) {
+          trigger(Event:Fwd_TGETS, in_msg.Address);  
+        }         else {
+          error("Invalid forwarded request type");
+        }
+      }
+    }
+  }
+
+  // Mandatory Queue betweens Node's CPU and it's L1 caches
+  in_port(mandatoryQueue_in, CacheMsg, mandatoryQueue, desc="...") {
+    if (mandatoryQueue_in.isReady()) {
+      peek(mandatoryQueue_in, CacheMsg) {
+
+        // Check for data access to blocks in I-cache and ifetchs to blocks in D-cache
+
+        if (in_msg.Type == CacheRequestType:IFETCH) {
+          // ** INSTRUCTION ACCESS ***
+
+          // Check to see if it is in the OTHER L1
+          if (L1DcacheMemory.isTagPresent(in_msg.Address)) {
+            // The block is in the wrong L1, put the request on the queue to the shared L2
+            trigger(Event:L1_Replacement, in_msg.Address);
+          }
+          if (L1IcacheMemory.isTagPresent(in_msg.Address)) { 
+            // The tag matches for the L1, so the L1 asks the L2 for it.
+            trigger(mandatory_request_type_to_event(in_msg.Type), in_msg.Address);
+          } else {
+            if (L1IcacheMemory.cacheAvail(in_msg.Address)) {
+              // L1 does't have the line, but we have space for it in the L1 so let's see if the L2 has it
+              trigger(mandatory_request_type_to_event(in_msg.Type), in_msg.Address);
+            } else {
+              // No room in the L1, so we need to make room in the L1
+              trigger(Event:L1_Replacement, L1IcacheMemory.cacheProbe(in_msg.Address));
+            }
+          }
+        } else {
+          // *** DATA ACCESS ***
+
+          // Check to see if it is in the OTHER L1
+          if (L1IcacheMemory.isTagPresent(in_msg.Address)) {
+            // The block is in the wrong L1, put the request on the queue to the shared L2
+            trigger(Event:L1_Replacement, in_msg.Address);
+          }
+          if (L1DcacheMemory.isTagPresent(in_msg.Address)) { 
+             // The tag matches for the L1, so the L1 ask the L2 for it
+            trigger(mandatory_request_type_to_event(in_msg.Type), in_msg.Address);
+          } else {
+            if (L1DcacheMemory.cacheAvail(in_msg.Address)) {
+              // L1 does't have the line, but we have space for it in the L1 let's see if the L2 has it
+              trigger(mandatory_request_type_to_event(in_msg.Type), in_msg.Address);
+            } else { 
+              // No room in the L1, so we need to make room in the L1
+              trigger(Event:L1_Replacement, L1DcacheMemory.cacheProbe(in_msg.Address));
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // ACTIONS
+  action(a_issueGETS, "a", desc="Issue GETS") {
+    peek(mandatoryQueue_in, CacheMsg) {
+      enqueue(requestIntraChipL1Network_out, RequestMsg, latency="L1_REQUEST_LATENCY") {
+        out_msg.Address := address;
+        if (getL1CacheEntry(address).Trans == true) {
+          out_msg.Type := CoherenceRequestType:TGETS;
+        } else { 
+          out_msg.Type := CoherenceRequestType:GETS;
+        }
+        out_msg.Requestor := machineID;
+        out_msg.Destination.add(map_L1CacheMachId_to_L2Cache(address, machineID));
+        DEBUG_EXPR(address);
+        DEBUG_EXPR(out_msg.Destination);
+        out_msg.MessageSize := MessageSizeType:Control;
+        out_msg.Prefetch := in_msg.Prefetch;
+        out_msg.AccessMode := in_msg.AccessMode;
+      }
+    }
+  }
+
+  action(ai_issueGETINSTR, "ai", desc="Issue GETINSTR") {
+    peek(mandatoryQueue_in, CacheMsg) {    
+      enqueue(requestIntraChipL1Network_out, RequestMsg, latency="L1_REQUEST_LATENCY") {
+        out_msg.Address := address;
+        out_msg.Type := CoherenceRequestType:GET_INSTR;
+        out_msg.Requestor := machineID;
+        out_msg.Destination.add(map_L1CacheMachId_to_L2Cache(address, machineID));
+        DEBUG_EXPR(address);
+        DEBUG_EXPR(out_msg.Destination);
+        out_msg.MessageSize := MessageSizeType:Control;
+        out_msg.Prefetch := in_msg.Prefetch;
+        out_msg.AccessMode := in_msg.AccessMode;
+      } 
+    }
+  }
+
+
+  action(b_issueGETX, "b", desc="Issue GETX") {
+    peek(mandatoryQueue_in, CacheMsg) {
+      enqueue(requestIntraChipL1Network_out, RequestMsg, latency="L1_REQUEST_LATENCY") {
+        out_msg.Address := address;
+        if (getL1CacheEntry(address).Trans == true) {
+        out_msg.Type := CoherenceRequestType:TGETX;
+        }
+        else {
+          out_msg.Type := CoherenceRequestType:GETX;
+        }
+        out_msg.Requestor := machineID;
+        DEBUG_EXPR(machineID);
+        out_msg.Destination.add(map_L1CacheMachId_to_L2Cache(address, machineID));
+        DEBUG_EXPR(address);
+        DEBUG_EXPR(out_msg.Destination);
+        out_msg.MessageSize := MessageSizeType:Control;
+        out_msg.Prefetch := in_msg.Prefetch;
+        out_msg.AccessMode := in_msg.AccessMode;
+      } 
+    }
+  }
+
+  action(c_issueUPGRADE, "c", desc="Issue GETX") {
+    peek(mandatoryQueue_in, CacheMsg) {    
+      enqueue(requestIntraChipL1Network_out, RequestMsg, latency="L1_REQUEST_LATENCY") {
+        out_msg.Address := address;
+        out_msg.Type := CoherenceRequestType:UPGRADE;
+        out_msg.Requestor := machineID;
+        out_msg.Destination.add(map_L1CacheMachId_to_L2Cache(address, machineID));
+        DEBUG_EXPR(address);
+        DEBUG_EXPR(out_msg.Destination);
+        out_msg.MessageSize := MessageSizeType:Control;
+        out_msg.Prefetch := in_msg.Prefetch;
+        out_msg.AccessMode := in_msg.AccessMode;
+      } 
+    }
+  }
+
+  action(d_sendDataToRequestor, "d", desc="send data to requestor") {
+    // [Filter]. Check the read filter and if it is in there send a read conflict.
+    // If incoming is a transactional msg note down the conflict as well.
+    // 
+    // peek(requestIntraChipL1Network_in, RequestMsg)
+    //   if in_msg.Type == Fwd_TGETX
+    if (false) { /* No conflict */
+     peek(requestIntraChipL1Network_in, RequestMsg) {
+          enqueue(responseIntraChipL1Network_out, ResponseMsg, latency="L1_RESPONSE_LATENCY") {
+            out_msg.Address := address;
+            out_msg.Type := CoherenceResponseType:DATA;
+            out_msg.DataBlk := getL1CacheEntry(address).DataBlk;
+            out_msg.Dirty := getL1CacheEntry(address).Dirty;
+            out_msg.Sender := machineID;
+            out_msg.Destination.add(in_msg.Requestor);
+            out_msg.MessageSize := MessageSizeType:Response_Data;
+          }
+        }
+      }
+      else
+      {  /* Conflict */
+        peek(requestIntraChipL1Network_in, RequestMsg) {
+          enqueue(responseIntraChipL1Network_out, ResponseMsg, latency="L1_RESPONSE_LATENCY") {
+            out_msg.Address := address;
+            out_msg.Type := CoherenceResponseType:DATA;
+            out_msg.Read := true;
+            out_msg.Threat := false;
+            out_msg.DataBlk := getL1CacheEntry(address).DataBlk;
+            out_msg.Dirty := getL1CacheEntry(address).Dirty;
+            out_msg.Sender := machineID;
+            out_msg.Destination.add(in_msg.Requestor);
+            out_msg.MessageSize := MessageSizeType:Response_Data;
+          }
+ 
+
+      }
+}
+}
+
+  action(d2_sendDataToL2, "d2", desc="send data to the L2 cache because of M downgrade") {
+       enqueue(responseIntraChipL1Network_out, ResponseMsg, latency="L1_RESPONSE_LATENCY") {
+      out_msg.Address := address;
+      out_msg.Type := CoherenceResponseType:DATA;
+      out_msg.DataBlk := getL1CacheEntry(address).DataBlk;
+      out_msg.Dirty := getL1CacheEntry(address).Dirty;
+      out_msg.Sender := machineID;
+      out_msg.Destination.add(map_L1CacheMachId_to_L2Cache(address, machineID));
+      out_msg.MessageSize := MessageSizeType:Response_Data;
+    }
+  }
+
+  action(dt_sendDataToRequestor_fromTBE, "dt", desc="send data to requestor") {
+    // Handles corner case. I Tloaded line in TM or TE; then evicted then got a forwarded TGETX.
+  // peek(requestIntraChipL1Network_in, RequestMsg)
+    //  
+    if (false) { /* No conflict */
+      peek(requestIntraChipL1Network_in, RequestMsg) {
+      enqueue(responseIntraChipL1Network_out, ResponseMsg, latency="L1_RESPONSE_LATENCY") {
+        out_msg.Address := address;
+        out_msg.Type := CoherenceResponseType:DATA;
+        out_msg.DataBlk := L1_TBEs[address].DataBlk;
+        out_msg.Read := false;
+        out_msg.Threat := false;
+        out_msg.Dirty := L1_TBEs[address].Dirty;
+        out_msg.Sender := machineID;
+        out_msg.Destination.add(in_msg.Requestor);
+        out_msg.MessageSize := MessageSizeType:Response_Data;
+      }
+    }
+  }  else {
+   peek(requestIntraChipL1Network_in, RequestMsg) {
+      enqueue(responseIntraChipL1Network_out, ResponseMsg, latency="L1_RESPONSE_LATENCY") {
+        out_msg.Address := address;
+        out_msg.Type := CoherenceResponseType:DATA;
+        out_msg.DataBlk := L1_TBEs[address].DataBlk;
+        out_msg.Read := true;
+        out_msg.Threat := false;
+        out_msg.Dirty := L1_TBEs[address].Dirty;
+        out_msg.Sender := machineID;
+        out_msg.Destination.add(in_msg.Requestor);
+        out_msg.MessageSize := MessageSizeType:Response_Data;
+      }
+    }
+  }
+  }
+  // Dummy action. 
+  action(d2t_sendDataToL2_fromTBE, "d2t", desc="send data to the L2 cache") {
+    enqueue(responseIntraChipL1Network_out, ResponseMsg, latency="L1_RESPONSE_LATENCY") {
+      out_msg.Address := address;
+      out_msg.Type := CoherenceResponseType:DATA;
+      out_msg.DataBlk := L1_TBEs[address].DataBlk;
+      out_msg.Dirty := L1_TBEs[address].Dirty;
+      out_msg.Sender := machineID;
+      out_msg.Destination.add(map_L1CacheMachId_to_L2Cache(address, machineID));
+      out_msg.MessageSize := MessageSizeType:Response_Data;
+    }
+  }
+  // Check for Read conflicts on S state (or TI which gets mapped to S if Transactional).
+  action(e_sendAckReadToRequestor, "eR", desc="send invalidate ack to requestor (could be L2 or L1)") {
+    peek(requestIntraChipL1Network_in, RequestMsg) {
+     // [Filter]. Check Read filter and if true send a request.
+      enqueue(responseIntraChipL1Network_out, ResponseMsg, latency="L1_RESPONSE_LATENCY") {
+        out_msg.Address := address;
+        out_msg.Type := CoherenceResponseType:ACK;
+        // [Filter]. If in read filter send msg. 
+        out_msg.Read := true;
+        if (L1_TBEs.isPresent(address) == true) {
+        out_msg.Threat := L1_TBEs[address].TStore; 
+        // [PROTOCOL] If I am in IM state and then after receiving DATA went to SM. 
+        // When I receive a forwarded TGETX I should threaten it if I am TStoring it.
+        // Not sure if this will ever happen though. Shouldn't happen in my opinion. Leaving it in for Safety.
+        }
+        out_msg.Sender := machineID;
+        out_msg.Destination.add(in_msg.Requestor);
+        out_msg.MessageSize := MessageSizeType:Response_Control;
+      }
+    }
+  }
+
+  action(e_sendAckThreatToRequestor, "et", desc="send invalidate ack to requestor (could be L2 or L1)") {
+    peek(requestIntraChipL1Network_in, RequestMsg) {
+      enqueue(responseIntraChipL1Network_out, ResponseMsg, latency="L1_RESPONSE_LATENCY") {
+        out_msg.Address := address;
+        out_msg.Type := CoherenceResponseType:ACK;
+        out_msg.Read := true;
+        out_msg.Threat := true;
+        // [Filter]
+        // Check filter and set threat to true. also set threat type.
+        // if (filter.check == true). out_msg.threat := true and out_msg.read := true. Read or Write conflict
+        out_msg.Sender := machineID;
+        out_msg.Destination.add(in_msg.Requestor);
+        out_msg.MessageSize := MessageSizeType:Response_Control;
+      }
+    }
+  }
+
+
+  action(f_sendDataToL2, "f", desc="send data to the L2 cache") {
+    enqueue(responseIntraChipL1Network_out, ResponseMsg, latency="L1_RESPONSE_LATENCY") {
+      out_msg.Address := address;
+      out_msg.Type := CoherenceResponseType:DATA;
+      out_msg.DataBlk := getL1CacheEntry(address).DataBlk;
+      out_msg.Dirty := getL1CacheEntry(address).Dirty;
+      out_msg.Sender := machineID;
+      out_msg.Destination.add(map_L1CacheMachId_to_L2Cache(address, machineID));
+      out_msg.MessageSize := MessageSizeType:Writeback_Data;
+
+
+    }
+  }
+
+  action(ft_sendDataToL2_fromTBE, "ft", desc="send data to the L2 cache") {
+    enqueue(responseIntraChipL1Network_out, ResponseMsg, latency="L1_RESPONSE_LATENCY") {
+      out_msg.Address := address;
+      out_msg.Type := CoherenceResponseType:DATA;
+      out_msg.DataBlk := L1_TBEs[address].DataBlk;
+      out_msg.Dirty := L1_TBEs[address].Dirty;
+      out_msg.Sender := machineID;
+      out_msg.Destination.add(map_L1CacheMachId_to_L2Cache(address, machineID));
+      out_msg.MessageSize := MessageSizeType:Writeback_Data;
+    }
+  }
+
+  action(fi_sendInvAck, "fi", desc="send Invalidation Acknowledgment") {
+    peek(requestIntraChipL1Network_in, RequestMsg) {
+      enqueue(responseIntraChipL1Network_out, ResponseMsg, latency="L1_RESPONSE_LATENCY") {
+        out_msg.Address := address;
+        out_msg.Type := CoherenceResponseType:ACK;
+        out_msg.Sender := machineID;
+        out_msg.Destination.add(in_msg.Requestor);
+        out_msg.MessageSize := MessageSizeType:Response_Control;
+        out_msg.AckCount := 1;
+      }
+    }
+  }
+
+
+  action(g_issuePUTX, "g", desc="send data to the L2 cache") {
+    enqueue(requestIntraChipL1Network_out, RequestMsg, latency="L1_RESPONSE_LATENCY") {
+      out_msg.Address := address;
+      out_msg.Type := CoherenceRequestType:PUTX;
+      out_msg.DataBlk := getL1CacheEntry(address).DataBlk;
+      out_msg.Dirty := getL1CacheEntry(address).Dirty;
+      out_msg.Requestor:= machineID;
+      out_msg.Destination.add(map_L1CacheMachId_to_L2Cache(address, machineID));
+      if (getL1CacheEntry(address).Dirty) {
+        out_msg.MessageSize := MessageSizeType:Writeback_Data;
+      } else {
+        out_msg.MessageSize := MessageSizeType:Writeback_Control;
+      }
+    }
+  }
+
+  action(j_sendUnblockIM, "jIM", desc="send unblock threat to the L2 cache from IM") {
+     enqueue(unblockNetwork_out, ResponseMsg, latency="1") {  
+     if ((L1_TBEs[address].TStore == true) && (L1_TBEs[address].FWD == true)) {
+      out_msg.Address := address;
+      out_msg.Type := CoherenceResponseType:UNBLOCK_DATA_THREAT;
+      out_msg.Sender := machineID;
+      out_msg.Destination.add(map_L1CacheMachId_to_L2Cache(address, machineID));
+      out_msg.MessageSize := MessageSizeType:Response_Control;
+    } else  if ((L1_TBEs[address].TStore == true) && (L1_TBEs[address].FWD == false)) {
+
+      out_msg.Address := address;
+      out_msg.Type := CoherenceResponseType:UNBLOCK_THREAT;
+      out_msg.Sender := machineID;
+      out_msg.Destination.add(map_L1CacheMachId_to_L2Cache(address, machineID));
+      out_msg.MessageSize := MessageSizeType:Response_Control;
+    } else if (L1_TBEs[address].TStore == false) {
+      assert(L1_TBEs[address].TStore == true); 
+      //  You should never get here. jIM invoked only by TM states. 
+     out_msg.Address := address;
+     out_msg.Type := CoherenceResponseType:EXCLUSIVE_UNBLOCK;
+     out_msg.Sender := machineID;
+     out_msg.Dirty := true;
+     out_msg.Destination.add(map_L1CacheMachId_to_L2Cache(address, machineID));
+     out_msg.MessageSize := MessageSizeType:Response_Control;
+    }
+  }
+}
+
+  action(j_sendUnblock, "j", desc="send unblock to the L2 cache") {
+  
+    enqueue(unblockNetwork_out, ResponseMsg, latency="1") {  
+ if ((L1_TBEs[address].FWD == false) && (L1_TBEs[address].Threat == true)) {
+  
+      out_msg.Address := address;
+      out_msg.Type := CoherenceResponseType:UNBLOCK_THREAT;
+      out_msg.Sender := machineID;
+      out_msg.Destination.add(map_L1CacheMachId_to_L2Cache(address, machineID));
+      out_msg.MessageSize := MessageSizeType:Response_Control;
+    }
+   else if ((L1_TBEs[address].FWD == true) && (L1_TBEs[address].Threat == false))
+  {
+      out_msg.Address := address;
+      out_msg.Type := CoherenceResponseType:UNBLOCK_DATA;
+      out_msg.DataBlk := getL1CacheEntry(address).DataBlk;
+      out_msg.Dirty := getL1CacheEntry(address).Dirty;
+      out_msg.Sender := machineID;
+      out_msg.Destination.add(map_L1CacheMachId_to_L2Cache(address, machineID));
+      out_msg.MessageSize := MessageSizeType:Writeback_Data;
+
+    } else if ((L1_TBEs[address].FWD == false) && (L1_TBEs[address].Threat == false)) {
+
+      out_msg.Address := address;
+      out_msg.Type := CoherenceResponseType:UNBLOCK;
+      out_msg.Dirty := false;
+      out_msg.Sender := machineID;
+      out_msg.Destination.add(map_L1CacheMachId_to_L2Cache(address, machineID));
+      out_msg.MessageSize := MessageSizeType:Control;      
+    }
+   else if ((L1_TBEs[address].FWD == true) && (L1_TBEs[address].Threat == true)) {
+
+      out_msg.Address := address;
+      out_msg.Type := CoherenceResponseType:UNBLOCK_DATA_THREAT;
+      out_msg.Dirty := false;
+      out_msg.Sender := machineID;
+      out_msg.Destination.add(map_L1CacheMachId_to_L2Cache(address, machineID));
+      out_msg.MessageSize := MessageSizeType:Control;      
+    }
+  }
+}
+  // FWD = true and Threat = true will occur if I am self threatening. TStores themselves set the threat bit. 
+
+  //     if (getL1CacheEntry(address).Dirty == false)
+  //   {
+  //   enqueue(unblockNetwork_out, ResponseMsg, latency="1") {
+  //     out_msg.Address := address;
+  //     out_msg.Type := CoherenceResponseType:UNBLOCK;
+  //     out_msg.Sender := machineID;
+  //     out_msg.Destination.add(map_L1CacheMachId_to_L2Cache(address, machineID));
+  //     out_msg.MessageSize := MessageSizeType:Response_Control;
+  //   }
+  // } else
+
+  action(jj_sendExclusiveUnblock, "je", desc="send exclusive unblock to the L2 cache") {
+    enqueue(unblockNetwork_out, ResponseMsg, latency="1") {
+      out_msg.Address := address;
+      out_msg.Type := CoherenceResponseType:EXCLUSIVE_UNBLOCK;
+      out_msg.Dirty := false;
+      out_msg.Sender := machineID;
+      out_msg.Destination.add(map_L1CacheMachId_to_L2Cache(address, machineID));
+      out_msg.MessageSize := MessageSizeType:Control;      
+  }
+}
+
+  action(o_checkForConflict, "oc", desc="Check for Conflict due to External Fwd msg.")
+  {
+    APPEND_TRANSITION_COMMENT("ABORT");
+    // [Filter]
+    // Check if line is trans either in TBE or Cache (note that address maybe in either or both)
+    // Check Read and Write filter.
+    // These are FWD msgs TGETX check for conflict action i.e., I am in a stable state and I for a fwd msg. 
+  }
+
+  // [PROTOCOL]: These are Non Transactional Aborts.
+  action(o_checkforTxAbort, "abt", desc="Abort Transaction due to external invalidation or L2 eviction")
+  {
+    APPEND_TRANSITION_COMMENT("ABORT");
+    getL1CacheEntry(address).Trans := false;
+    // Check if line is trans either in TBE or Cache (note that address maybe in either or both)
+    // Check Read and Write filter.
+    // If both conditions are true then Tx aborts. 
+  }
+
+  // [PROTOCOL]. If Trans then returnn XACT hit.
+  action(h_load_hit, "h", desc="If not prefetch, notify sequencer the load completed.") {
+    DEBUG_EXPR(getL1CacheEntry(address).DataBlk);
+    peek(mandatoryQueue_in, CacheMsg) {
+              // Check for data access to blocks in I-cache and ifetchs to blocks in D-cache
+      if ((in_msg.Type == CacheRequestType:LD_XACT) || (in_msg.Type == CacheRequestType:ST_XACT))  {
+        getL1CacheEntry(address).Trans := true;
+      }
+    }
+   // Essentially set the Trans bit on allocating the transaction.
+  }
+
+  action(x_external_load_hit, "x", desc="Notify sequencer the load completed.") {
+  peek(responseIntraChipL1Network_in, ResponseMsg) {
+   sequencer.readCallback(address, getL1CacheEntry(address).DataBlk, getNondirectHitMachType(in_msg.Address, in_msg.Sender), PrefetchBit:No);
+    }
+  }
+
+
+  action(hh_store_hit, "\h", desc="If not prefetch, notify sequencer that store completed.") {
+    sequencer.writeCallback(address, getL1CacheEntry(address).DataBlk);
+    getL1CacheEntry(address).Dirty := true;
+  }
+
+  action(xx_external_store_hit, "\x", desc="Notify sequencer that store completed.") {
+    peek(responseIntraChipL1Network_in, ResponseMsg) {
+      sequencer.writeCallback(address, getL1CacheEntry(address).DataBlk, getNondirectHitMachType(in_msg.Address, in_msg.Sender), PrefetchBit:No);
+    }
+    getL1CacheEntry(address).Dirty := true;
+  }
+
+
+  action(i_allocateTBE, "i", desc="Allocate TBE (isPrefetch=0, number of invalidates=0)") {
+    check_allocate(L1_TBEs);
+    L1_TBEs.allocate(address);
+    L1_TBEs[address].isPrefetch := false;
+    L1_TBEs[address].Dirty := getL1CacheEntry(address).Dirty;
+    L1_TBEs[address].DataBlk := getL1CacheEntry(address).DataBlk;
+    }
+
+  action(s_setTBETrans, "TxTBE", desc="Allocate TBE and set Trans bit") {
+    L1_TBEs[address].Trans := true;
+    getL1CacheEntry(address).Trans := true;
+    // Add address to filter. 
+  }
+
+
+  action(s_setThreatBit, "ThreatTBE", desc="Allocate TBE and set Threat  bit") {
+    L1_TBEs[address].Threat := true;
+    getL1CacheEntry(address).Trans := true;
+    // Add address to filter. 
+  }
+
+  action(k_popMandatoryQueue, "k", desc="Pop mandatory queue.") {
+    mandatoryQueue_in.dequeue();
+  }
+
+  action(l_popRequestQueue, "l", desc="Pop incoming request queue and profile the delay within this virtual network") {
+    profileMsgDelay(2, requestIntraChipL1Network_in.dequeue_getDelayCycles());
+  }
+
+  action(o_popIncomingResponseQueue, "o", desc="Pop Incoming Response queue and profile the delay within this virtual network") {
+    profileMsgDelay(3, responseIntraChipL1Network_in.dequeue_getDelayCycles());
+  }
+
+  action(s_deallocateTBE, "s", desc="Deallocate TBE") {
+    L1_TBEs.deallocate(address);
+  }
+
+  action(u_writeDataToL1Cache, "u", desc="Write data to cache") {
+    peek(responseIntraChipL1Network_in, ResponseMsg) {
+      getL1CacheEntry(address).DataBlk := in_msg.DataBlk;
+      getL1CacheEntry(address).Dirty := in_msg.Dirty;
+    }
+    // Update L1_TBEs with threat information. 
+    peek(responseIntraChipL1Network_in, ResponseMsg)
+    {
+      if (machineIDToMachineType(in_msg.Sender) == MachineType:L1Cache )
+      {
+        if (in_msg.Threat)
+        {
+          L1_TBEs[address].Threat := true;
+        }
+          L1_TBEs[address].FWD := true;
+      }
+    // [Conflict] 
+    // Check sender. If threatening cannot be sending data. So no Write conflicts can be introduced here.
+    // Only possibility is W-R o RR.
+    // if TBEs.Write = True and in_msg.Read = True; this is a W-R conflict
+    // if TBEs.Trans = True and TBEs.Write = False and in_msg.Read = True. R-R overlap (some R-R maybe missed)
+    }
+  }
+
+  action(q_updateAckCount, "q", desc="Update ack count") {
+    peek(responseIntraChipL1Network_in, ResponseMsg) {
+      L1_TBEs[address].pendingAcks := L1_TBEs[address].pendingAcks - in_msg.AckCount;
+      L1_TBEs[address].Threat := in_msg.Threat;
+      // [Conflict] Update conflict maps. 
+      // Check for type of conflict. in_msg.Read indicates read conflicts. 
+      // if TBEs.Write = True and in_msg.Read = True; this is a W-R conflict
+      // if TBEs.Write = True and in_msg.Threat = True; this is a W-W conflict
+      // if TBEs.Trans = True and TBEs.Write = False and in_msg.Read = True. R-R overlap (some R-R maybe missed)
+      // if TBEs.Trans = True and TBEs.Write = False and in_msg.Threat = True R-W conflict.
+      // if TBEs.Trans = True and TBEs.Write = False and in_msg.Threat = false and in_msg.Read = false (No conflict)
+      APPEND_TRANSITION_COMMENT(in_msg.AckCount);
+      APPEND_TRANSITION_COMMENT(" p: ");
+      APPEND_TRANSITION_COMMENT(L1_TBEs[address].pendingAcks);
+    }
+  }
+
+  action(z_stall, "z", desc="Stall") {
+  }
+  
+  action(ff_deallocateL1CacheBlock, "\f", desc="Deallocate L1 cache block.  Sets the cache to not present, allowing a replacement in parallel with a fetch.") {
+    if (L1DcacheMemory.isTagPresent(address)) {
+      L1DcacheMemory.deallocate(address);
+    } else {
+      L1IcacheMemory.deallocate(address);
+    }
+  }
+
+  action(oo_allocateL1DCacheBlock, "\o", desc="Set L1 D-cache tag equal to tag of block B.") {
+    if (L1DcacheMemory.isTagPresent(address) == false) {
+      L1DcacheMemory.allocate(address);
+    }
+    peek(mandatoryQueue_in, CacheMsg) {
+
+        // Check for data access to blocks in I-cache and ifetchs to blocks in D-cache
+
+      if ((in_msg.Type == CacheRequestType:LD_XACT) || (in_msg.Type == CacheRequestType:ST_XACT))
+      {
+          getL1CacheEntry(address).Trans := true;
+        }
+      }
+
+  }
+
+  action(pp_allocateL1ICacheBlock, "\p", desc="Set L1 I-cache tag equal to tag of block B.") {
+    if (L1IcacheMemory.isTagPresent(address) == false) {
+      L1IcacheMemory.allocate(address);
+    }
+  }
+
+  action(zz_recycleRequestQueue, "zz", desc="recycle L1 request queue") {
+    requestIntraChipL1Network_in.recycle();
+  }
+
+  action(z_recycleMandatoryQueue, "\z", desc="recycle L1 request queue") {
+    mandatoryQueue_in.recycle();
+  }
+
+
+  //*****************************************************
+  // TRANSITIONS
+  //*****************************************************
+
+  // Transitions for Load/Store/Replacement/WriteBack from transient states
+  transition({IS, IM, IS_I, M_I, E_I, SM}, {Load, TLoad, Ifetch, Store, L1_Replacement,TStore}) {
+    z_recycleMandatoryQueue;
+  }
+
+  // Transitions from Idle
+  transition({NP,I}, L1_Replacement) {
+    ff_deallocateL1CacheBlock;
+  }
+
+  transition({NP,I}, {Load}, IS) {
+    oo_allocateL1DCacheBlock;
+    i_allocateTBE;
+    a_issueGETS;
+    k_popMandatoryQueue;
+  }
+
+    transition({NP,I}, {TLoad}, IS) {
+    oo_allocateL1DCacheBlock;
+    i_allocateTBE;
+    s_setTBETrans;
+    a_issueGETS;
+    k_popMandatoryQueue;
+  }
+
+
+  transition({NP,I}, Ifetch, IS) {
+    pp_allocateL1ICacheBlock;
+    i_allocateTBE;
+    ai_issueGETINSTR;
+    k_popMandatoryQueue;
+  }
+
+  transition({NP,I}, Store, IM) {
+    oo_allocateL1DCacheBlock;
+    i_allocateTBE;
+    b_issueGETX;
+    k_popMandatoryQueue;
+  }
+
+  transition({NP,I}, {TStore}, IM) {
+    oo_allocateL1DCacheBlock;
+    i_allocateTBE;
+    s_setTBETrans;
+    s_setThreatBit;
+    b_issueGETX;
+    k_popMandatoryQueue;
+  }
+
+  transition({NP,I,IS,IM,IS_I}, {Fwd_GETX,Fwd_GET_INSTR,Fwd_TGETX,Fwd_TGETS,Fwd_GETS}) {
+    fi_sendInvAck;
+    l_popRequestQueue;
+  }
+
+// Only reason I am getting Fwd in TS is because I must have been TI at some point
+  transition(S, {Fwd_GET_INSTR,Fwd_GETS,Fwd_TGETS},I) {
+    fi_sendInvAck;
+    o_checkforTxAbort;
+    l_popRequestQueue;
+  }
+
+  transition({NP,I}, {Inv}) {
+    fi_sendInvAck;
+    l_popRequestQueue;
+  }
+
+  // Transitions from Shared
+  transition(S, {TLoad,Load,Ifetch}) {
+    h_load_hit;
+    k_popMandatoryQueue;
+  }
+
+  transition(S, Store, SM) {
+    i_allocateTBE;
+    c_issueUPGRADE;
+    k_popMandatoryQueue;
+  }
+
+  transition(S, TStore, ITM) {
+    oo_allocateL1DCacheBlock;
+    i_allocateTBE;
+    s_setTBETrans;
+    s_setThreatBit;
+    b_issueGETX;
+    k_popMandatoryQueue;
+  }
+
+  transition(S, L1_Replacement, I) {
+    ff_deallocateL1CacheBlock;
+  }
+
+  transition(S, {Fwd_GETX,Inv}, I) {
+    fi_sendInvAck;
+    o_checkforTxAbort;
+    l_popRequestQueue;
+  }
+
+  transition(S, {Fwd_TGETX}, I) {
+    e_sendAckReadToRequestor;
+    o_checkForConflict;
+    l_popRequestQueue;
+  }
+
+  // Transitions from Exclusive
+
+  transition(E, {TLoad,Load, Ifetch}) {
+    h_load_hit;
+    k_popMandatoryQueue;
+  }
+
+  transition(E, Store, M) {
+    hh_store_hit;
+    k_popMandatoryQueue;
+  }
+
+
+  transition(E, L1_Replacement, M_I) {
+    // silent E replacement??
+    i_allocateTBE;
+    g_issuePUTX;   // send data, but hold in case forwarded request
+    o_checkforTxAbort;
+    ff_deallocateL1CacheBlock;
+  }
+
+  transition(E, {Inv}, I) {
+    // don't send data
+    fi_sendInvAck;
+    o_checkforTxAbort;
+    l_popRequestQueue;
+  }
+
+  transition(E, {Fwd_GETX,Fwd_TGETX}, I) {
+    d_sendDataToRequestor;
+    o_checkforTxAbort;
+    l_popRequestQueue;
+  }
+
+  transition(E, {Fwd_GETS, Fwd_TGETS, Fwd_GET_INSTR}, S) {
+    d_sendDataToRequestor;
+   // d2_sendDataToL2;
+    o_checkforTxAbort;
+    l_popRequestQueue;
+  }
+
+  // Transitions from Modified
+  transition(M, {TLoad,Load, Ifetch}) {
+    h_load_hit;
+    k_popMandatoryQueue;
+  }
+
+
+// If M and Tload trigger replacement first. IF I am diry then I don't do anything Txnational until I sync up the L2 first.
+
+  transition(M, Store) {
+    hh_store_hit;
+    k_popMandatoryQueue;
+  }
+
+  transition(M, L1_Replacement, M_I) {
+    i_allocateTBE;
+    g_issuePUTX;   // send data, but hold in case forwarded request
+    ff_deallocateL1CacheBlock;
+  }
+
+  transition({M_I,E_I}, WB_Ack, I) {
+    o_checkforTxAbort; // L2 can no longer track it.
+    s_deallocateTBE;
+    o_popIncomingResponseQueue;
+  }
+
+  transition(M, Inv, I) {
+    f_sendDataToL2;
+    o_checkforTxAbort;    
+    l_popRequestQueue;
+  }
+
+  transition(M_I, Inv, I) {
+    ft_sendDataToL2_fromTBE;
+    o_checkforTxAbort;
+    s_deallocateTBE;
+    l_popRequestQueue;
+  }
+
+  transition(M, {Fwd_TGETX,Fwd_GETX}, I) {
+    d_sendDataToRequestor;
+    o_checkforTxAbort;
+    l_popRequestQueue;
+  }
+
+  transition(M, {Fwd_GETS, Fwd_TGETS,Fwd_GET_INSTR}, S) {
+    d_sendDataToRequestor;
+    o_checkforTxAbort;
+  //  d2_sendDataToL2;
+    l_popRequestQueue;
+  }
+
+  transition({E_I,M_I}, {Fwd_GETX}, I) {
+    dt_sendDataToRequestor_fromTBE;
+    o_checkforTxAbort;
+    s_deallocateTBE;
+    l_popRequestQueue;
+  }
+
+  transition({E_I,M_I}, {Fwd_TGETX}, I) {
+    dt_sendDataToRequestor_fromTBE;
+    o_checkForConflict; 
+    s_deallocateTBE;
+    l_popRequestQueue;
+  }
+
+
+  transition({M_I,E_I}, {Fwd_GETS,Fwd_GET_INSTR}) {
+    dt_sendDataToRequestor_fromTBE;
+//    d2t_sendDataToL2_fromTBE;
+    o_checkforTxAbort;
+    s_deallocateTBE;
+    l_popRequestQueue;
+  }
+
+  transition({M_I,E_I}, {Fwd_TGETS}) {
+    dt_sendDataToRequestor_fromTBE;
+    s_deallocateTBE;
+    l_popRequestQueue;
+  }
+
+
+
+  // Transitions from IS
+  transition({IS, IS_I}, Inv, IS_I) {
+    fi_sendInvAck;
+    l_popRequestQueue;
+  }
+
+  transition(IS, Data_all_Acks, S) {
+    u_writeDataToL1Cache;
+    x_external_load_hit;
+    s_deallocateTBE;
+    j_sendUnblock;
+    o_popIncomingResponseQueue;
+  }
+
+  transition(IS_I, Data_all_Acks, I) {
+    u_writeDataToL1Cache;
+    x_external_load_hit;
+    o_checkforTxAbort;
+    s_deallocateTBE;
+    j_sendUnblock;
+    o_popIncomingResponseQueue;
+  }
+
+  transition(IS_I, Data_all_Acks_Threat, I) {
+    u_writeDataToL1Cache;
+    x_external_load_hit;
+    o_checkforTxAbort;
+    s_deallocateTBE;
+    j_sendUnblock;
+    o_popIncomingResponseQueue;
+  }
+
+
+  transition(IS, Data_all_Acks_Threat, I) {
+    u_writeDataToL1Cache;
+    q_updateAckCount;
+    x_external_load_hit;
+    s_deallocateTBE;
+    j_sendUnblock;
+    o_popIncomingResponseQueue;
+  }
+
+
+  // directory is blocked when sending exclusive data
+  transition(IS_I, Data_Exclusive, E) {
+    u_writeDataToL1Cache;
+    x_external_load_hit;
+    jj_sendExclusiveUnblock;
+    s_deallocateTBE;
+    o_popIncomingResponseQueue;
+  }
+
+  transition(IS, Data_Exclusive, E) {
+    u_writeDataToL1Cache;
+    x_external_load_hit;
+    jj_sendExclusiveUnblock;
+    s_deallocateTBE;
+    o_popIncomingResponseQueue;
+  }
+
+  // Transitions from IM
+  transition({IM,ITM}, {Inv}) {  
+    fi_sendInvAck;
+    l_popRequestQueue;
+  }
+
+  transition(IM, Data, SM) {
+    // Don't unblock just yet. 
+    u_writeDataToL1Cache;
+    q_updateAckCount;
+    o_popIncomingResponseQueue;
+  }
+
+  transition({IS,IS_I}, Data) {
+    // Don't unblock just yet. 
+    u_writeDataToL1Cache;
+    q_updateAckCount;
+    o_popIncomingResponseQueue;
+  }
+
+
+  transition(ITM, Data, ITM) {
+    // Don't unblock just yet. 
+    u_writeDataToL1Cache;
+    q_updateAckCount;
+    o_popIncomingResponseQueue;
+  }
+
+  transition(IM, {Data_Exclusive,Data_all_Acks}, M) {
+    u_writeDataToL1Cache;
+    xx_external_store_hit;
+    jj_sendExclusiveUnblock;
+    s_deallocateTBE;
+    o_popIncomingResponseQueue;
+  }
+
+  transition(ITM, {Data_Exclusive,Data_all_Acks,Data_all_Acks_Threat}, TM) {
+    u_writeDataToL1Cache;
+    xx_external_store_hit;
+    j_sendUnblockIM;
+    s_deallocateTBE;
+    o_popIncomingResponseQueue;
+  }
+
+  // transitions from SM. You will never get DATA as SM means you upgraded and L2 is in S state. You might get Acks. 
+  transition({IM, IS, SM}, Ack) {
+    q_updateAckCount;
+    o_popIncomingResponseQueue;
+  }
+
+  transition(IS, Ack_all, S) {
+    q_updateAckCount;
+    j_sendUnblock;
+    xx_external_store_hit;
+    s_deallocateTBE;
+    o_popIncomingResponseQueue;
+  }
+
+  transition(IS, Ack_all_Threat, I) {
+    q_updateAckCount;
+    j_sendUnblock;
+    xx_external_store_hit;
+    s_deallocateTBE;
+    o_popIncomingResponseQueue;
+  }
+
+  transition({ITM}, Ack) {
+    q_updateAckCount; //
+    o_popIncomingResponseQueue;
+  }
+
+
+
+  transition(ITM, {Ack_all,Ack_all_Threat}, TM) {
+    q_updateAckCount;
+    j_sendUnblockIM;
+    xx_external_store_hit;
+    s_deallocateTBE;
+    o_popIncomingResponseQueue;
+  }
+
+  transition(SM, Ack_all, M) {
+    q_updateAckCount;
+    jj_sendExclusiveUnblock;
+    xx_external_store_hit;
+    s_deallocateTBE;
+    o_popIncomingResponseQueue;
+  }
+
+  transition({SM}, {Fwd_TGETX}, IM) {  
+    e_sendAckReadToRequestor;
+    l_popRequestQueue;
+  }
+
+  transition({SM}, {Inv,Fwd_GETX}, IM) {  
+    fi_sendInvAck;
+    o_checkforTxAbort;
+    l_popRequestQueue;
+  }
+
+  transition({ITM}, {Fwd_TGETS, Fwd_GETS, Fwd_TGETX, Fwd_GETX,Fwd_GET_INSTR}, ITM) {  
+    fi_sendInvAck;
+    l_popRequestQueue;
+  }
+
+  // Transitions from TM
+  
+  transition(TM, TLoad) {
+    h_load_hit;
+    }
+
+  
+    transition(TM, TStore) {
+    hh_store_hit;
+    }
+
+  transition(TM, L1_Replacement, I) {
+    // Either Log to external table or abort
+    o_checkforTxAbort;
+  }
+
+  transition(TM, Inv, I) {
+    fi_sendInvAck;
+    o_checkforTxAbort;    
+    l_popRequestQueue;
+  }
+
+  transition(TM, Fwd_GETX, I) {
+    fi_sendInvAck;
+    o_checkforTxAbort;
+    l_popRequestQueue;
+  }
+
+  transition(TM, {Fwd_GETS, Fwd_GET_INSTR}, I) {
+    fi_sendInvAck;
+    o_checkforTxAbort;
+    l_popRequestQueue;
+  }
+
+  transition(TM, {Fwd_TGETS, Fwd_TGETX}, TM) {
+    e_sendAckThreatToRequestor;
+    o_checkForConflict;
+    l_popRequestQueue;
+  }
+
+// IS, IM can never receive all ACKs without receiving DATA.
+// SM can't receive threats since GETXs will not be threatened. 
+// SM won't be receiving DATA without an interleaved INV.
+// IM goes to TM if threatened by itself; Nobody else can threaten it if GETX 
+// If IM got data and moved to SM, and then it received a fwd request it should start threatening people.
+// If SM received fwd msgs; its because it went from S->M. Even then it won't receive Fwd_GETS,TGETS etc since they are reads. L2 will filter them out. 
+// If SM went from I->IM->SM. It wont receive any forwarded msgs until it unblocks.
+}
