@@ -27,12 +27,16 @@ html/MESI_SCMP_bankdirectory MESI_SCMP_bankdirectory "html"
 
 # PROTOCOL INTRICACIES
 ***L1 Cache***
+
+
 1. TM is an explicit state.
 2. TI is a implicit state (getState checks the Trans bit and if it is an
 I state) simply returns S. getState is invoked on every protocol
 transaction.
 
 ***L2 Cache***
+
+
 1. TMT, TMT_B, TMT_B_MT. Transactional states. TMT means some line in
 some L1 has it in either TM or not; you don't know. Only way to find
 out is to probe the L1s on every Fwd request.
@@ -41,7 +45,6 @@ eventually finds out that there are no TM lines. The requestor that
 collects all the ACKS will no if any of the acks threatened. Look at
 the L1 TBE for this. TMT_B could go either to SS if not threatened
 (i.e., Unblock w/o any Threat). or TMT (i.e., Unblock w/ threat)
-
 3. TMT_B_MT always goes to MT in the end (i.e., it got a Fwd GETX). If
 there are any other TM lines they will abort.
 
